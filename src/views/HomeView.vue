@@ -1,11 +1,13 @@
 <template>
   <MainBanner />
-  <div>
-    Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate ratione,
-    quia illo perspiciatis exercitationem, iste, repudiandae facilis sit libero
-    molestiae incidunt reprehenderit tempore quos! Qui asperiores porro dolorem
-    enim magnam?
-  </div>
+  <v-container>
+    <v-content>
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Voluptate
+      ratione, quia illo perspiciatis exercitationem, iste, repudiandae facilis
+      sit libero molestiae incidunt reprehenderit tempore quos! Qui asperiores
+      porro dolorem enim magnam?
+    </v-content>
+  </v-container>
 </template>
 
 <script>
