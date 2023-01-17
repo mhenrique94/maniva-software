@@ -2,10 +2,19 @@
   <div>
     <v-card class="banner">
       <img :src="bannerBg" alt="maniva banner" class="bannerBg" />
-      <div class="bannerText">
+      <v-container class="bannerText">
         <h1>Contrate desenvolvedores de software</h1>
-        <h2>As habilidades que você precisa para o crescimento que deseja</h2>
-      </div>
+        <h2>As habilidades que você precisa para crescer como merece</h2>
+        <v-card-text class="bannerInnerDisclaimer">
+          Seu site é <span class="highlighted">a cara da sua empresa</span> e o
+          primeiro <span class="highlighted">vislumbre</span> do que sua marca
+          pode oferecer. Ao aproveitar o poder do design e desenvolvimento Web
+          <span class="highlighted">modernos</span>, ele também pode ser sua
+          plataforma de lançamento, impulsionando os usuários para
+          <span class="highlighted">sua história</span> e diferenciação
+          <span class="highlighted"> exclusiva</span>.
+        </v-card-text>
+      </v-container>
     </v-card>
   </div>
 </template>
@@ -16,7 +25,7 @@ export default {
     bannerBg() {
       return require("@/assets/images/hero.jpg");
     },
-    bannerLogo() {
+    bannerImg() {
       return require("@/assets/images/logo-no-brand-green.png");
     },
   },
@@ -27,18 +36,19 @@ export default {
 .banner {
   display: flex;
   width: 100%;
-  height: auto;
-  max-height: 50vh;
+  max-height: 100vh;
   object-fit: cover;
   object-position: center;
-  text-align: center;
   align-items: center;
-  justify-content: center;
 }
 
 .bannerText {
   position: absolute;
-  max-width: 660px;
+  margin: auto 10%;
+  z-index: 1;
+  padding: 32px;
+  /* background-color: #50934f; */
+  width: 860px;
 }
 
 .bannerBg {
@@ -50,12 +60,39 @@ h1 {
   background-color: white;
   padding: 16px;
   display: initial;
-  z-index: 1;
+  font-weight: 700;
 }
 h2 {
   background-color: #50934f;
   padding: 16px;
   color: white;
-  z-index: 1;
+  font-weight: 300;
+}
+
+.bannerInnerDisclaimer {
+  font-size: 14pt;
+  max-width: 700px;
+  line-height: 1.8rem;
+  backdrop-filter: blur(2px);
+  mix-blend-mode: difference;
+  background-color: whitesmoke;
+  filter: opacity(0.9);
+}
+
+.highlighted {
+  position: relative;
+  font-weight: 700;
+  background-color: none;
+}
+.highlighted:before {
+  background-color: #a6c17b;
+  content: "";
+  position: absolute;
+  width: calc(100% + 4px);
+  height: 100%;
+  left: -2px;
+  bottom: 0;
+  z-index: -1;
+  transform: rotate(-2deg);
 }
 </style>
