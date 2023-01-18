@@ -1,0 +1,3 @@
+{
+  "rewrites": [{ "source": "/maniva-software/", "destination": "/" }]
+}
