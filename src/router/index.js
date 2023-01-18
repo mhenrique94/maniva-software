@@ -1,4 +1,4 @@
-import { createRouter } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 
 const routes = [
@@ -16,14 +16,10 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/AboutView.vue"),
   },
-  {
-    path: "*",
-    name: "catchAll",
-    component: HomeView,
-  },
 ];
 
 const router = createRouter({
+  history: createWebHashHistory(),
   routes,
 });
 
