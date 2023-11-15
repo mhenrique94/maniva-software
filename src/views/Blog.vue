@@ -15,28 +15,24 @@
 </template>
 
 <script>
-import { NotionRenderer, getPageBlocks } from "vue-notion"
+import { NotionRenderer, getPageBlocks, getPageTable } from "vue-notion"
 export default {
   name: "Blog",
   components: { NotionRenderer },
   data: () => ({ blockMap: null, posts: [], pageToRender: null}),
   async created() {
-    const pageId = "d47aa7000088417a8bb13d5c40d2f9d7"
-    this.blockMap = await getPageBlocks(pageId)
-    for (const [key, value] of Object.entries(this.blockMap)) {
-      const childId = value.value.id.replaceAll("-", "")
-      if (value.value.type == "page" && pageId != childId) {
+    this.blockMap = await getPageTable('0fd43881e1d5424b84f5562d4fac34d5?v=7316b3a22dc74e42839e6641c8997fd0')
+    for (const entrada of this.blockMap) {
+      const block = await getPageBlocks(entrada.id)
+      this.posts.push(
+        {
+          tags: entrada.Tags,
+          title: entrada.Nome,
+          blockmap: block,
+          created_on: this.formattedDate(Object.entries(block)[1][1].value.created_time)
+        }
+      );
 
-        this.posts.push(
-          {
-            content: value.value.content,
-            title: value.value.properties.title[0][0],
-            blockmap: await getPageBlocks(value.value.id),
-            created_on: this.formattedDate(value.value.created_time)
-
-          }
-        );
-      }
       this.pageToRender = this.posts[0]
     }
   },
