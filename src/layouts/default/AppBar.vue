@@ -13,6 +13,11 @@
           <span>Início</span>
         </v-btn>
 
+        <v-btn variant="plain" :to="{name: 'Chat'}">
+          <v-icon>mdi-forum-outline</v-icon>
+          <span>Ai Chat</span>
+        </v-btn>
+
         <v-btn variant="plain" :to="{name: 'Blog'}">
           <v-icon>mdi-post</v-icon>
           <span>Blog</span>
