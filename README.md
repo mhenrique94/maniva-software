@@ -1,4 +1,4 @@
-# base
+# maniva-software
 
 ## Project setup
 
