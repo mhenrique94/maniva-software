@@ -1,9 +1,15 @@
 <template>
-  <v-main>
+  <v-main class="page-wrapper">
     <router-view />
   </v-main>
 </template>
-
-<script setup>
-  //
-</script>
+<style scoped>
+.page-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 0 !important;
+}
+</style>

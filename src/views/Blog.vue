@@ -56,11 +56,13 @@ export default {
 .blog-wrapper {
   display: flex;
   gap: 24px;
+  max-width: 1200px;
+
 }
 
 .bw-rendered-page {
   padding: 24px;
-  max-width: 600px;;
+  max-width: 900px;
 }
 
 .bwrp-details {
@@ -69,21 +71,9 @@ export default {
 }
 
 .bw-menu {
-  min-width: 260px;
+  max-width: 300px;
   padding: 24px 0;
   display: flex;
   flex-direction: column;
-  position: absolute;
-  right: 0;
   height: 100%;
 }
-
-.bw-menu > a {
-  cursor: pointer;
-  padding: 2px 0px 0px 8px;
-}
-
-.bw-menu > a:hover {
-  background-color: #00af66;
-}
-</style>

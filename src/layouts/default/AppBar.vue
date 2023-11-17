@@ -49,4 +49,22 @@
   align-items: center;
   color: white;
 }
+.logotype {
+  font-size: xx-large;
+}
+.bar {
+  background-color: #00af66;
+}
+.bar-menu {
+  display: flex;
+  align-items: center;
+  max-width: 1000px;
+}
+
+.bm-buttons {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: white;
+}
 </style>
