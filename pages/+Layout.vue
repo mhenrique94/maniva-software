@@ -27,6 +27,8 @@
 <script setup lang="ts">
 import { Header, Footer, WhatsAppFloat } from "@layout";
 import { getOrganizationSchema } from "@util/structuredData";
+import "@fontsource/cormorant-garamond";
+import "@fontsource/figtree";
 
 const organizationSchema = getOrganizationSchema();
 </script>

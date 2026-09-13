@@ -14,9 +14,13 @@
 </template>
 
 <script setup lang="ts">
-import { HeroSection, ServicesSection, HelpMedSection, MethodologySection } from '../../components/sections';
+import { HeroSection, ServicesSection } from '../../components/sections';
+import { defineAsyncComponent } from 'vue';
 import { getFAQSchema, getHelpMedSchema, FAQ_QUESTIONS } from "@util/structuredData";
 import { Head } from 'vike-vue/Head';
+
+const HelpMedSection = defineAsyncComponent(() => import('../../components/sections/HelpMedSection.vue'));
+const MethodologySection = defineAsyncComponent(() => import('../../components/sections/MethodologySection.vue'));
 
 const faqSchema = getFAQSchema(FAQ_QUESTIONS);
 const helpMedSchema = getHelpMedSchema();

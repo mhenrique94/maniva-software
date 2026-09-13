@@ -4,6 +4,11 @@
   <link rel="icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  
+  <!-- Critical Font Preloads -->
+  <link rel="preload" href="/node_modules/@fontsource/cormorant-garamond/files/cormorant-garamond-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/node_modules/@fontsource/figtree/files/figtree-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HV03VP5FL"></script>
   <script>
