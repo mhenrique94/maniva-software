@@ -24,17 +24,5 @@ const MethodologySection = defineAsyncComponent(() => import('../../components/s
 
 const faqSchema = getFAQSchema(FAQ_QUESTIONS);
 const helpMedSchema = getHelpMedSchema();
-
-// Meta tags for the landing page
-const seoData = {
-  title: "Maniva Software | Engenharia de Software e Soluções Digitais",
-  description: "Maniva Software: transformamos necessidade digital em solução técnica. Desenvolvimento web, modernização de sistemas e projetos complexos como o HelpMed. Engenharia de software com código limpo e entregas claras.",
-  ogTitle: "Maniva Software | Engenharia de Software e Soluções Digitais",
-  ogDescription: "Maniva Software: transformamos necessidade digital em solução técnica. Desenvolvimento web, modernização de sistemas e projetos complexos como o HelpMed. Engenharia de software com código limpo e entregas claras.",
-  ogImage: "/images/og-image.png", // Placeholder
-  ogUrl: "https://manivasoftware.com.br",
-  twitterTitle: "Maniva Software | Engenharia de Software e Soluções Digitais",
-  twitterDescription: "Maniva Software: transformamos necessidade digital em solução técnica. Desenvolvimento web, modernização de sistemas e projetos complexos como o HelpMed.",
-  twitterImage: "/images/og-image.png" // Placeholder
-};
 </script>
+
