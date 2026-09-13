@@ -12,8 +12,8 @@
 
       <!-- Timeline -->
       <div class="relative max-w-5xl mx-auto">
-        <!-- Vertical line (Mobile) -->
-        <div class="absolute left-8 top-0 bottom-0 w-0.5 bg-root-200 lg:left-1/2 lg:-translate-x-1/2" />
+        <!-- Vertical line with gradient (Mobile) -->
+        <div class="absolute left-8 top-0 bottom-0 w-0.5 lg:left-1/2 lg:-translate-x-1/2" style="background: linear-gradient(to bottom, var(--color-root-100), var(--color-root-300));" />
 
         <div class="space-y-12 lg:space-y-0">
           <div v-for="(step, idx) in steps" :key="idx" 
@@ -26,13 +26,13 @@
             <div class="hidden lg:block w-1/2" />
 
             <!-- Step Indicator -->
-            <div class="absolute left-8 lg:left-1/2 lg:-translate-x-1/2 w-12 h-12 rounded-full bg-root-500 flex items-center justify-center text-white z-10 shadow-lg shadow-root-200">
+            <div class="absolute left-8 lg:left-1/2 lg:-translate-x-1/2 w-12 h-12 rounded-full bg-root-500 flex items-center justify-center text-root-50 z-10 shadow-elevation-2">
               <Typography variant="text-sm" class="font-bold">{{ idx + 1 }}</Typography>
             </div>
 
             <!-- Step Content Card -->
             <div class="w-full lg:w-1/2 pl-20 lg:pl-0" :class="idx % 2 === 0 ? 'lg:text-right' : 'lg:text-left'">
-              <div class="bg-white p-8 rounded-2xl shadow-sm border border-root-100 relative">
+              <div class="bg-root-50 p-8 rounded-card shadow-elevation-1 border border-root-100 relative">
                 <Typography variant="text-lg" class="font-bold mb-3">
                   {{ step.title }}
                 </Typography>
@@ -49,7 +49,7 @@
       <div class="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <div v-for="diff in differentiators" :key="diff.title" class="text-center">
           <div class="w-16 h-16 mx-auto mb-6 bg-root-100 rounded-full flex items-center justify-center text-root-600">
-            <Icon :name="diff.icon" size="32" />
+            <Icon :name="diff.icon" size="32" duotone />
           </div>
           <Typography variant="text-md" class="font-bold mb-2">
             {{ diff.title }}

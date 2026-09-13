@@ -21,7 +21,7 @@
   <WhatsAppFloat />
   
   <!-- Global Structured Data -->
-  <script type="application/ld+json" v-text="JSON.stringify(organizationSchema)"></script>
+  <component :is="'script'" type="application/ld+json" v-text="JSON.stringify(organizationSchema)" />
 </template>
 
 <script setup lang="ts">

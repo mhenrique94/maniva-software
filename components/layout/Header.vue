@@ -172,6 +172,8 @@ function onGlobalKey(event: KeyboardEvent) {
 }
 .maniva-header--scrolled {
   box-shadow: var(--shadow-elevation-2);
+  backdrop-filter: blur(8px);
+  background-color: color-mix(in srgb, var(--color-root-50) 90%, transparent);
 }
 .maniva-header__inner {
   display: flex;

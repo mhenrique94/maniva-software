@@ -14,12 +14,11 @@
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center max-w-6xl mx-auto">
         <!-- HelpMed Showcase Card -->
         <div class="relative group">
-          <div class="absolute -inset-1 bg-gradient-to-r from-root-500 to-leaf-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
-          <div class="relative bg-white rounded-2xl shadow-xl overflow-hidden border border-root-100">
+          <div class="relative bg-white rounded-2xl shadow-elevation-2 overflow-hidden border border-root-100">
             <div class="p-8 md:p-12">
               <div class="flex items-center gap-3 mb-6">
                 <div class="w-12 h-12 bg-root-100 rounded-lg flex items-center justify-center text-root-600">
-                  <Icon name="brain" size="28" />
+                  <Icon name="brain" size="28" duotone />
                 </div>
                 <Typography variant="text-xl" class="font-bold">HelpMed.app</Typography>
               </div>
@@ -32,22 +31,40 @@
                 Como construímos uma plataforma de IA que processa milhares de artigos médicos para pesquisadores, transformando dados complexos em síntese útil.
               </p>
 
+              <!-- Screenshot do produto -->
+              <figure class="mb-8">
+                <img 
+                  src="/images/screenshot_pubmed-scielo.webp"
+                  srcset="/images/screenshot_pubmed-scielo.webp 800w, /images/screenshot_pubmed-scielo.webp 1200w"
+                  sizes="(max-width: 768px) 100vw, 800px"
+                  alt="Interface do HelpMed.app mostrando busca em PubMed e SciELO"
+                  width="1441"
+                  height="913"
+                  loading="lazy"
+                  decoding="async"
+                  class="w-full h-auto rounded-lg border border-root-100"
+                />
+                <figcaption class="text-xs text-text-secondary mt-2 text-center">
+                  Interface do HelpMed.app
+                </figcaption>
+              </figure>
+
               <div class="space-y-4">
                 <div class="flex items-center gap-3">
                   <div class="w-5 h-5 rounded-full bg-leaf-100 flex items-center justify-center text-leaf-600">
-                    <Icon name="check" size="14" />
+                    <Icon name="check" size="14" duotone />
                   </div>
                   <Typography variant="text-sm" class="text-text-primary">Processamento de documentos complexos</Typography>
                 </div>
                 <div class="flex items-center gap-3">
                   <div class="w-5 h-5 rounded-full bg-leaf-100 flex items-center justify-center text-leaf-600">
-                    <Icon name="check" size="14" />
+                    <Icon name="check" size="14" duotone />
                   </div>
                   <Typography variant="text-sm" class="text-text-primary">Sistema de busca inteligente (Context-Aware)</Typography>
                 </div>
                 <div class="flex items-center gap-3">
                   <div class="w-5 h-5 rounded-full bg-leaf-100 flex items-center justify-center text-leaf-600">
-                    <Icon name="check" size="14" />
+                    <Icon name="check" size="14" duotone />
                   </div>
                   <Typography variant="text-sm text-text-primary">Escalabilidade e alta performance de processamento</Typography>
                 </div>
