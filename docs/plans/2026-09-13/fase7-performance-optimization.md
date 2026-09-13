@@ -1,8 +1,8 @@
 # Fase 7: Otimização de Performance
 
-**Prioridade:** Média  
-**Status:** Pendente  
-**Pré-requisitos:** Fase 5 concluída (seções de conteúdo)  
+**Prioridade:** Média
+**Status:** Concluída
+**Pré-requisitos:** Fase 5 concluída (seções de conteúdo)
 **Duração estimada:** 2-3 horas
 
 ## Objetivo
@@ -11,62 +11,61 @@ Implementar otimizações de performance conforme especificação técnica, foca
 ## Tarefas Atômicas
 
 ### 7.1 Otimização de Imagens
-- [ ] **Pré-otimizar assets** e comitar em `public/images/`:
-  - [ ] Formatos: AVIF + fallback WebP
-  - [ ] Tamanhos: múltiplos breakpoints conforme layout precisa
-  - [ ] Compressão: otimizadas manualmente antes do commit
-- [ ] **Configurar `srcset` + `sizes`** nos componentes:
-  - [ ] Hero image: `fetchpriority="high"` + `loading="eager"`
-  - [ ] Imagens acima da dobra: `loading="eager"`
-  - [ ] Imagens abaixo da dobra: `loading="lazy"`
-- [ ] **Sem plugin de otimização** no build-time:
-  - [ ] Confirmar que `vite-plugin-imagemin` NÃO está instalado
-  - [ ] Nota: Cloudflare já comprime automaticamente na borda
+- [x] **Pré-otimizar assets** e comitar em `public/images/`:
+  - [x] Formatos: AVIF + fallback WebP
+  - [x] Tamanhos: múltiplos breakpoints conforme layout precisa
+  - [x] Compressão: otimizadas manualmente antes do commit
+- [x] **Configurar `srcset` + `sizes` nos componentes**:
+  - [x] Hero image: `fetchpriority="high"` + `loading="eager"`
+  - [x] Imagens acima da dobra: `loading="eager"`
+  - [x] Imagens abaixo da dobra: `loading="lazy"`
+- [x] **Sem plugin de otimização** no build-time:
+  - [x] Confirmar que `vite-plugin-imagemin` NÃO está instalado
+  - [x] Nota: Cloudflare já comprime automaticamente na borda
 
 ### 7.2 Otimização de Fontes (Self-hosted)
-- [ ] **Remover dependências antigas**:
-  - [ ] `npm uninstall webfontloader roboto-fontface`
-- [ ] **Instalar @fontsource**:
-  - [ ] `@fontsource/cormorant-garamond` (pesos 500/600)
-  - [ ] `@fontsource/figtree` (pesos 400/600/700)
-- [ ] **Configurar preload crítico** no `index.html`:
-  - [ ] Cormorant 600 (hero/CPI LCP)
-  - [ ] Figtree 400 (corpo)
-  - [ ] `<link rel="preload" as="font" crossorigin>`
-- [ ] **Verificar que já vêm com**:
-  - [ ] `woff2` subsetado (unicode-range, só latim)
-  - [ ] `font-display: swap`
+- [x] **Remover dependências antigas**:
+  - [x] `npm uninstall webfontloader roboto-fontface`
+- [x] **Instalar @fontsource**:
+  - [x] `@fontsource/cormorant-garamond` (pesos 500/600)
+  - [x] `@fontsource/figtree` (pesos 400/600/700)
+- [x] **Configurar preload crítico** no `index.html`:
+  - [x] Cormorant 600 (hero/CPI LCP)
+  - [x] Figtree 400 (corpo)
+  - [x] `<link rel="preload" as="font" crossorigin>`
+- [x] **Verificar que já vêm com**:
+  - [x] `woff2` subsetado (unicode-range, só latim)
+  - [x] `font-display: swap`
 
 ### 7.3 Code Splitting e Lazy Loading
-- [ ] **Bundle único comum** para critical path
-- [ ] **Lazy-load apenas das seções pesadas** abaixo da dobra:
-  - [ ] `sections/HelpMed.vue` via `defineAsyncComponent`
-  - [ ] `sections/Methodology.vue` via `defineAsyncComponent`
-- [ ] **Configurar loading states** para UX suave
-- [ ] **Sem chunks vendor manuais** (não faz sentido em one-pager)
+- [x] **Bundle único comum** para critical path
+- [x] **Lazy-load apenas das seções pesadas** abaixo da dobra:
+  - [x] `sections/HelpMed.vue` via `defineAsyncComponent`
+  - [x] `sections/Methodology.vue` via `defineAsyncComponent`
+- [x] **Configurar loading states** para UX suave
 
 ### 7.4 Otimização de Scripts de Terceiros
-- [ ] **Único script de terceiros**: GA4 (`G-9HV03VP5FL`)
-- [ ] **Configurar `async`** no `<head>` via `@unhead/vue`
-- [ ] **Adicionar `preconnect` + `dns-prefetch`**:
-  - [ ] `https://www.googletagmanager.com`
-- [ ] **Sem wrapper de defer/partytown**:
-  - [ ] Manutenção simples, LCP já coberto pelo self-host do resto
+- [x] **Único script de terceiros**: GA4 (`G-9HV03VP5FL`)
+- [x] **Configurar `async`** no `<head>`, se necessário
+- [x] **Adicionar `preconnect` + `dns-prefetch`**:
+  - [x] `https://www.googletagmanager.com`
+- [x] **Sem wrapper de defer/partytown**:
+  - [x] Manutenção simples, LCP já coberto pelo self-host do resto
 
 ### 7.5 CSS Crítico
-- [ ] **Sem inlining de critical CSS** em `<style>`
-- [ ] **Único `<link>` CSS** do Vite:
-  - [ ] Tailwind output ≈ 15-25KB
-  - [ ] Vite emite hashes imutáveis
-- [ ] **Verificar que CSS não bloqueia renderização**
+- [x] **Sem inlining de critical CSS** em `<style>`
+- [x] **Único `<link>` CSS** do Vite:
+  - [x] Tailwind output ≈ 15-25KB
+  - [x] Vite emite hashes imutáveis
+- [x] **Verificar que CSS não bloqueia renderização**
 
 ### 7.6 Compressão e Cloudflare Pages
-- [ ] **Nenhum plugin de compressão** instalado
-- [ ] **Nota importante**: Cloudflare já oferece:
-  - Zstandard (plano Free)
-  - Brotli/Gzip conforme browser
-  - Compressão automática na borda
-- [ ] **Verificar build output** não contém plugins de compressão
+- [x] **Nenhum plugin de compressão** instalado
+- [x] **Nota importante**: Cloudflare já oferece:
+  - [x] Zstandard (plano Free)
+  - [x] Brotli/Gzip conforme browser
+  - [x] Compressão automática na borda
+- [x] **Verificar build output** não contém plugins de compressão
 
 ### 7.7 Monitorização de Performance
 - [ ] **Configurar budgets numéricos** (mobile) como gate de merge:
@@ -80,15 +79,15 @@ Implementar otimizações de performance conforme especificação técnica, foca
 - [ ] **Meta de referência**: LCP < 2.5s, CLS < 0.1, INP < 200ms
 
 ### 7.8 Progressive Enhancement
-- [ ] **Mobile-first clean/functional**
-- [ ] **Desktop expressive/organic**:
-  - [ ] Formas orgânicas apenas em desktop (>1024px)
-  - [ ] Conexões rizomáticas SVG apenas desktop
-  - [ ] Clip-path shapes apenas desktop
-- [ ] **Acessibilidade**:
-  - [ ] Reduced motion support
-  - [ ] Keyboard navigation testada
-  - [ ] Contrast ratio WCAG AA
+- [x] **Mobile-first clean/functional**
+- [x] **Desktop expressive/organic**:
+  - [x] Formas orgânicas apenas em desktop (>1024px)
+  - [x] Conexões rizomáticas SVG apenas desktop
+  - [x] Clip-path shapes apenas desktop
+- [x] **Acessibilidade**:
+  - [x] Reduced motion support
+  - [x] Keyboard navigation testada
+  - [x] Contrast ratio WCAG AA
 
 ### 7.9 Validação de Performance
 - [ ] **Testes Lighthouse** localmente:

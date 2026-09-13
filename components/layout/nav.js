@@ -20,7 +20,7 @@ export const navLinks = [
 
 /** CTA superior del header (WhatsApp contextual) — §5.2. */
 export const headerCta = {
-  label: "Veja qual solução faz sentido para você",
+  label: "Conversar agora",
   message: defaultMessage,
 };
 

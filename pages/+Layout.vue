@@ -21,12 +21,14 @@
   <WhatsAppFloat />
   
   <!-- Global Structured Data -->
-  <script type="application/ld+json" v-text="JSON.stringify(organizationSchema)"></script>
+  <component :is="'script'" type="application/ld+json" v-text="JSON.stringify(organizationSchema)" />
 </template>
 
 <script setup lang="ts">
 import { Header, Footer, WhatsAppFloat } from "@layout";
 import { getOrganizationSchema } from "@util/structuredData";
+import "@fontsource/cormorant-garamond";
+import "@fontsource/figtree";
 
 const organizationSchema = getOrganizationSchema();
 </script>

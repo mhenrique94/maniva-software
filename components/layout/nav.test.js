@@ -22,7 +22,7 @@ test("navLinks: rótulos pt-BR canónicos (no 'establecidas' ni personaje)", () 
 });
 
 test("headerCta: rótulo contextual + mensaje WhatsApp", () => {
-  assert.equal(headerCta.label, "Veja qual solução faz sentido para você");
+  assert.equal(headerCta.label, "Conversar agora");
   assert.ok(headerCta.message.includes("projeto digital"));
 });
 

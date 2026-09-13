@@ -10,14 +10,16 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <Card v-for="(benefit, idx) in segment1Benefits" :key="idx" class="p-8 border-root-100">
+        <Card v-for="(benefit, idx) in segment1Benefits" :key="idx" 
+          :elevation="idx === 0 ? 'raised' : 'soft'"
+          :class="['p-8 border border-root-100', idx === 0 ? 'md:col-span-2 lg:col-span-1' : '']">
           <div class="text-root-500 mb-4">
-            <Icon :name="benefit.icon" size="32" />
+            <Icon :name="benefit.icon" size="32" duotone />
           </div>
           <Typography variant="text-md" class="font-semibold mb-2">
             {{ benefit.title }}
           </Typography>
-          <Typography variant="text-sm" class="text-slate-500">
+          <Typography variant="text-sm" class="text-text-secondary">
             {{ benefit.desc }}
           </Typography>
         </Card>
@@ -34,32 +36,37 @@
   <!-- Segmento 2: Empresas em Crescimento -->
   <Section variant="root" organic :connect-to="'services-segment-2'" class="py-20">
     <div class="container mx-auto px-6">
-      <div class="max-w-4xl mx-auto mb-20 text-center">
-        <Typography variant="display-md" class="mb-6">
-          Seu sistema trava seu crescimento? <br class="hidden lg:block" />
-          Vamos desemperrar sua operação digital.
-        </Typography>
-        
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left mt-12">
-          <div v-for="pain in segment2Pains" :key="pain" class="flex items-start gap-3 p-4 bg-white/50 rounded-lg border border-root-100">
-            <Icon name="warning" class="text-root-500 flex-shrink-0" />
-            <Typography variant="text-sm" class="font-medium text-slate-700">
-              {{ pain }}
-            </Typography>
+        <div class="max-w-4xl mx-auto mb-20 text-center">
+          <Typography variant="display-md" class="mb-6">
+            Seu sistema trava seu crescimento? <br class="hidden lg:block" />
+            Vamos desemperrar sua operação digital.
+          </Typography>
+          
+          <div class="mt-12 max-w-2xl mx-auto">
+            <div class="space-y-3 text-left">
+              <div v-for="pain in segment2Pains" :key="pain" class="flex items-center gap-3 p-3 bg-root-50 rounded-lg border border-root-100">
+                <Icon name="warning" class="text-root-500 flex-shrink-0" size="20" duotone />
+                <Typography variant="text-sm" class="font-medium text-text-primary">
+                  {{ pain }}
+                </Typography>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <div v-for="(solution, idx) in segment2Solutions" :key="idx" class="flex flex-col items-start">
+        <Card v-for="(solution, idx) in segment2Solutions" :key="idx" 
+          elevation="soft" 
+          texture
+          class="p-8 border border-root-100">
           <div class="h-1 w-12 bg-root-500 mb-6" />
           <Typography variant="text-lg" class="font-bold mb-4">
             {{ solution.title }}
           </Typography>
-          <Typography variant="text-md" class="text-slate-600">
+          <Typography variant="text-md" class="text-text-secondary">
             {{ solution.desc }}
           </Typography>
-        </div>
+        </Card>
       </div>
 
       <div class="mt-20 text-center">
