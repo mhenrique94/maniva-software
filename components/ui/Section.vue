@@ -14,6 +14,7 @@
     :style="surfaceStyle"
     :aria-label="ariaLabel"
     :data-connect-to="connectTo"
+    v-bind="$attrs"
   >
     <slot />
     <svg

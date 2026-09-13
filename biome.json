@@ -16,7 +16,7 @@
       }
     },
     {
-      "includes": ["components/ui/*.vue"],
+      "includes": ["components/ui/*.vue", "components/layout/*.vue"],
       "linter": {
         "rules": {
           "style": {
