@@ -33,17 +33,24 @@
 
               <!-- Screenshot do produto -->
               <figure class="mb-8">
-                <img 
-                  src="/images/screenshot_pubmed-scielo.webp"
-                  srcset="/images/screenshot_pubmed-scielo.webp 800w, /images/screenshot_pubmed-scielo.webp 1200w"
-                  sizes="(max-width: 768px) 100vw, 800px"
-                  alt="Interface do HelpMed.app mostrando busca em PubMed e SciELO"
-                  width="1441"
-                  height="913"
-                  loading="lazy"
-                  decoding="async"
-                  class="w-full h-auto rounded-lg border border-root-100"
-                />
+                <picture>
+                  <source
+                    srcset="/images/screenshot_pubmed-scielo-400.avif 400w, /images/screenshot_pubmed-scielo-800.avif 800w"
+                    sizes="(max-width: 768px) 100vw, 800px"
+                    type="image/avif"
+                  />
+                  <img
+                    src="/images/screenshot_pubmed-scielo-800.webp"
+                    srcset="/images/screenshot_pubmed-scielo-400.webp 400w, /images/screenshot_pubmed-scielo-800.webp 800w"
+                    sizes="(max-width: 768px) 100vw, 800px"
+                    alt="Interface do HelpMed.app mostrando busca em PubMed e SciELO"
+                    width="800"
+                    height="507"
+                    loading="lazy"
+                    decoding="async"
+                    class="w-full h-auto rounded-lg border border-root-100"
+                  />
+                </picture>
                 <figcaption class="text-xs text-text-secondary mt-2 text-center">
                   Interface do HelpMed.app
                 </figcaption>
@@ -95,12 +102,14 @@
 </template>
 
 <script setup>
-import { Button, Section, Typography, Icon } from '@ui';
-import { trackCTA } from '@util/ctaTracking';
+import { Button, Section, Typography, Icon } from "@ui";
+import { trackCTA } from "@util/ctaTracking";
 
 const handleCTAShowcase = () => {
-  trackCTA('helpmed_showcase_cta', 'ambitious_projects');
-  const msg = encodeURIComponent("Olá! Vi o site da Maniva e tenho um projeto tecnicamente desafiador para conversar.");
-  window.open(`https://wa.me/5515936182755?text=${msg}`, '_blank');
+  trackCTA("helpmed_showcase_cta", "ambitious_projects");
+  const msg = encodeURIComponent(
+    "Olá! Vi o site da Maniva e tenho um projeto tecnicamente desafiador para conversar.",
+  );
+  window.open(`https://wa.me/5515936182755?text=${msg}`, "_blank");
 };
 </script>

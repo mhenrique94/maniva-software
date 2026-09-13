@@ -10,9 +10,18 @@
   <footer class="maniva-footer">
     <Container class="maniva-footer__grid">
       <div class="maniva-footer__col">
-        <Typography type="heading" level="2" tone="pulp" class="maniva-footer__title">
-          {{ company.brand }}
-        </Typography>
+        <picture>
+          <source srcset="/images/logo/logo-maniva-footer-light.avif" type="image/avif" />
+          <img
+            src="/images/logo/logo-maniva-footer-light.webp"
+            alt="Maniva Software"
+            width="72"
+            height="48"
+            loading="lazy"
+            decoding="async"
+            class="maniva-footer__logo"
+          />
+        </picture>
         <p class="maniva-footer__legal">{{ company.legalName }}</p>
         <p class="maniva-footer__legal">CNPJ: {{ company.cnpj }}</p>
         <ul class="maniva-footer__contact">
@@ -108,8 +117,11 @@ const baseline = footerBaseline();
     grid-template-columns: repeat(3, 1fr);
   }
 }
-.maniva-footer__title {
-  margin: 0 0 0.75rem;
+.maniva-footer__logo {
+  height: 2rem;
+  width: auto;
+  margin-bottom: 0.75rem;
+  display: block;
 }
 .maniva-footer__legal {
   font-family: var(--font-ui);

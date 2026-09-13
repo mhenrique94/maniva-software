@@ -2,7 +2,7 @@
   Header.vue — "Navegación Orgánica" (§5.2).
 
   Sticky con:
-    - Logo Maniva Software (Cormorant + Figtree, tokens §4.2).
+    - Logomarca Maniva Software (imagem otimizada em WebP/AVIF, §3).
     - Navegación segmentada por dor (pt-BR, CONTEXT.md) con scroll spy.
     - CTA superior contextual (WhatsApp pre-escrito).
     - Menu mobile suave (burger + slide), a11y (`aria-expanded`,
@@ -16,8 +16,19 @@
   <header class="maniva-header" :class="{ 'maniva-header--scrolled': scrolled }">
     <Container size="lg" class="maniva-header__inner">
       <a href="#inicio" class="maniva-brand" aria-label="Maniva Software — ir ao início" @click="onAnchor">
-        <span class="maniva-brand__word">Maniva</span>
-        <span class="maniva-brand__sub">Software</span>
+        <picture>
+          <source srcset="/images/logo/logo-maniva-header.avif" type="image/avif" />
+          <img
+            src="/images/logo/logo-maniva-header.webp"
+            alt=""
+            width="60"
+            height="40"
+            loading="eager"
+            decoding="async"
+            class="maniva-brand__logo"
+          />
+        </picture>
+        <span class="sr-only">Maniva Software</span>
       </a>
 
       <nav class="maniva-nav" aria-label="Navegação principal">
@@ -185,24 +196,15 @@ function onGlobalKey(event: KeyboardEvent) {
 /* Marca: Cormorant (orgánico) + Figtree (técnico) — §4.2. */
 .maniva-brand {
   display: inline-flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.5rem;
   flex: none;
   text-decoration: none;
-  color: var(--color-root-800);
 }
-.maniva-brand__word {
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 1.5rem;
-  line-height: 1;
-}
-.maniva-brand__sub {
-  font-family: var(--font-ui);
-  font-weight: 600;
-  font-size: 0.875rem;
-  line-height: 1;
-  letter-spacing: 0.02em;
+.maniva-brand__logo {
+  height: 2.5rem;
+  width: auto;
+  display: block;
 }
 
 /* Navegación desktop: solo >= 1024px. */

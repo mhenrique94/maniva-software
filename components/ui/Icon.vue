@@ -39,7 +39,7 @@
           :is="nerve.component"
           weight="thin"
           :size="sizeCss"
-          :color="nerveColor"
+          :color="resolvedNerveColor"
           class="maniva-icon-nerve"
           aria-hidden="true"
         />
@@ -89,7 +89,7 @@ const nerve = entry;
 const line = entry;
 const lineWeight = resolveWeight(props.weight);
 const lineColor = props.color;
-const nerveColor = props.nerveColor;
+const resolvedNerveColor = props.nerveColor;
 
 const sizeCss = typeof props.size === "number" ? `${props.size}px` : props.size;
 const wrapStyle = { fontSize: sizeCss, lineHeight: 0 };
