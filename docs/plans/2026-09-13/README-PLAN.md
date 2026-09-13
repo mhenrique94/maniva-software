@@ -82,13 +82,13 @@ graph TD
 
 ### **Fase 3: Componentes UI Base** ⏱️ 3-4h
 **Prioridade:** Alta
-**Status:** Pendente
+**Status:** Concluida
 **Arquivo:** `docs/plans/2026-09-13/fase3-ui-components.md`
 
-**Tarefas principais:**
+**Tarefas principales:**
 - Button.vue - "O Broto" (formas assimétricas)
 - Card.vue - "Seção Transversal" (textura casca)
-- Section.vue - "Solo/Camadas" (clip-path orgânico)
+- Section.vue - "Solo/Camadas" (clip-path orgánico)
 - Typography.vue e Icon.vue
 - Foco em acessibilidade WCAG AA
 
