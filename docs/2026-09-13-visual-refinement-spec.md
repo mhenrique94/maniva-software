@@ -123,7 +123,9 @@
 
 ## 4. Microinteracciones e pulido
 
-- **Botones:** validar hover `scale(1.02)` + `shadow-earth` e active hundido tras la corrección de tokens.
+- **Botones:**
+  - validar hover `scale(1.02)` + `shadow-earth` e active hundido tras la corrección de tokens.
+  - validar se de fato tem ação atribuida, links ou ancoras válidos e funcionando.
 - **Cards:** `transition-shadow` + leve elevación em hover.
 - **Links del footer:** manter transición de color suave.
 - **Reduced motion:** garantir que toda animación respete `prefers-reduced-motion` (ya hay soporte parcial).

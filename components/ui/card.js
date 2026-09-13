@@ -30,6 +30,13 @@ const baseClasses = [
   "h-full",
 ];
 
+/** Microinterações terrosas: sombra + leve elevação no hover. */
+const interactionClasses = [
+  "transition-shadow",
+  "hover:shadow-elevation-2",
+  "hover:-translate-y-0.5",
+];
+
 /**
  * Classes da Card.
  * @param {{elevation?: keyof typeof elevations; density?: keyof typeof densities;
@@ -42,7 +49,7 @@ export function cardClasses({
   padding = null,
   flat = false,
 } = {}) {
-  const classes = [...baseClasses];
+  const classes = [...baseClasses, ...interactionClasses];
   if (!flat) classes.push(...(elevations[elevation] ?? elevations.soft));
   classes.push(...(padding ?? densities[density] ?? densities.comfortable));
   return { classes };

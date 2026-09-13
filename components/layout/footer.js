@@ -48,4 +48,11 @@ export function footerBaseline(year = new Date().getFullYear()) {
 /** Sinal de atualidade (GEO, §6.4) — "Atualizado em …" no rodapé. */
 export const lastUpdated = "Atualizado em setembro de 2026";
 
-export default { company, quickLinks, connections, footerBaseline, lastUpdated };
+/** Classes utilitárias para links do footer: transição suave de cor + reduced motion (§4). */
+export const footerLinkClasses = [
+  "motion-safe:transition-colors",
+  "motion-safe:duration-150",
+  "motion-safe:ease-in-out",
+];
+
+export default { company, quickLinks, connections, footerBaseline, lastUpdated, footerLinkClasses };

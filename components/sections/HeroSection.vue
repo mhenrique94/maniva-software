@@ -1,5 +1,5 @@
 <template>
-  <Section variant="pulp" organic :aria-label="'Hero Section'">
+  <Section id="inicio" variant="pulp" organic :aria-label="'Hero Section'">
     <div class="container mx-auto px-6 py-20 lg:py-32 flex flex-col items-center text-center relative overflow-hidden">
       
       <!-- Background Organic Roots Decoration -->
@@ -22,7 +22,7 @@
       </Typography>
 
       <div class="flex flex-col sm:flex-row gap-4">
-        <Button variant="primary" size="lg" @click="handleCTAClick">
+        <Button variant="primary" size="lg" @click="openHeroCTA">
           Veja qual solução faz sentido para você
         </Button>
       </div>
@@ -31,10 +31,6 @@
 </template>
 
 <script setup>
-import { Button, Section, Typography } from '@ui';
-import { trackCTA } from '@util/ctaTracking';
-
-const handleCTAClick = () => {
-  trackCTA('hero_primary_cta', 'all');
-};
+import { Button, Section, Typography } from "@ui";
+import { openHeroCTA } from "@util/ctaActions";
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <Section variant="earth" organic :aria-label="'Methodology Section'">
+  <Section id="metodo" variant="earth" organic :aria-label="'Methodology Section'">
     <div class="container mx-auto px-6 py-20">
       <div class="text-center max-w-3xl mx-auto mb-20">
         <Typography variant="display-md" class="mb-6">

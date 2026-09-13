@@ -1,14 +1,14 @@
 <!--
   Card.vue — "Seção Transversal" (§4.4).
 
-  Card con `border-radius: 48px 12px 6px 6px` (canto superior esquerdo
-  proeminente), textura sutil de casca de mandioca (SVG noise) e fondo Polpa
-  para contraste máximo con la tipografia. Slots: `header`, default y
-  `actions`. La textura queda por detrás del contenido (no afecta el
-  contraste de la tipografia).
+  Card com `border-radius: 48px 12px 6px 6px` (canto superior esquerdo
+  proeminente), textura sutil de casca de mandioca (SVG noise) e fundo Polpa
+  para contraste máximo com a tipografia. Slots: `header`, default e
+  `actions`. A textura fica por trás do conteúdo (não afeta o contraste da
+  tipografia).
 -->
 <template>
-  <component :is="element" :class="classes" :aria-label="ariaLabel">
+  <component :is="element" class="maniva-card" :class="classes" :aria-label="ariaLabel">
     <span v-if="texture" class="maniva-card-texture" aria-hidden="true" />
     <header v-if="$slots.header" class="maniva-card-header">
       <slot name="header" />
@@ -70,5 +70,13 @@ const classes = cardClasses({
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+}
+
+/* Microinterações terrosas respeitam prefers-reduced-motion (§4). */
+@media (prefers-reduced-motion: reduce) {
+  .maniva-card {
+    transition: none !important;
+    transform: none !important;
+  }
 }
 </style>

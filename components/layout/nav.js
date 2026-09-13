@@ -15,7 +15,6 @@ export const navLinks = [
   { id: "empresas", label: "Para empresas em crescimento", href: "#empresas" },
   { id: "projetos", label: "Para projetos ambiciosos", href: "#projetos" },
   { id: "metodo", label: "Como trabalhamos", href: "#metodo" },
-  { id: "sobre", label: "Sobre", href: "#sobre" },
 ];
 
 /** CTA superior del header (WhatsApp contextual) — §5.2. */

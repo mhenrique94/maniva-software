@@ -1,5 +1,5 @@
 <template>
-  <Section variant="vitality" organic :aria-label="'HelpMed Showcase'">
+  <Section id="projetos" variant="vitality" organic :aria-label="'HelpMed Showcase'">
     <div class="container mx-auto px-6 py-20">
       <div class="text-center max-w-4xl mx-auto mb-16">
         <Typography variant="display-md" class="mb-6">
@@ -91,7 +91,7 @@
           </Typography>
 
           <div class="pt-4">
-            <Button variant="primary" size="lg" @click="handleCTAShowcase">
+            <Button variant="primary" size="lg" @click="openHelpMedShowcaseCTA">
               Tenho um projeto desafiador
             </Button>
           </div>
@@ -103,13 +103,5 @@
 
 <script setup>
 import { Button, Section, Typography, Icon } from "@ui";
-import { trackCTA } from "@util/ctaTracking";
-
-const handleCTAShowcase = () => {
-  trackCTA("helpmed_showcase_cta", "ambitious_projects");
-  const msg = encodeURIComponent(
-    "Olá! Vi o site da Maniva e tenho um projeto tecnicamente desafiador para conversar.",
-  );
-  window.open(`https://wa.me/5515936182755?text=${msg}`, "_blank");
-};
+import { openHelpMedShowcaseCTA } from "@util/ctaActions";
 </script>

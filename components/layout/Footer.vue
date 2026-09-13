@@ -26,13 +26,13 @@
         <p class="maniva-footer__legal">CNPJ: {{ company.cnpj }}</p>
         <ul class="maniva-footer__contact">
           <li>
-            <a :href="waLink()" target="_blank" rel="noopener">
+            <a :href="waLink()" target="_blank" rel="noopener" :class="footerLinkClasses">
               <Icon name="whatsapp" :size="18" duotone aria-hidden="true" />
               {{ company.whatsapp }}
             </a>
           </li>
           <li>
-            <a :href="`mailto:${company.email}`">
+            <a :href="`mailto:${company.email}`" :class="footerLinkClasses">
               <Icon name="envelope" :size="18" duotone aria-hidden="true" />
               {{ company.email }}
             </a>
@@ -46,7 +46,7 @@
         </Typography>
         <ul class="maniva-footer__links">
           <li v-for="link in quick" :key="link.id">
-            <a :href="link.href">{{ link.label }}</a>
+            <a :href="link.href" :class="footerLinkClasses">{{ link.label }}</a>
           </li>
         </ul>
       </div>
@@ -62,6 +62,7 @@
               target="_blank"
               rel="noopener"
               :title="conn.description"
+              :class="footerLinkClasses"
             >
               {{ conn.label }}
               <Icon name="arrow-right" :size="16" duotone aria-hidden="true" />
@@ -87,6 +88,7 @@ import {
   connections,
   footerBaseline,
   lastUpdated,
+  footerLinkClasses,
 } from "@layout/footer.js";
 import { waLink } from "@layout/whatsapp.js";
 

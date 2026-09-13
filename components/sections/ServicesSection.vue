@@ -1,6 +1,6 @@
 <template>
   <!-- Segmento 1: Pessoas e Pequenos Negócios -->
-  <Section variant="pulp" class="py-20">
+  <Section id="pmes" variant="pulp" class="py-20">
     <div class="container mx-auto px-6">
       <div class="max-w-3xl mx-auto text-center mb-16">
         <Typography variant="display-md" class="mb-6">
@@ -26,7 +26,7 @@
       </div>
 
       <div class="mt-16 text-center">
-        <Button variant="primary" @click="handleCTASegment1">
+        <Button variant="primary" @click="openServicesSegment1CTA">
           Quero meu site profissional sem dor técnica
         </Button>
       </div>
@@ -34,7 +34,7 @@
   </Section>
 
   <!-- Segmento 2: Empresas em Crescimento -->
-  <Section variant="root" organic :connect-to="'services-segment-2'" class="py-20">
+  <Section id="empresas" variant="root" organic :connect-to="'services-segment-2'" class="py-20">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto mb-20 text-center">
           <Typography variant="display-md" class="mb-6">
@@ -70,7 +70,7 @@
       </div>
 
       <div class="mt-20 text-center">
-        <Button variant="primary" @click="handleCTASegment2">
+        <Button variant="primary" @click="openServicesSegment2CTA">
           Diagnóstico técnico do seu sistema atual
         </Button>
       </div>
@@ -79,8 +79,8 @@
 </template>
 
 <script setup>
-import { Button, Card, Section, Typography, Icon } from '@ui';
-import { trackCTA } from '@util/ctaTracking';
+import { Button, Card, Section, Typography, Icon } from "@ui";
+import { openServicesSegment1CTA, openServicesSegment2CTA } from "@util/ctaActions";
 
 const segment1Benefits = [
   { title: 'Pareça profissional antes mesmo de atender', desc: 'Transmita autoridade e segurança para seus clientes desde o primeiro contato.', icon: 'briefcase' },
@@ -102,15 +102,5 @@ const segment2Solutions = [
   { title: 'Arquitetura que escala', desc: 'Sistema que cresce com seu negócio, não trava o seu crescimento.' },
 ];
 
-const handleCTASegment1 = () => {
-  trackCTA('services_segment_1', 'small_business');
-  const msg = encodeURIComponent("Olá! Vi o site da Maniva e quero um site profissional simples e eficiente.");
-  window.open(`https://wa.me/5515936182755?text=${msg}`, '_blank');
-};
 
-const handleCTASegment2 = () => {
-  trackCTA('services_segment_2', 'growing_business');
-  const msg = encodeURIComponent("Olá! Vi o site da Maniva e preciso de diagnóstico técnico do nosso sistema atual.");
-  window.open(`https://wa.me/5515936182755?text=${msg}`, '_blank');
-};
 </script>
