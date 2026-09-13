@@ -17,7 +17,7 @@
           <Typography variant="text-md" class="font-semibold mb-2">
             {{ benefit.title }}
           </Typography>
-          <Typography variant="text-sm" class="text-slate-500">
+          <Typography variant="text-sm" class="text-text-secondary">
             {{ benefit.desc }}
           </Typography>
         </Card>
@@ -43,7 +43,7 @@
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-left mt-12">
           <div v-for="pain in segment2Pains" :key="pain" class="flex items-start gap-3 p-4 bg-white/50 rounded-lg border border-root-100">
             <Icon name="warning" class="text-root-500 flex-shrink-0" />
-            <Typography variant="text-sm" class="font-medium text-slate-700">
+            <Typography variant="text-sm" class="font-medium text-text-primary">
               {{ pain }}
             </Typography>
           </div>
@@ -56,7 +56,7 @@
           <Typography variant="text-lg" class="font-bold mb-4">
             {{ solution.title }}
           </Typography>
-          <Typography variant="text-md" class="text-slate-600">
+          <Typography variant="text-md" class="text-text-secondary">
             {{ solution.desc }}
           </Typography>
         </div>

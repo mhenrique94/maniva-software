@@ -5,7 +5,7 @@
         <Typography variant="display-md" class="mb-6">
           Sem surpresas — processo claro do primeiro contato à entrega
         </Typography>
-        <Typography variant="text-lg" class="text-slate-600">
+        <Typography variant="text-lg" class="text-text-secondary">
           Trabalhamos com transparência e previsibilidade, para que você tenha controle total sobre o que está sendo construído.
         </Typography>
       </div>
@@ -36,7 +36,7 @@
                 <Typography variant="text-lg" class="font-bold mb-3">
                   {{ step.title }}
                 </Typography>
-                <Typography variant="text-sm" class="text-slate-600 leading-relaxed">
+                <Typography variant="text-sm" class="text-text-secondary leading-relaxed">
                   {{ step.desc }}
                 </Typography>
               </div>
@@ -54,7 +54,7 @@
           <Typography variant="text-md" class="font-bold mb-2">
             {{ diff.title }}
           </Typography>
-          <Typography variant="text-sm" class="text-slate-600">
+          <Typography variant="text-sm" class="text-text-secondary">
             {{ diff.desc }}
           </Typography>
         </div>

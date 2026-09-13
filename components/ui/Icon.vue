@@ -88,6 +88,8 @@ const entry = getIcon(props.name ?? null);
 const nerve = entry;
 const line = entry;
 const lineWeight = resolveWeight(props.weight);
+const lineColor = props.color;
+const nerveColor = props.nerveColor;
 
 const sizeCss = typeof props.size === "number" ? `${props.size}px` : props.size;
 const wrapStyle = { fontSize: sizeCss, lineHeight: 0 };

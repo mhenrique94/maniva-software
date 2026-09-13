@@ -11,7 +11,7 @@
         Do site simples ao sistema complexo — <span class="text-root-600">engenharia de software</span> que entende seu negócio
       </Typography>
 
-      <Typography variant="text-lg" class="max-w-2xl mb-10 text-slate-600">
+      <Typography variant="text-lg" class="max-w-2xl mb-10 text-text-secondary">
         Desenvolvimento web, modernização de sistemas e projetos de IA complexos — com qualidade técnica de quem já construiu plataformas em escala.
       </Typography>
 

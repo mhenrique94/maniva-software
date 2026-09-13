@@ -6,7 +6,7 @@
           Projetos que outros chamariam de impossíveis — <br class="hidden lg:block" />
           <span class="text-root-600">nosso terreno favorito</span>
         </Typography>
-        <Typography variant="text-lg" class="text-slate-600">
+        <Typography variant="text-lg" class="text-text-secondary">
           Quando falamos em IA complexa, nós realmente construímos.
         </Typography>
       </div>
@@ -28,7 +28,7 @@
                 Plataforma de IA aplicada a um domínio específico
               </Typography>
               
-              <p class="text-slate-600 mb-8 leading-relaxed">
+              <p class="text-text-secondary mb-8 leading-relaxed">
                 Como construímos uma plataforma de IA que processa milhares de artigos médicos para pesquisadores, transformando dados complexos em síntese útil.
               </p>
 
@@ -37,19 +37,19 @@
                   <div class="w-5 h-5 rounded-full bg-leaf-100 flex items-center justify-center text-leaf-600">
                     <Icon name="check" size="14" />
                   </div>
-                  <Typography variant="text-sm" class="text-slate-700">Processamento de documentos complexos</Typography>
+                  <Typography variant="text-sm" class="text-text-primary">Processamento de documentos complexos</Typography>
                 </div>
                 <div class="flex items-center gap-3">
                   <div class="w-5 h-5 rounded-full bg-leaf-100 flex items-center justify-center text-leaf-600">
                     <Icon name="check" size="14" />
                   </div>
-                  <Typography variant="text-sm" class="text-slate-700">Sistema de busca inteligente (Context-Aware)</Typography>
+                  <Typography variant="text-sm" class="text-text-primary">Sistema de busca inteligente (Context-Aware)</Typography>
                 </div>
                 <div class="flex items-center gap-3">
                   <div class="w-5 h-5 rounded-full bg-leaf-100 flex items-center justify-center text-leaf-600">
                     <Icon name="check" size="14" />
                   </div>
-                  <Typography variant="text-sm text-slate-700">Escalabilidade e alta performance de processamento</Typography>
+                  <Typography variant="text-sm text-text-primary">Escalabilidade e alta performance de processamento</Typography>
                 </div>
               </div>
             </div>
@@ -58,11 +58,11 @@
 
         <!-- Showcase Text -->
         <div class="space-y-8">
-          <Typography variant="text-2xl" class="font-bold text-slate-800 leading-snug">
+          <Typography variant="text-2xl" class="font-bold text-text-primary leading-snug">
             IA, processamento de dados e sistemas especializados.
           </Typography>
           
-          <Typography variant="text-md" class="text-slate-600">
+          <Typography variant="text-md" class="text-text-secondary">
             Não nos limitamos ao básico. Atuamos na fronteira entre a necessidade de negócio e a capacidade técnica, resolvendo desafios de arquitetura, extração de conhecimento e automação inteligente.
           </Typography>
 
