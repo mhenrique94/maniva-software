@@ -19,10 +19,16 @@
   </main>
   <Footer />
   <WhatsAppFloat />
+  
+  <!-- Global Structured Data -->
+  <script type="application/ld+json" v-text="JSON.stringify(organizationSchema)"></script>
 </template>
 
 <script setup lang="ts">
 import { Header, Footer, WhatsAppFloat } from "@layout";
+import { getOrganizationSchema } from "@util/structuredData";
+
+const organizationSchema = getOrganizationSchema();
 </script>
 
 <style>
@@ -52,3 +58,4 @@ section[id],
   }
 }
 </style>
+

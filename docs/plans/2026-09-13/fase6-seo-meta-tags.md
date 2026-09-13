@@ -1,17 +1,17 @@
 # Fase 6: SEO e Meta Tags
 
-**Prioridade:** Média  
-**Status:** Pendente  
-**Pré-requisitos:** Fase 3 concluída (componentes UI base)  
+**Prioridade:** Média
+**Status:** Pendente
+**Pré-requisitos:** Fase 3 concluída (componentes UI base)
 **Duração estimada:** 2-3 horas
 
 ## Objetivo
-Implementar otimização SEO completa conforme estratégia definida, incluindo structured data, meta tags, GA4 tracking e otimização para AI Overviews (GEO).
+Implementar otimização SEO completa conforme estratégia definida, incluindo structured data, meta tags, GA4 tracking e otimização para AI Overviews (GEO). respeitar a estrutura adotada e pequenos desvios (decisões podem ter sido tomadas e algumas coisas podem ser diferentes do planejado).
 
 ## Tarefas Atômicas
 
 ### 6.1 Configuração @unhead/vue
-- [ ] Configurar `@unhead/vue` no projeto
+- [ ] Configurar `@unhead/vue` no projeto se estiver disponivel, ou equivalente.
 - [ ] Criar composable `useHead()` para gerenciamento de meta tags
 - [ ] Configurar placeholders no `index.html` como fallback
 - [ ] Implementar sistema de meta tags dinâmicas por rota/seção
