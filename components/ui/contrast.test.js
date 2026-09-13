@@ -34,7 +34,7 @@ test("ratios de la paleta Mandioca (referencia independiente en el test)", () =>
     const lum = (hex) => {
       const c = (h) => {
         const v = parseInt(h, 16) / 255;
-        return v <= 0.04045 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+        return v <= 0.04045 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4;
       };
       const r = c(hex.slice(1, 3));
       const g = c(hex.slice(3, 5));
