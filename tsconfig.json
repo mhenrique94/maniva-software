@@ -10,11 +10,13 @@
       "ESNext"
     ],
     "types": [
-      "vite/client"
+      "vite/client",
+      "node"
     ],
     "noEmit": true,
     "skipLibCheck": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "allowImportingTsExtensions": true
   },
   "exclude": [
     "dist"

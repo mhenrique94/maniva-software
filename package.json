@@ -9,6 +9,7 @@
     "preview": "vike build && vike preview",
     "lint": "biome lint --write .",
     "format": "biome format --write .",
+    "test": "node --test",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -21,6 +22,7 @@
     "@fontsource/cormorant-garamond": "^5.3.0",
     "@fontsource/figtree": "^5.3.0",
     "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.5.1",
     "@vitejs/plugin-vue": "^6.0.8",
     "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3",

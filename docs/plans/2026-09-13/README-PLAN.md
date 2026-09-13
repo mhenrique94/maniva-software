@@ -55,7 +55,7 @@ graph TD
 
 ### **Fase 1: Setup Inicial e Migração de Stack** ⏱️ 2-3h
 **Prioridade:** Alta
-**Status:** Pendente
+**Status:** Concluida
 **Arquivo:** `docs/plans/2026-09-13/fase1-setup.md`
 
 **Tarefas principais:**
@@ -69,7 +69,7 @@ graph TD
 
 ### **Fase 2: Sistema de Design e Tokens** ⏱️ 4-5h
 **Prioridade:** Alta
-**Status:** Pendente
+**Status:** Concluida
 **Arquivo:** `docs/plans/2026-09-13/fase2-design-system.md`
 
 **Tarefas principais:**
