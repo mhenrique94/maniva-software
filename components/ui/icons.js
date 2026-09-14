@@ -39,38 +39,195 @@ import PhTrendUp from "phosphor-vue/dist/esm/components/PhTrendUp.vue.js";
 export const defaultIconName = "leaf";
 
 /** Pesos admitidos por phosphor-vue v4. */
-export const allowedWeights = ["thin", "light", "regular", "bold", "fill", "duotone"];
+export const allowedWeights = [
+  "thin",
+  "light",
+  "regular",
+  "bold",
+  "fill",
+  "duotone",
+];
 
 /**
  * Registro de íconos comunes.
  * @typedef {{name:string, component:object, weight:string, label:string, category:string}} IconEntry
  */
 export const icons = [
-  { name: "whatsapp", component: PhWhatsappLogo, weight: "regular", label: "WhatsApp", category: "contacto" },
-  { name: "storefront", component: PhStorefront, weight: "regular", label: "Presença digital", category: "pmes" },
-  { name: "globe", component: PhGlobeHemisphereWest, weight: "regular", label: "Alcance nacional", category: "pmes" },
-  { name: "check", component: PhCheckCircle, weight: "regular", label: "Benefício confirmado", category: "pmes" },
-  { name: "leaf", component: PhLeaf, weight: "regular", label: "Crecimento", category: "pmes" },
-  { name: "flower", component: PhFlower, weight: "regular", label: "Novo brote", category: "pmes" },
-  { name: "code", component: PhCode, weight: "regular", label: "Código", category: "empresas" },
-  { name: "gear", component: PhGear, weight: "regular", label: "Automatização", category: "empresas" },
-  { name: "wrench", component: PhWrench, weight: "regular", label: "Modernização", category: "empresas" },
-  { name: "database", component: PhDatabase, weight: "regular", label: "Datos", category: "empresas" },
-  { name: "terminal", component: PhTerminalWindow, weight: "regular", label: "Sistemas", category: "empresas" },
-  { name: "trend-up", component: PhTrendUp, weight: "regular", label: "Métricas em alta", category: "empresas" },
-  { name: "brain", component: PhBrain, weight: "regular", label: "Inteligência artificial", category: "complejos" },
-  { name: "sparkle", component: PhSparkle, weight: "regular", label: "Projetos ambiciosos", category: "complejos" },
-  { name: "robot", component: PhRobot, weight: "regular", label: "Agentes", category: "complejos" },
-  { name: "atom", component: PhAtom, weight: "regular", label: "Ciencia", category: "complejos" },
-  { name: "magnifying-glass", component: PhMagnifyingGlass, weight: "regular", label: "Busca inteligente", category: "complejos" },
-  { name: "rocket", component: PhRocketLaunch, weight: "regular", label: "Lançamento", category: "complejos" },
-  { name: "pencil", component: PhPencilLine, weight: "regular", label: "Design", category: "metodo" },
-  { name: "chat", component: PhChatCentered, weight: "regular", label: "Conversação", category: "metodo" },
-  { name: "map-pin", component: PhMapPinLine, weight: "regular", label: "Mapeo", category: "metodo" },
-  { name: "users", component: PhUsers, weight: "regular", label: "Usuários", category: "metodo" },
-  { name: "arrow-right", component: PhArrowRight, weight: "regular", label: "Seguinte", category: "navegacao" },
-  { name: "envelope", component: PhEnvelope, weight: "regular", label: "Email", category: "contacto" },
-  { name: "linkedin", component: PhLinkedinLogo, weight: "regular", label: "LinkedIn", category: "contacto" },
+  {
+    name: "whatsapp",
+    component: PhWhatsappLogo,
+    weight: "regular",
+    label: "WhatsApp",
+    category: "contacto",
+  },
+  {
+    name: "storefront",
+    component: PhStorefront,
+    weight: "regular",
+    label: "Presença digital",
+    category: "pmes",
+  },
+  {
+    name: "globe",
+    component: PhGlobeHemisphereWest,
+    weight: "regular",
+    label: "Alcance nacional",
+    category: "pmes",
+  },
+  {
+    name: "check",
+    component: PhCheckCircle,
+    weight: "regular",
+    label: "Benefício confirmado",
+    category: "pmes",
+  },
+  {
+    name: "leaf",
+    component: PhLeaf,
+    weight: "regular",
+    label: "Crecimento",
+    category: "pmes",
+  },
+  {
+    name: "flower",
+    component: PhFlower,
+    weight: "regular",
+    label: "Novo brote",
+    category: "pmes",
+  },
+  {
+    name: "code",
+    component: PhCode,
+    weight: "regular",
+    label: "Código",
+    category: "empresas",
+  },
+  {
+    name: "gear",
+    component: PhGear,
+    weight: "regular",
+    label: "Automatização",
+    category: "empresas",
+  },
+  {
+    name: "wrench",
+    component: PhWrench,
+    weight: "regular",
+    label: "Modernização",
+    category: "empresas",
+  },
+  {
+    name: "database",
+    component: PhDatabase,
+    weight: "regular",
+    label: "Datos",
+    category: "empresas",
+  },
+  {
+    name: "terminal",
+    component: PhTerminalWindow,
+    weight: "regular",
+    label: "Sistemas",
+    category: "empresas",
+  },
+  {
+    name: "trend-up",
+    component: PhTrendUp,
+    weight: "regular",
+    label: "Métricas em alta",
+    category: "empresas",
+  },
+  {
+    name: "brain",
+    component: PhBrain,
+    weight: "regular",
+    label: "Inteligência artificial",
+    category: "complejos",
+  },
+  {
+    name: "sparkle",
+    component: PhSparkle,
+    weight: "regular",
+    label: "Projetos ambiciosos",
+    category: "complejos",
+  },
+  {
+    name: "robot",
+    component: PhRobot,
+    weight: "regular",
+    label: "Agentes",
+    category: "complejos",
+  },
+  {
+    name: "atom",
+    component: PhAtom,
+    weight: "regular",
+    label: "Ciencia",
+    category: "complejos",
+  },
+  {
+    name: "magnifying-glass",
+    component: PhMagnifyingGlass,
+    weight: "regular",
+    label: "Busca inteligente",
+    category: "complejos",
+  },
+  {
+    name: "rocket",
+    component: PhRocketLaunch,
+    weight: "regular",
+    label: "Lançamento",
+    category: "complejos",
+  },
+  {
+    name: "pencil",
+    component: PhPencilLine,
+    weight: "regular",
+    label: "Design",
+    category: "metodo",
+  },
+  {
+    name: "chat",
+    component: PhChatCentered,
+    weight: "regular",
+    label: "Conversação",
+    category: "metodo",
+  },
+  {
+    name: "map-pin",
+    component: PhMapPinLine,
+    weight: "regular",
+    label: "Mapeo",
+    category: "metodo",
+  },
+  {
+    name: "users",
+    component: PhUsers,
+    weight: "regular",
+    label: "Usuários",
+    category: "metodo",
+  },
+  {
+    name: "arrow-right",
+    component: PhArrowRight,
+    weight: "regular",
+    label: "Seguinte",
+    category: "navegacao",
+  },
+  {
+    name: "envelope",
+    component: PhEnvelope,
+    weight: "regular",
+    label: "Email",
+    category: "contacto",
+  },
+  {
+    name: "linkedin",
+    component: PhLinkedinLogo,
+    weight: "regular",
+    label: "LinkedIn",
+    category: "contacto",
+  },
 ];
 
 /** Entrada por nombre (kebab-case), o el ícono por defecto si no existe. */
@@ -89,4 +246,11 @@ export function resolveWeight(weight) {
   return allowedWeights.includes(weight) ? weight : "regular";
 }
 
-export default { defaultIconName, allowedWeights, icons, getIcon, iconNames, resolveWeight };
+export default {
+  defaultIconName,
+  allowedWeights,
+  icons,
+  getIcon,
+  iconNames,
+  resolveWeight,
+};

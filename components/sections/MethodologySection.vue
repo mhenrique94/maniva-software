@@ -64,18 +64,42 @@
 </template>
 
 <script setup>
-import { Section, Typography, Icon } from '@ui';
+import { Section, Typography, Icon } from "@ui";
 
 const steps = [
-  { title: 'Entendemos', desc: 'Mapeamos seu problema, não só requisitos técnicos. O objetivo é entender a dor para propor a melhor solução.' },
-  { title: 'Projetamos', desc: 'Prototipamos rápido para você validar o design e o fluxo antes de começarmos a codar.' },
-   { title: 'Construímos', desc: 'Desenvolvimento com entregas semanais. Você acompanha o progresso real ao longo de todo o ciclo.' },
-   { title: 'Entregamos', desc: 'Código documentado + suporte inicial. Você recebe um sistema pronto para uso e não apenas arquivos.' },
+  {
+    title: "Entendemos",
+    desc: "Mapeamos seu problema, não só requisitos técnicos. O objetivo é entender a dor para propor a melhor solução.",
+  },
+  {
+    title: "Projetamos",
+    desc: "Prototipamos rápido para você validar o design e o fluxo antes de começarmos a codar.",
+  },
+  {
+    title: "Construímos",
+    desc: "Desenvolvimento com entregas semanais. Você acompanha o progresso real ao longo de todo o ciclo.",
+  },
+  {
+    title: "Entregamos",
+    desc: "Código documentado + suporte inicial. Você recebe um sistema pronto para uso e não apenas arquivos.",
+  },
 ];
 
 const differentiators = [
-   { title: 'Código Limpo', desc: 'Documentamos o que construímos. Você herda um sistema, não um problema.', icon: 'file-text' },
-  { title: 'Performance Obrigatória', desc: 'Sites rápidos não são opção, são obrigação para SEO e conversão.', icon: 'zap' },
-  { title: 'Arquitetura Pensada', desc: 'Construímos para hoje, garantindo que o sistema funcione e escale amanhã.', icon: 'layers' },
+  {
+    title: "Código Limpo",
+    desc: "Documentamos o que construímos. Você herda um sistema, não um problema.",
+    icon: "file-text",
+  },
+  {
+    title: "Performance Obrigatória",
+    desc: "Sites rápidos não são opção, são obrigação para SEO e conversão.",
+    icon: "zap",
+  },
+  {
+    title: "Arquitetura Pensada",
+    desc: "Construímos para hoje, garantindo que o sistema funcione e escale amanhã.",
+    icon: "layers",
+  },
 ];
 </script>

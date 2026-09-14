@@ -11,11 +11,13 @@
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HV03VP5FL"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(...args){dataLayer.push(args);}
-    gtag('js', new Date());
-    gtag('config', 'G-9HV03VP5FL');
-  </script>
+window.dataLayer = window.dataLayer || [];
+function gtag(...args) {
+  dataLayer.push(args);
+}
+gtag("js", new Date());
+gtag("config", "G-9HV03VP5FL");
+</script>
 </template>
 
 <script setup lang="ts">

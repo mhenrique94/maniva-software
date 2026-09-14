@@ -19,13 +19,17 @@ export const clipPaths = {
   /** Mobile-first: retangular, sem overhead de pintura. */
   flat: "none",
   /** Onda suave na borda superior (herança crescendo do solo). */
-  waveUp: "polygon(0 1%, 10% 0.4%, 24% 1.1%, 38% 0.3%, 52% 0.9%, 66% 0.2%, 82% 0.8%, 100% 0.3%, 100% 100%, 0 100%)",
+  waveUp:
+    "polygon(0 1%, 10% 0.4%, 24% 1.1%, 38% 0.3%, 52% 0.9%, 66% 0.2%, 82% 0.8%, 100% 0.3%, 100% 100%, 0 100%)",
   /** Onda suave na borda inferior. */
-  waveDown: "polygon(0 0, 100% 0, 100% 99%, 92% 99.3%, 76% 99.8%, 60% 99.2%, 44% 99.7%, 28% 99.1%, 12% 99.6%, 0 99%)",
+  waveDown:
+    "polygon(0 0, 100% 0, 100% 99%, 92% 99.3%, 76% 99.8%, 60% 99.2%, 44% 99.7%, 28% 99.1%, 12% 99.6%, 0 99%)",
   /** Extremidade de raiz: topo e base com ondas amplas e suaves. */
-  rootEdge: "polygon(0 0.6%, 14% 0.2%, 30% 1%, 46% 0.3%, 62% 0.9%, 78% 0.2%, 100% 0.5%, 100% 91%, 88% 92.2%, 70% 91.4%, 52% 92.6%, 34% 91.6%, 16% 92.4%, 0 91.6%)",
+  rootEdge:
+    "polygon(0 0.6%, 14% 0.2%, 30% 1%, 46% 0.3%, 62% 0.9%, 78% 0.2%, 100% 0.5%, 100% 91%, 88% 92.2%, 70% 91.4%, 52% 92.6%, 34% 91.6%, 16% 92.4%, 0 91.6%)",
   /** Prega de folha: borda superior discreta. */
-  leafEdge: "polygon(0 0.8%, 12% 0.3%, 26% 1.2%, 42% 0.4%, 58% 1.1%, 74% 0.3%, 100% 0.6%, 100% 100%, 0 100%)",
+  leafEdge:
+    "polygon(0 0.8%, 12% 0.3%, 26% 1.2%, 42% 0.4%, 58% 1.1%, 74% 0.3%, 100% 0.6%, 100% 100%, 0 100%)",
 };
 
 /**
@@ -36,7 +40,10 @@ export const clipPaths = {
  * @param {{width?: number; height?: number}} [dimensions]
  * @returns {number} graus (0–90)
  */
-export function maxSlopeOf(polygonPct, { width = slopeViewbox.width, height = slopeViewbox.height } = {}) {
+export function maxSlopeOf(
+  polygonPct,
+  { width = slopeViewbox.width, height = slopeViewbox.height } = {},
+) {
   const points = polygonPct
     .replace(/^polygon\(|\)$/g, "")
     .split(",")
@@ -63,4 +70,11 @@ export function sectionClipPath(variant = "flat") {
   return clipPaths[variant] ?? clipPaths.flat;
 }
 
-export default { desktopBreakpoint, maxSlopeDeg, slopeViewbox, clipPaths, maxSlopeOf, sectionClipPath };
+export default {
+  desktopBreakpoint,
+  maxSlopeDeg,
+  slopeViewbox,
+  clipPaths,
+  maxSlopeOf,
+  sectionClipPath,
+};

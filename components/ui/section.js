@@ -35,7 +35,7 @@ const baseClasses = ["relative", "isolate"];
  */
 export function sectionClasses({ variant = "pulp", organic = false } = {}) {
   const classes = [...baseClasses, variantBg[variant] ?? variantBg.pulp];
-  const clipName = organic ? variantClip[variant] ?? "flat" : "flat";
+  const clipName = organic ? (variantClip[variant] ?? "flat") : "flat";
   return { classes, clipPath: sectionClipPath(clipName) };
 }
 
@@ -45,7 +45,11 @@ export function sectionClasses({ variant = "pulp", organic = false } = {}) {
  *          sag?: number}} [options]
  * @returns {{d: string, stroke: string, strokeWidth: string, opacity: number}}
  */
-export function sectionRhizome({ from = [0, 0], to = [100, 40], sag = 0.15 } = {}) {
+export function sectionRhizome({
+  from = [0, 0],
+  to = [100, 40],
+  sag = 0.15,
+} = {}) {
   return {
     d: rhizomePath({ start: from, end: to, sag }),
     stroke: rhizome.stroke,

@@ -30,8 +30,16 @@ export const typeScale = {
   "3xl": { size: "1.875rem", lineHeight: "2.25rem", letterSpacing: "-0.01em" },
   "4xl": { size: "2.25rem", lineHeight: "2.5rem", letterSpacing: "-0.02em" },
   "5xl": { size: "2.625rem", lineHeight: "3rem", letterSpacing: "-0.02em" },
-  "display-1": { size: "3rem", lineHeight: "3.25rem", letterSpacing: "-0.02em" },
-  "display-2": { size: "3.375rem", lineHeight: "3.5rem", letterSpacing: "-0.025em" },
+  "display-1": {
+    size: "3rem",
+    lineHeight: "3.25rem",
+    letterSpacing: "-0.02em",
+  },
+  "display-2": {
+    size: "3.375rem",
+    lineHeight: "3.5rem",
+    letterSpacing: "-0.025em",
+  },
 };
 
 export default { fontFamilies, fontWeights, typeScale };

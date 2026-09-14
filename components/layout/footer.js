@@ -55,4 +55,11 @@ export const footerLinkClasses = [
   "motion-safe:ease-in-out",
 ];
 
-export default { company, quickLinks, connections, footerBaseline, lastUpdated, footerLinkClasses };
+export default {
+  company,
+  quickLinks,
+  connections,
+  footerBaseline,
+  lastUpdated,
+  footerLinkClasses,
+};

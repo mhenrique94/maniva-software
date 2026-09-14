@@ -25,13 +25,19 @@ function hexToRgbTriplet(hex) {
  * @param {{opacity?: number; color?: string; baseColor?: string}} [options]
  * @returns {{backgroundImage: string, backgroundRepeat: string, backgroundSize: string}}
  */
-export function barkTexture({ opacity = 0.05, color = colors.root[800], baseColor = colors.root[100] } = {}) {
+export function barkTexture({
+  opacity = 0.05,
+  color = colors.root[800],
+  baseColor = colors.root[100],
+} = {}) {
   const [r, g, b] = hexToRgbTriplet(baseColor);
   return {
-    backgroundImage: `linear-gradient(rgba(${r}, ${g}, ${b}, 0.92) 0%, rgba(${r}, ${g}, ${b}, 0.97) 100%), url(${noiseDataUri({
-      opacity,
-      color,
-    })})`,
+    backgroundImage: `linear-gradient(rgba(${r}, ${g}, ${b}, 0.92) 0%, rgba(${r}, ${g}, ${b}, 0.97) 100%), url(${noiseDataUri(
+      {
+        opacity,
+        color,
+      },
+    )})`,
     backgroundRepeat: "repeat",
     backgroundSize: "96px 96px",
   };
@@ -44,7 +50,11 @@ export function barkTexture({ opacity = 0.05, color = colors.root[800], baseColo
  * @param {number} [angle] ângulo em graus
  * @returns {string} valor CSS de `background-image`
  */
-export function organicGradient(from = colors.root[100], to = colors.root[50], angle = 135) {
+export function organicGradient(
+  from = colors.root[100],
+  to = colors.root[50],
+  angle = 135,
+) {
   return `linear-gradient(${angle}deg, ${from} 0%, ${to} 100%)`;
 }
 
@@ -53,7 +63,12 @@ export function organicGradient(from = colors.root[100], to = colors.root[50], a
  * @param {{width?: number; height?: number; amplitude?: number; repetitions?: number}} [options]
  * @returns {string} atributo `d` do caminho
  */
-export function wavePath({ width = 100, height = 10, amplitude = 2, repetitions = 4 } = {}) {
+export function wavePath({
+  width = 100,
+  height = 10,
+  amplitude = 2,
+  repetitions = 4,
+} = {}) {
   const mid = height / 2;
   const step = width / (repetitions * 2);
   let d = `M 0 ${mid}`;
@@ -72,7 +87,11 @@ export function wavePath({ width = 100, height = 10, amplitude = 2, repetitions 
  * @param {{start?: [number, number]; end?: [number, number]; sag?: number}} [options]
  * @returns {string} atributo `d` do caminho
  */
-export function rhizomePath({ start = [0, 0], end = [100, 40], sag = 0.15 } = {}) {
+export function rhizomePath({
+  start = [0, 0],
+  end = [100, 40],
+  sag = 0.15,
+} = {}) {
   const [x0, y0] = start;
   const [x1, y1] = end;
   const dx = x1 - x0;
@@ -86,4 +105,10 @@ export function rhizomePath({ start = [0, 0], end = [100, 40], sag = 0.15 } = {}
   return `M ${x0} ${y0} C ${c1x} ${c1y}, ${c2x} ${c2y}, ${x1} ${y1}`;
 }
 
-export default { noiseDataUri, barkTexture, organicGradient, wavePath, rhizomePath };
+export default {
+  noiseDataUri,
+  barkTexture,
+  organicGradient,
+  wavePath,
+  rhizomePath,
+};

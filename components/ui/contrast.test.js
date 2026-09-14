@@ -1,6 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { hexToRgb, relativeLuminance, contrastRatio, passesAa, passesAaa } from "./contrast.js";
+import {
+  hexToRgb,
+  relativeLuminance,
+  contrastRatio,
+  passesAa,
+  passesAaa,
+} from "./contrast.js";
 import { colors, roles } from "../../design/tokens/colors.js";
 
 test("hexToRgb normaliza #rgb e #rrggbb", () => {
@@ -60,7 +66,10 @@ test("ratios de la paleta Mandioca (referencia independiente en el test)", () =>
       `contrastRatio(${fg}, ${bg}) = ${contrastRatio(fg, bg).toFixed(2)} fuera de [${min}, ${max}]`,
     );
     // y coincide con la referencia independiente
-    assert.equal(Math.round(contrastRatio(fg, bg) * 100), Math.round(ratio(fg, bg) * 100));
+    assert.equal(
+      Math.round(contrastRatio(fg, bg) * 100),
+      Math.round(ratio(fg, bg) * 100),
+    );
   }
 });
 
@@ -72,7 +81,10 @@ test("WCAG AA: los pares canónicos de la UI cumplen", () => {
   // Texto primário/secundário sobre Polpa (terra a 90% se aproxima ao hex terra)
   assert.ok(passesAa(roles.earth, roles.pulp));
   assert.ok(passesAa(colors.text.secondary, roles.pulp));
-  assert.ok(passesAa(roles.earth, roles.pulp, { large: true }), "AAA con texto grande");
+  assert.ok(
+    passesAa(roles.earth, roles.pulp, { large: true }),
+    "AAA con texto grande",
+  );
 });
 
 test("WCAG AA: decorativos que fallan en texto normal quedan documentados", () => {

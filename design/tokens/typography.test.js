@@ -29,7 +29,10 @@ test("escala tipográfica base 6px — tamanhos do §4.2", () => {
 test("escala completa define line-height e letter-spacing", () => {
   for (const [nome, passo] of Object.entries(typeScale)) {
     assert.ok(passo.lineHeight, `line-height ausente em ${nome}`);
-    assert.ok(passo.letterSpacing !== undefined, `letter-spacing ausente em ${nome}`);
+    assert.ok(
+      passo.letterSpacing !== undefined,
+      `letter-spacing ausente em ${nome}`,
+    );
   }
 });
 

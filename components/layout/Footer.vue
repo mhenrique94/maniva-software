@@ -104,21 +104,25 @@ const baseline = footerBaseline();
   margin-top: auto;
 }
 .maniva-footer__grid {
-  padding: 2.25rem 0; /* base 6px: 36px */
-  display: grid;
-  gap: 2.5rem;
-  grid-template-columns: 1fr;
-}
-@media (width >= 768px) {
-  .maniva-footer__grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-@media (width >= 1024px) {
-  .maniva-footer__grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
+   padding: 2.25rem 1.5rem; /* base 6px: 24px vertical + lateral */
+   display: flex;
+   flex-wrap: wrap;
+   justify-content: center;
+   gap: 2.5rem;
+ }
+ .maniva-footer__col {
+   flex: 1 1 100%;
+ }
+ @media (width >= 768px) {
+   .maniva-footer__col {
+     flex: 1 1 calc(50% - 1.25rem);
+   }
+ }
+ @media (width >= 1024px) {
+   .maniva-footer__col {
+     flex: 1 1 calc(33.333% - 1.67rem);
+   }
+ }
  .maniva-footer__brand {
    display: flex;
    align-items: center;

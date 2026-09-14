@@ -41,7 +41,12 @@ export const headingScale = {
 export const bodyLevels = { sm: "sm", base: "base", lg: "lg" };
 
 /** Grupo de pesos por familia. */
-const weightGroup = { display: "display", heading: "display", body: "ui", caption: "ui" };
+const weightGroup = {
+  display: "display",
+  heading: "display",
+  body: "ui",
+  caption: "ui",
+};
 
 /** Pesos disponibles por familia (display 500/600, ui 400/600/700). */
 export const weightClasses = {
@@ -95,10 +100,17 @@ export function typographyClasses({
     sizeClass = `text-${bodyLevels[level] ?? bodyLevels.base}`;
   }
 
-  const classes = [cfg.family, sizeClass, toneClasses[tone] ?? toneClasses.primary];
+  const classes = [
+    cfg.family,
+    sizeClass,
+    toneClasses[tone] ?? toneClasses.primary,
+  ];
 
-  const chosen = weight && weightClasses[group][weight] !== undefined ? weight : null;
-  const weightClass = chosen ? weightClasses[group][chosen] : fontWeightDefault(type);
+  const chosen =
+    weight && weightClasses[group][weight] !== undefined ? weight : null;
+  const weightClass = chosen
+    ? weightClasses[group][chosen]
+    : fontWeightDefault(type);
   if (weightClass) classes.push(weightClass);
 
   return { element: elementFor(type ?? "body", level), classes };

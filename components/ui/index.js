@@ -14,9 +14,28 @@ export { default as Typography } from "./Typography.vue";
 export { default as Icon } from "./Icon.vue";
 
 // Seams puros (lógica de mapping + helpers)
-export { buttonClasses, variants as buttonVariants, sizes as buttonSizes } from "./button.js";
-export { cardClasses, elevations as cardElevations, densities as cardDensities } from "./card.js";
+export {
+  buttonClasses,
+  variants as buttonVariants,
+  sizes as buttonSizes,
+} from "./button.js";
+export {
+  cardClasses,
+  elevations as cardElevations,
+  densities as cardDensities,
+} from "./card.js";
 export { typographyClasses, typeMap, toneClasses } from "./typography.js";
-export { sectionClasses, sectionRhizome, variantBg, variantClip } from "./section.js";
-export { getIcon, iconNames, icons, defaultIconName, resolveWeight } from "./icons.js";
+export {
+  sectionClasses,
+  sectionRhizome,
+  variantBg,
+  variantClip,
+} from "./section.js";
+export {
+  getIcon,
+  iconNames,
+  icons,
+  defaultIconName,
+  resolveWeight,
+} from "./icons.js";
 export { contrastRatio, passesAa, passesAaa } from "./contrast.js";

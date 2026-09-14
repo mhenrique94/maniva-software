@@ -1,6 +1,13 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { company, quickLinks, connections, footerBaseline, lastUpdated, footerLinkClasses } from "./footer.js";
+import {
+  company,
+  quickLinks,
+  connections,
+  footerBaseline,
+  lastUpdated,
+  footerLinkClasses,
+} from "./footer.js";
 
 test("company: marca + razão social + CNPJ corretos (§5.8/CONTEXT)", () => {
   assert.equal(company.brand, "Maniva Software");

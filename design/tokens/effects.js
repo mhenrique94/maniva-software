@@ -33,7 +33,11 @@ const terraRgb = toCssRgb(colors.root[800]);
  * @param {{baseFrequency?: number; opacity?: number; color?: string}} [options]
  * @returns {string} data URI
  */
-export function noiseDataUri({ baseFrequency = 0.72, opacity = 0.07, color = colors.root[800] } = {}) {
+export function noiseDataUri({
+  baseFrequency = 0.72,
+  opacity = 0.07,
+  color = colors.root[800],
+} = {}) {
   const r = parseInt(color.slice(1, 3), 16);
   const g = parseInt(color.slice(3, 5), 16);
   const b = parseInt(color.slice(5, 7), 16);
@@ -43,9 +47,11 @@ export function noiseDataUri({ baseFrequency = 0.72, opacity = 0.07, color = col
     "<filter id='n'><feTurbulence type='fractalNoise' baseFrequency='",
     String(baseFrequency),
     "' numOctaves='2' stitchTiles='stitch'/>",
-    `<feColorMatrix type='matrix' values='0 0 0 0 ${(r / 255).toFixed(3)} 0 0 0 0 ${
-      (g / 255).toFixed(3)
-    } 0 0 0 0 ${(b / 255).toFixed(3)} 0 0 0 ${alpha.toFixed(3)} 0'/>`,
+    `<feColorMatrix type='matrix' values='0 0 0 0 ${(r / 255).toFixed(3)} 0 0 0 0 ${(
+      g / 255
+    ).toFixed(
+      3,
+    )} 0 0 0 0 ${(b / 255).toFixed(3)} 0 0 0 ${alpha.toFixed(3)} 0'/>`,
     "</filter><rect width='100%' height='100%' filter='url(#n)'/>",
     "</svg>",
   ].join("");

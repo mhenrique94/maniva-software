@@ -12,7 +12,11 @@ export function hexToRgb(hex) {
   const value = hex.replace(/^#/, "").trim();
   if (value.length === 3) {
     const [r, g, b] = value;
-    return [parseInt(`${r}${r}`, 16), parseInt(`${g}${g}`, 16), parseInt(`${b}${b}`, 16)];
+    return [
+      parseInt(`${r}${r}`, 16),
+      parseInt(`${g}${g}`, 16),
+      parseInt(`${b}${b}`, 16),
+    ];
   }
   if (value.length === 6) {
     return [
@@ -63,4 +67,10 @@ export function passesAaa(fg, bg, { large = false } = {}) {
   return contrastRatio(fg, bg) >= (large ? 4.5 : 7);
 }
 
-export default { hexToRgb, relativeLuminance, contrastRatio, passesAa, passesAaa };
+export default {
+  hexToRgb,
+  relativeLuminance,
+  contrastRatio,
+  passesAa,
+  passesAaa,
+};

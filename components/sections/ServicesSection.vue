@@ -80,27 +80,57 @@
 
 <script setup>
 import { Button, Card, Section, Typography, Icon } from "@ui";
-import { openServicesSegment1CTA, openServicesSegment2CTA } from "@util/ctaActions";
+import {
+  openServicesSegment1CTA,
+  openServicesSegment2CTA,
+} from "@util/ctaActions";
 
 const segment1Benefits = [
-  { title: 'Pareça profissional antes mesmo de atender', desc: 'Transmita autoridade e segurança para seus clientes desde o primeiro contato.', icon: 'briefcase' },
-  { title: 'Clientes encontram você quando procuram', desc: 'Presença otimizada para que sua marca seja descoberta no Google.', icon: 'magnifying-glass' },
-  { title: 'Mostre seu trabalho melhor que no Instagram', desc: 'Um portfólio organizado, profissional e que converte visitantes em clientes.', icon: 'image' },
-  { title: 'Receba contatos sem dar seu número pessoal', desc: 'Formulários inteligentes e gestão de leads sem expor sua privacidade.', icon: 'chat-circle' },
-  { title: 'Site rápido e otimizado para Google', desc: 'Performance de ponta para garantir a melhor experiência e SEO.', icon: 'lightning' },
+  {
+    title: "Pareça profissional antes mesmo de atender",
+    desc: "Transmita autoridade e segurança para seus clientes desde o primeiro contato.",
+    icon: "briefcase",
+  },
+  {
+    title: "Clientes encontram você quando procuram",
+    desc: "Presença otimizada para que sua marca seja descoberta no Google.",
+    icon: "magnifying-glass",
+  },
+  {
+    title: "Mostre seu trabalho melhor que no Instagram",
+    desc: "Um portfólio organizado, profissional e que converte visitantes em clientes.",
+    icon: "image",
+  },
+  {
+    title: "Receba contatos sem dar seu número pessoal",
+    desc: "Formulários inteligentes e gestão de leads sem expor sua privacidade.",
+    icon: "chat-circle",
+  },
+  {
+    title: "Site rápido e otimizado para Google",
+    desc: "Performance de ponta para garantir a melhor experiência e SEO.",
+    icon: "lightning",
+  },
 ];
 
 const segment2Pains = [
-  'Sistema legado que não acompanha suas vendas?',
-  'Processos manuais que geram erros e perda de tempo?',
-  'Equipe técnica sobrecarregada com manutenção?',
+  "Sistema legado que não acompanha suas vendas?",
+  "Processos manuais que geram erros e perda de tempo?",
+  "Equipe técnica sobrecarregada com manutenção?",
 ];
 
 const segment2Solutions = [
-   { title: 'Modernização com propósito', desc: 'Não refazemos por refazer. Otimizamos onde dói e onde gera valor real.' },
-  { title: 'Automações inteligentes', desc: 'De processos manuais a fluxos que funcionam sozinhos e sem erros.' },
-  { title: 'Arquitetura que escala', desc: 'Sistema que cresce com seu negócio, não trava o seu crescimento.' },
+  {
+    title: "Modernização com propósito",
+    desc: "Não refazemos por refazer. Otimizamos onde dói e onde gera valor real.",
+  },
+  {
+    title: "Automações inteligentes",
+    desc: "De processos manuais a fluxos que funcionam sozinhos e sem erros.",
+  },
+  {
+    title: "Arquitetura que escala",
+    desc: "Sistema que cresce com seu negócio, não trava o seu crescimento.",
+  },
 ];
-
-
 </script>

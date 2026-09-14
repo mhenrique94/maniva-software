@@ -11,7 +11,12 @@ export const variants = {
   /** Borde Raiz + texto Terra — ação secundaria. */
   secondary: ["border-2", "border-root-500", "text-root-800", "bg-transparent"],
   /** Vitalidade + texto Terra — CTA de conversão (6:1); hover ganha Raiz. */
-  action: ["bg-root-300", "text-root-800", "hover:bg-root-500", "hover:text-root-50"],
+  action: [
+    "bg-root-300",
+    "text-root-800",
+    "hover:bg-root-500",
+    "hover:text-root-50",
+  ],
 };
 
 /** Tamaños com padding da escala base 6px (§4.3). */

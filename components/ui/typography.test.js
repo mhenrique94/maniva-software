@@ -42,7 +42,10 @@ test("escala base 6px: headings 1–6 y body sm/base/lg", () => {
   assert.ok(h4.classes.includes("text-3xl"));
   const body = typographyClasses({ type: "body", level: "lg" });
   assert.ok(body.classes.includes("text-lg"));
-  assert.equal(typographyClasses({ type: "caption" }).classes.includes("text-xs"), true);
+  assert.equal(
+    typographyClasses({ type: "caption" }).classes.includes("text-xs"),
+    true,
+  );
 });
 
 test("pesos por familia", () => {
@@ -50,11 +53,29 @@ test("pesos por familia", () => {
   assert.equal(weightClasses.ui.bold, "font-bold");
   assert.equal(weightClasses.ui.regular, "");
 
-  assert.ok(typographyClasses({ type: "display" }).classes.includes("font-medium"));
-  assert.ok(typographyClasses({ type: "display", weight: "semibold" }).classes.includes("font-semibold"));
-  assert.ok(typographyClasses({ type: "body", weight: "bold" }).classes.includes("font-bold"));
-  assert.ok(!typographyClasses({ type: "body", weight: "regular" }).classes.includes("font-bold"));
-  assert.ok(typographyClasses({ type: "display", weight: "bogus" }).classes.includes("font-medium"));
+  assert.ok(
+    typographyClasses({ type: "display" }).classes.includes("font-medium"),
+  );
+  assert.ok(
+    typographyClasses({ type: "display", weight: "semibold" }).classes.includes(
+      "font-semibold",
+    ),
+  );
+  assert.ok(
+    typographyClasses({ type: "body", weight: "bold" }).classes.includes(
+      "font-bold",
+    ),
+  );
+  assert.ok(
+    !typographyClasses({ type: "body", weight: "regular" }).classes.includes(
+      "font-bold",
+    ),
+  );
+  assert.ok(
+    typographyClasses({ type: "display", weight: "bogus" }).classes.includes(
+      "font-medium",
+    ),
+  );
 });
 
 test("peso por defecto por familia", () => {
@@ -68,8 +89,12 @@ test("tono semántico → clase de color", () => {
   assert.equal(toneClasses.secondary, "text-text-secondary");
   assert.equal(toneClasses.leaf, "text-leaf-500");
 
-  assert.ok(typographyClasses({ tone: "leaf" }).classes.includes("text-leaf-500"));
-  assert.ok(typographyClasses({ tone: "bogus" }).classes.includes("text-root-800"));
+  assert.ok(
+    typographyClasses({ tone: "leaf" }).classes.includes("text-leaf-500"),
+  );
+  assert.ok(
+    typographyClasses({ tone: "bogus" }).classes.includes("text-root-800"),
+  );
 });
 
 test("fallbacks de type/level desconocidos", () => {

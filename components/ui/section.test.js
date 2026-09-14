@@ -1,7 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { desktopBreakpoint, clipPaths } from "../../design/shapes/organic.js";
-import { sectionClasses, sectionRhizome, variantBg, variantClip } from "./section.js";
+import {
+  sectionClasses,
+  sectionRhizome,
+  variantBg,
+  variantClip,
+} from "./section.js";
 
 test("variantes semánticas → fondo con token (§4.1)", () => {
   assert.equal(variantBg.pulp, "bg-root-50");
@@ -32,7 +37,10 @@ test("progressive enhancement: mobile nunca orgánico", () => {
 });
 
 test("variante desconocida cae a pulp/flat", () => {
-  const { classes, clipPath } = sectionClasses({ variant: "bogus", organic: true });
+  const { classes, clipPath } = sectionClasses({
+    variant: "bogus",
+    organic: true,
+  });
   assert.ok(classes.includes("bg-root-50"));
   assert.equal(clipPath, "none");
 });

@@ -12,13 +12,17 @@ import { whatsappE164 } from "../components/layout/whatsapp.js";
 /** Mensagens contextuais por CTA (fonte única de verdade pt-BR). */
 const ctaMessages = {
   hero: "Olá! Vi o site da Maniva e quero conversar sobre qual solução faz sentido para mim.",
-  servicesSegment1: "Olá! Vi o site da Maniva e quero um site profissional simples e eficiente.",
-  servicesSegment2: "Olá! Vi o site da Maniva e preciso de diagnóstico técnico do nosso sistema atual.",
-  helpMedShowcase: "Olá! Vi o site da Maniva e tenho um projeto tecnicamente desafiador para conversar.",
+  servicesSegment1:
+    "Olá! Vi o site da Maniva e quero um site profissional simples e eficiente.",
+  servicesSegment2:
+    "Olá! Vi o site da Maniva e preciso de diagnóstico técnico do nosso sistema atual.",
+  helpMedShowcase:
+    "Olá! Vi o site da Maniva e tenho um projeto tecnicamente desafiador para conversar.",
 };
 
 function openWhatsApp(message) {
-  if (typeof window === "undefined" || typeof window.open !== "function") return;
+  if (typeof window === "undefined" || typeof window.open !== "function")
+    return;
   const url = `https://wa.me/${whatsappE164}?text=${encodeURIComponent(message)}`;
   window.open(url, "_blank");
 }

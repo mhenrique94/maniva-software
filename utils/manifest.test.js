@@ -9,11 +9,16 @@ import { fileURLToPath } from "node:url";
  * Rizomática e ícones quadrados 1:1 (padding transparente, §2.10).
  */
 
-const manifestPath = fileURLToPath(new URL("../public/manifest.json", import.meta.url));
+const manifestPath = fileURLToPath(
+  new URL("../public/manifest.json", import.meta.url),
+);
 const manifest = JSON.parse(readFileSync(manifestPath, "utf8"));
 
 test("identidade da marca Maniva Software (§2.9)", () => {
-  assert.equal(manifest.name, "Maniva Software | Engenharia de Software e Soluções Digitais");
+  assert.equal(
+    manifest.name,
+    "Maniva Software | Engenharia de Software e Soluções Digitais",
+  );
   assert.equal(manifest.short_name, "Maniva Software");
   assert.equal(
     manifest.description,
@@ -49,7 +54,11 @@ test("ícones PWA quadrados 1:1 declarados com dimensões reais (§2.10)", () =>
   assert.equal(manifest.icons.length, expected.size);
   for (const icon of manifest.icons) {
     assert.ok(expected.has(icon.src), `src inesperado: ${icon.src}`);
-    assert.equal(icon.sizes, expected.get(icon.src), `sizes errado para ${icon.src}`);
+    assert.equal(
+      icon.sizes,
+      expected.get(icon.src),
+      `sizes errado para ${icon.src}`,
+    );
     assert.equal(icon.type, "image/png");
     const [w, h] = icon.sizes.split("x").map(Number);
     assert.equal(w, h, `${icon.src} não é 1:1`);
