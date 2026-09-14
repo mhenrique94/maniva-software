@@ -68,6 +68,11 @@ const rhizome = props.connectTo
 </script>
 
 <style scoped>
+/* Âncoras param o scroll acima do header sticky (altura medida no runtime
+   pelo Header, via `--maniva-header-height`). */
+.maniva-layer {
+  scroll-margin-top: var(--maniva-header-height, 6rem);
+}
 /* Progressive enhancement: o clip-path só se pinta em desktop. */
 @media (width >= 1024px) {
   .maniva-layer {

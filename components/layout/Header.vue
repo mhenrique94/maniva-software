@@ -109,7 +109,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onUnmounted, ref } from "vue";
+import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useWindowScroll } from "@vueuse/core";
 import { Button } from "@ui";
 import Container from "@layout/Container.vue";
@@ -219,6 +219,34 @@ function onGlobalKey(event: KeyboardEvent) {
 if (typeof document !== "undefined") {
   document.addEventListener("keydown", onGlobalKey);
 }
+
+/**
+ * Publica a altura real do header em `--maniva-header-height` para o
+ * `scroll-margin-top` das seções (âncora não esconde o topo do header).
+ */
+function syncHeaderScrollOffset() {
+  document.documentElement.style.setProperty(
+    "--maniva-header-height",
+    `${Math.ceil(headerHeight())}px`,
+  );
+}
+
+let headerObserver: ResizeObserver | null = null;
+if (typeof document !== "undefined") {
+  onMounted(() => {
+    syncHeaderScrollOffset();
+    const el = document.querySelector(".maniva-header");
+    if (typeof ResizeObserver !== "undefined" && el) {
+      headerObserver = new ResizeObserver(syncHeaderScrollOffset);
+      headerObserver.observe(el);
+    }
+  });
+  onUnmounted(() => {
+    headerObserver?.disconnect();
+    headerObserver = null;
+  });
+}
+
 onUnmounted(() => {
   if (typeof document !== "undefined") {
     document.removeEventListener("keydown", onGlobalKey);
