@@ -7,6 +7,9 @@ import designTokens from "./plugins/design-tokens.ts";
 
 export default defineConfig({
   plugins: [vike(), designTokens(), tailwindcss(), vue()],
+  build: {
+    cssCodeSplit: false,
+  },
   resolve: {
     alias: {
       "@ui": fileURLToPath(new URL("components/ui", import.meta.url)),
