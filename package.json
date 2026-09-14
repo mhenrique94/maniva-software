@@ -3,14 +3,19 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=20.19"
+  },
   "scripts": {
     "dev": "vike dev",
     "build": "vike build",
     "preview": "vike build && vike preview",
     "lint": "biome lint --write .",
+    "lint:ci": "biome lint .",
     "format": "biome format --write .",
     "test": "node --test",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "verify:build": "node scripts/verify-build.mjs dist/client"
   },
   "dependencies": {
     "@vueuse/core": "^14.4.0",
