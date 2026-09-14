@@ -11,7 +11,9 @@ const config: Config = {
     "Maniva Software: transformamos necessidade digital em solução técnica. Desenvolvimento web, modernização de sistemas e projetos complexos como o HelpMed. Engenharia de software com código limpo e entregas claras.",
 
   // https://vike.dev/pre-rendering (SSG)
-  prerender: true,
+  prerender: {
+    keepDistServer: true,
+  },
 
   extends: [vikeVue],
 };
