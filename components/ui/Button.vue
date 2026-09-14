@@ -7,11 +7,15 @@
   `contrast.test.js` para las tres variantes.
 -->
 <template>
-  <button
-    :type="type"
+  <component
+    :is="as"
+    :type="as === 'button' ? type : null"
+    :href="as === 'a' ? href : null"
+    :target="as === 'a' ? target : null"
+    :rel="as === 'a' ? rel : null"
     class="maniva-bud"
     :class="state.classes"
-    :disabled="state.disabled"
+    :disabled="as === 'button' ? state.disabled : null"
     :aria-busy="state.busy ? 'true' : null"
     :aria-label="ariaLabel"
   >
@@ -39,7 +43,7 @@
       class="maniva-bud-trailing"
       aria-hidden="true"
     />
-  </button>
+  </component>
 </template>
 
 <script lang="ts" setup>
@@ -47,9 +51,17 @@ import { buttonClasses } from "@ui/button.js";
 import Icon from "@ui/Icon.vue";
 
 const props = defineProps({
-  /** Variante semántica: primary | secondary | action. */
+  /** Elemento raiz: `button` nativo ou `a` para links (CTA externos). */
+  as: { type: String, default: "button" },
+  /** URL quando `as="a"`. */
+  href: { type: String, default: null },
+  /** Target do link quando `as="a"`. */
+  target: { type: String, default: null },
+  /** Rel do link quando `as="a"`. */
+  rel: { type: String, default: null },
+  /** Variante semântica: primary | secondary | action. */
   variant: { type: String, default: "primary" },
-  /** Tamaño: sm | base | lg (escala base 6px). */
+  /** Tamanho: sm | base | lg (escala base 6px). */
   size: { type: String, default: "base" },
   disabled: { type: Boolean, default: false },
   loading: { type: Boolean, default: false },
@@ -86,8 +98,8 @@ const sizeSpinner = props.size === "lg" ? "1.25em" : "1em";
     will-change: transform;
   }
   .maniva-bud:not(:disabled):hover {
-    transform: scale(1.02);
-  }
+     transform: scale(1.03);
+   }
   .maniva-bud:not(:disabled):active {
     transform: translateY(1px) scale(0.99);
   }

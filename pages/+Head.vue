@@ -4,6 +4,9 @@
   <link rel="icon" href="/favicon.ico" />
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="manifest" href="/manifest.json" />
+  <meta name="theme-color" content="#8B6B3C" />
+  <link rel="apple-touch-icon" href="/images/icons/icon-192x192.png" />
   
   <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-9HV03VP5FL"></script>

@@ -3,9 +3,19 @@ import assert from "node:assert/strict";
 import { variants, sizes, buttonClasses } from "./button.js";
 
 test("variantes usan tokens de color (§4.4)", () => {
-  assert.deepEqual(variants.primary, ["bg-leaf-500", "text-root-50"]);
+  assert.deepEqual(variants.primary, ["bg-leaf-500", "text-root-50", "hover:bg-leaf-300"]);
   assert.deepEqual(variants.secondary, ["border-2", "border-root-500", "text-root-800", "bg-transparent"]);
-  assert.deepEqual(variants.action, ["bg-root-300", "text-root-800"]);
+  assert.deepEqual(variants.action, ["bg-root-300", "text-root-800", "hover:bg-root-500", "hover:text-root-50"]);
+});
+
+test("hover perceptível: sombra elevation-2 e shift de cor por variante (§2.4 melhorias)", () => {
+  const { classes } = buttonClasses({ variant: "action" });
+  assert.ok(classes.includes("hover:shadow-elevation-2"), "sombra de hover mais forte");
+  assert.ok(classes.includes("hover:bg-root-500"), "action escurece para root-500");
+  assert.ok(classes.includes("hover:text-root-50"), "texto do action clareia no hover");
+
+  const primary = buttonClasses({ variant: "primary" });
+  assert.ok(primary.classes.includes("hover:bg-leaf-300"), "primary clareia para leaf-300 no hover");
 });
 
 test("tamaños padding por escala 6px", () => {
@@ -21,7 +31,7 @@ test("clases base incluyen forma 'O Broto', foco visible e interacción", () => 
   const { classes } = buttonClasses();
   assert.ok(classes.includes("rounded-bud"));
   assert.ok(classes.includes("focus-visible:ring-2"));
-  assert.ok(classes.includes("hover:shadow-earth"));
+  assert.ok(classes.includes("hover:shadow-elevation-2"));
   assert.ok(classes.includes("font-ui"));
 });
 

@@ -37,9 +37,9 @@
   <Section id="empresas" variant="root" organic :connect-to="'services-segment-2'" class="py-20">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto mb-20 text-center">
-          <Typography variant="display-md" class="mb-6">
-            Seu sistema trava seu crescimento? <br class="hidden lg:block" />
-            Vamos desemperrar sua operação digital.
+           <Typography variant="display-md" tone="pulp" class="mb-6">
+             Seu sistema trava seu crescimento? <br class="hidden lg:block" />
+             Vamos desemperrar sua operação digital.
           </Typography>
           
           <div class="mt-12 max-w-2xl mx-auto">
@@ -97,7 +97,7 @@ const segment2Pains = [
 ];
 
 const segment2Solutions = [
-  { title: 'Modernização com propósito', desc: 'Não refazemos por refazer — otimizamos onde dói e onde gera valor real.' },
+   { title: 'Modernização com propósito', desc: 'Não refazemos por refazer. Otimizamos onde dói e onde gera valor real.' },
   { title: 'Automações inteligentes', desc: 'De processos manuais a fluxos que funcionam sozinhos e sem erros.' },
   { title: 'Arquitetura que escala', desc: 'Sistema que cresce com seu negócio, não trava o seu crescimento.' },
 ];

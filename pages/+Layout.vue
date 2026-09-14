@@ -14,7 +14,7 @@
 
 <template>
   <Header />
-  <main id="contenido" class="maniva-main">
+  <main id="conteudo" class="maniva-main">
     <slot />
   </main>
   <Footer />

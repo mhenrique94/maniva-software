@@ -68,7 +68,7 @@ export const icons = [
   { name: "chat", component: PhChatCentered, weight: "regular", label: "Conversação", category: "metodo" },
   { name: "map-pin", component: PhMapPinLine, weight: "regular", label: "Mapeo", category: "metodo" },
   { name: "users", component: PhUsers, weight: "regular", label: "Usuários", category: "metodo" },
-  { name: "arrow-right", component: PhArrowRight, weight: "regular", label: "Seguinte", category: "navegacion" },
+  { name: "arrow-right", component: PhArrowRight, weight: "regular", label: "Seguinte", category: "navegacao" },
   { name: "envelope", component: PhEnvelope, weight: "regular", label: "Email", category: "contacto" },
   { name: "linkedin", component: PhLinkedinLogo, weight: "regular", label: "LinkedIn", category: "contacto" },
 ];

@@ -2,11 +2,11 @@
   <Section id="metodo" variant="earth" organic :aria-label="'Methodology Section'">
     <div class="container mx-auto px-6 py-20">
       <div class="text-center max-w-3xl mx-auto mb-20">
-        <Typography variant="display-md" class="mb-6">
-          Sem surpresas — processo claro do primeiro contato à entrega
+        <Typography variant="display-md" tone="pulp" class="mb-6">
+          Sem surpresas. Processo claro do primeiro contato à entrega
         </Typography>
-        <Typography variant="text-lg" class="text-text-secondary">
-          Trabalhamos com transparência e previsibilidade, para que você tenha controle total sobre o que está sendo construído.
+         <Typography variant="text-lg" tone="pulp">
+           Trabalhamos com transparência e previsibilidade, para que você tenha controle total sobre o que está sendo construído.
         </Typography>
       </div>
 
@@ -48,14 +48,14 @@
       <!-- Differentiators -->
       <div class="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <div v-for="diff in differentiators" :key="diff.title" class="text-center">
-          <div class="w-16 h-16 mx-auto mb-6 bg-root-100 rounded-full flex items-center justify-center text-root-600">
+          <div class="w-16 h-16 mx-auto mb-6 bg-root-100 rounded-full flex items-center justify-center text-root-800">
             <Icon :name="diff.icon" size="32" duotone />
           </div>
-          <Typography variant="text-md" class="font-bold mb-2">
-            {{ diff.title }}
-          </Typography>
-          <Typography variant="text-sm" class="text-text-secondary">
-            {{ diff.desc }}
+           <Typography variant="text-md" tone="pulp" class="font-bold mb-2">
+             {{ diff.title }}
+           </Typography>
+           <Typography variant="text-sm" tone="pulp">
+             {{ diff.desc }}
           </Typography>
         </div>
       </div>
@@ -69,12 +69,12 @@ import { Section, Typography, Icon } from '@ui';
 const steps = [
   { title: 'Entendemos', desc: 'Mapeamos seu problema, não só requisitos técnicos. O objetivo é entender a dor para propor a melhor solução.' },
   { title: 'Projetamos', desc: 'Prototipamos rápido para você validar o design e o fluxo antes de começarmos a codar.' },
-  { title: 'Construímos', desc: 'Desenvolvimento com entregas semanais — você acompanha o progresso real ao longo de todo o ciclo.' },
-  { title: 'Entregamos', desc: 'Código documentado + suporte inicial — você recebe um sistema pronto para uso e não apenas arquivos.' },
+   { title: 'Construímos', desc: 'Desenvolvimento com entregas semanais. Você acompanha o progresso real ao longo de todo o ciclo.' },
+   { title: 'Entregamos', desc: 'Código documentado + suporte inicial. Você recebe um sistema pronto para uso e não apenas arquivos.' },
 ];
 
 const differentiators = [
-  { title: 'Código Limpo', desc: 'Documentamos o que construímos — você herda um sistema, não um problema.', icon: 'file-text' },
+   { title: 'Código Limpo', desc: 'Documentamos o que construímos. Você herda um sistema, não um problema.', icon: 'file-text' },
   { title: 'Performance Obrigatória', desc: 'Sites rápidos não são opção, são obrigação para SEO e conversão.', icon: 'zap' },
   { title: 'Arquitetura Pensada', desc: 'Construímos para hoje, garantindo que o sistema funcione e escale amanhã.', icon: 'layers' },
 ];

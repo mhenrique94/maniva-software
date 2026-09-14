@@ -38,7 +38,7 @@ test("pesos admitidos y fallback a regular", () => {
   assert.equal(resolveWeight(undefined), "regular");
 });
 
-test("íconos por categoría cubren las secciones del landing (§5)", () => {
+test("ícones por categoría cubren las secciones del landing (§5)", () => {
   const byCategory = (cat) => icons.filter((i) => i.category === cat);
   assert.ok(byCategory("pmes").length >= 5);
   assert.ok(byCategory("empresas").length >= 5);
@@ -49,6 +49,13 @@ test("íconos por categoría cubren las secciones del landing (§5)", () => {
   assert.ok(names.has("whatsapp"));
   assert.ok(names.has("envelope"));
   assert.ok(names.has("linkedin"));
+});
+
+test("categorías en pt-BR, sin restos de español (§2.8 mejorias)", () => {
+  for (const entry of icons) {
+    assert.ok(entry.category !== "navegacion", `${entry.name} com categoría em espanhol`);
+  }
+  assert.equal(getIcon("arrow-right").category, "navegacao");
 });
 
 test("colores 'Fibras & Nervuras' disponibles desde los tokens", () => {

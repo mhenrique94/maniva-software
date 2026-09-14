@@ -3,10 +3,10 @@
     <div class="container mx-auto px-6 py-20">
       <div class="text-center max-w-4xl mx-auto mb-16">
         <Typography variant="display-md" class="mb-6">
-          Projetos que outros chamariam de impossíveis — <br class="hidden lg:block" />
-          <span class="text-root-600">nosso terreno favorito</span>
+         Projetos que outros chamariam de impossíveis. <br class="hidden lg:block" />
+           <span class="text-root-800">Nosso terreno favorito</span>
         </Typography>
-        <Typography variant="text-lg" class="text-text-secondary">
+        <Typography variant="text-lg" class="text-root-800">
           Quando falamos em IA complexa, nós realmente construímos.
         </Typography>
       </div>
@@ -17,7 +17,7 @@
           <div class="relative bg-white rounded-2xl shadow-elevation-2 overflow-hidden border border-root-100">
             <div class="p-8 md:p-12">
               <div class="flex items-center gap-3 mb-6">
-                <div class="w-12 h-12 bg-root-100 rounded-lg flex items-center justify-center text-root-600">
+                <div class="w-12 h-12 bg-root-100 rounded-lg flex items-center justify-center text-root-800">
                   <Icon name="brain" size="28" duotone />
                 </div>
                 <Typography variant="text-xl" class="font-bold">HelpMed.app</Typography>
@@ -86,9 +86,9 @@
             IA, processamento de dados e sistemas especializados.
           </Typography>
           
-          <Typography variant="text-md" class="text-text-secondary">
-            Não nos limitamos ao básico. Atuamos na fronteira entre a necessidade de negócio e a capacidade técnica, resolvendo desafios de arquitetura, extração de conhecimento e automação inteligente.
-          </Typography>
+           <Typography variant="text-md" class="text-root-800">
+              Não nos limitamos ao básico. Atuamos na fronteira entre a necessidade de negócio e a capacidade técnica, resolvendo desafios de arquitetura, extração de conhecimento e automação inteligente.
+            </Typography>
 
           <div class="pt-4">
             <Button variant="primary" size="lg" @click="openHelpMedShowcaseCTA">

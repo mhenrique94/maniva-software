@@ -6,12 +6,12 @@
 
 /** Variantes semánticas (contraste AA validado em `contrast.test.js`). */
 export const variants = {
-  /** Folha + Polpa — ação principal (7:1). */
-  primary: ["bg-leaf-500", "text-root-50"],
+  /** Folha + Polpa — ação principal (7:1); hover clareia para Folha clara. */
+  primary: ["bg-leaf-500", "text-root-50", "hover:bg-leaf-300"],
   /** Borde Raiz + texto Terra — ação secundaria. */
   secondary: ["border-2", "border-root-500", "text-root-800", "bg-transparent"],
-  /** Vitalidade + texto Terra — CTA de conversão (6:1). */
-  action: ["bg-root-300", "text-root-800"],
+  /** Vitalidade + texto Terra — CTA de conversão (6:1); hover ganha Raiz. */
+  action: ["bg-root-300", "text-root-800", "hover:bg-root-500", "hover:text-root-50"],
 };
 
 /** Tamaños com padding da escala base 6px (§4.3). */
@@ -30,7 +30,7 @@ const baseClasses = [
   "font-semibold",
   "no-underline",
   "cursor-pointer",
-  "hover:shadow-earth",
+  "hover:shadow-elevation-2",
   "focus-visible:ring-2",
   "focus-visible:ring-offset-2",
   "focus-visible:ring-root-500",

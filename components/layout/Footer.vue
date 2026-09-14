@@ -9,19 +9,19 @@
 <template>
   <footer class="maniva-footer">
     <Container class="maniva-footer__grid">
-      <div class="maniva-footer__col">
-        <picture>
-          <source srcset="/images/logo/logo-maniva-footer-light.avif" type="image/avif" />
+       <div class="maniva-footer__col">
+        <div class="maniva-footer__brand">
           <img
-            src="/images/logo/logo-maniva-footer-light.webp"
-            alt="Maniva Software"
-            width="72"
-            height="48"
+            src="/images/icons/icon-192x192.png"
+            alt=""
+            width="32"
+            height="32"
             loading="lazy"
             decoding="async"
-            class="maniva-footer__logo"
+            class="maniva-footer__symbol"
           />
-        </picture>
+          <span class="maniva-footer__wordmark">Maniva Software</span>
+        </div>
         <p class="maniva-footer__legal">{{ company.legalName }}</p>
         <p class="maniva-footer__legal">CNPJ: {{ company.cnpj }}</p>
         <ul class="maniva-footer__contact">
@@ -53,7 +53,7 @@
 
       <div class="maniva-footer__col">
         <Typography type="heading" level="2" tone="pulp" class="maniva-footer__title">
-          Conexiones
+          Conexões
         </Typography>
         <ul class="maniva-footer__links">
           <li v-for="conn in connections" :key="conn.href">
@@ -119,12 +119,25 @@ const baseline = footerBaseline();
     grid-template-columns: repeat(3, 1fr);
   }
 }
-.maniva-footer__logo {
-  height: 2rem;
-  width: auto;
-  margin-bottom: 0.75rem;
-  display: block;
-}
+ .maniva-footer__brand {
+   display: flex;
+   align-items: center;
+   gap: 0.5rem;
+   margin-bottom: 0.75rem;
+ }
+ .maniva-footer__symbol {
+   height: 2rem;
+   width: 2rem;
+   filter: brightness(0) invert(1);
+   opacity: 0.95;
+   display: block;
+ }
+ .maniva-footer__wordmark {
+   font-family: var(--font-ui);
+   font-weight: 700;
+   font-size: 0.9375rem;
+   color: var(--color-root-50);
+ }
 .maniva-footer__legal {
   font-family: var(--font-ui);
   font-size: 0.875rem;

@@ -14,11 +14,11 @@
       </div>
 
       <Typography variant="display-lg" class="max-w-4xl mb-6 leading-tight tracking-tight">
-        Do site simples ao sistema complexo — <span class="text-root-600">engenharia de software</span> que entende seu negócio
+        Do site simples ao sistema complexo. <span class="text-root-500">Engenharia de software</span> que entende seu negócio
       </Typography>
 
       <Typography variant="text-lg" class="max-w-2xl mb-10 text-text-secondary">
-        Desenvolvimento web, modernização de sistemas e projetos de IA complexos — com qualidade técnica de quem já construiu plataformas em escala.
+        Desenvolvimento web, modernização de sistemas e projetos de IA complexos. Com qualidade técnica de quem já construiu plataformas em escala.
       </Typography>
 
       <div class="flex flex-col sm:flex-row gap-4">

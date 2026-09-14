@@ -1,34 +1,34 @@
 <!--
-  Header.vue — "Navegación Orgánica" (§5.2).
+  Header.vue — "Navegação Orgânica" (§5.2).
 
-  Sticky con:
-    - Logomarca Maniva Software (imagem otimizada em WebP/AVIF, §3).
-    - Navegación segmentada por dor (pt-BR, CONTEXT.md) con scroll spy.
-    - CTA superior contextual (WhatsApp pre-escrito).
+  Sticky com:
+    - Marca Maniva Software (símbolo "M" PWA + wordmark em HTML).
+    - Navegação segmentada por dor (pt-BR, CONTEXT.md) com scroll spy.
+    - CTA superior contextual (WhatsApp pre-escrito) como Button action.
     - Menu mobile suave (burger + slide), a11y (`aria-expanded`,
-      `aria-controls`, Esc para cerrar).
+      `aria-controls`, Esc para fechar).
 
-  El scroll spy se resuelve con `utils/scroll.js` (debounce + seguimiento de
-  la sección bajo el header). Todo el comportamiento vive en la sección
-  cliente (onMounted) para no romper el prerender SSG de vike.
+  O scroll spy se resolve com `utils/scroll.js` (debounce +
+  acompanhamento da seção sob o header). Todo o comportamento
+  vive na seção cliente (onMounted) para não romper o prerender
+  SSG de vike.
 -->
 <template>
   <header class="maniva-header" :class="{ 'maniva-header--scrolled': scrolled }">
     <Container size="lg" class="maniva-header__inner">
       <a href="#inicio" class="maniva-brand" aria-label="Maniva Software — ir ao início" @click="onAnchor">
-        <picture>
-          <source srcset="/images/logo/logo-maniva-header.avif" type="image/avif" />
-          <img
-            src="/images/logo/logo-maniva-header.webp"
-            alt=""
-            width="60"
-            height="40"
-            loading="eager"
-            decoding="async"
-            class="maniva-brand__logo"
-          />
-        </picture>
-        <span class="sr-only">Maniva Software</span>
+        <img
+          src="/images/icons/icon-192x192.png"
+          alt=""
+          width="34"
+          height="34"
+          loading="eager"
+          decoding="async"
+          class="maniva-brand__symbol"
+        />
+        <span class="maniva-brand__wordmark">
+          <span class="maniva-brand__name">Maniva</span> Software
+        </span>
       </a>
 
       <nav class="maniva-nav" aria-label="Navegação principal">
@@ -47,10 +47,18 @@
         </ul>
       </nav>
 
-      <a :href="ctaHref" class="maniva-cta" target="_blank" rel="noopener">
-        <Icon name="whatsapp" :size="20" duotone class="maniva-cta__icon" aria-hidden="true" />
-        <span>{{ ctaLabel }}</span>
-      </a>
+      <Button
+        as="a"
+        :href="ctaHref"
+        variant="action"
+        size="base"
+        class="maniva-header__cta shadow-elevation-1"
+        target="_blank"
+        rel="noopener"
+        leading-icon="whatsapp"
+      >
+        {{ ctaLabel }}
+      </Button>
 
       <button
         type="button"
@@ -81,10 +89,19 @@
             {{ item.label }}
           </a>
         </nav>
-        <a :href="ctaHref" class="maniva-menu-panel__cta" target="_blank" rel="noopener">
-          <Icon name="whatsapp" :size="20" duotone aria-hidden="true" />
-          <span>Conversar por WhatsApp</span>
-        </a>
+        <Button
+          as="a"
+          :href="ctaHref"
+          variant="action"
+          full
+          leading-icon="whatsapp"
+          target="_blank"
+          rel="noopener"
+          @click="closeMenu()"
+          class="maniva-menu-panel__cta"
+        >
+          Conversar por WhatsApp
+        </Button>
       </div>
     </Transition>
   </header>
@@ -92,7 +109,7 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from "vue";
-import { Icon } from "@ui";
+import { Button } from "@ui";
 import Container from "@layout/Container.vue";
 import { navLinks, headerCta, resolveNav, spyTargets } from "@layout/nav.js";
 import { waLink } from "@layout/whatsapp.js";
@@ -116,7 +133,7 @@ const resolvedNav = computed(() =>
 
 const ids = spyTargets(navLinks);
 
-/** Debounce del scroll: actualiza `scrolled` y la sección activa. */
+/** Debounce do scroll: atualiza `scrolled` e a seção ativa. */
 const spy = debounceScroll({
   wait: 60,
   onScroll: updateSpy,
@@ -143,7 +160,6 @@ function onAnchor(event: Event) {
   const id = anchorIdOf(href);
   if (!id) return;
   smoothScrollTo(id);
-  // Navegación por hash (§4.5): actualiza la URL sin salto de página.
   if (typeof history.replaceState === "function") {
     history.replaceState(null, "", href);
   }
@@ -173,7 +189,7 @@ function onGlobalKey(event: KeyboardEvent) {
 </script>
 
 <style scoped>
-/* Header principal: sticky, sobre todo el contenido. */
+/* Header principal: sticky, sobre todo o conteúdo. */
 .maniva-header {
   position: sticky;
   top: 0;
@@ -193,7 +209,7 @@ function onGlobalKey(event: KeyboardEvent) {
   gap: 1rem;
 }
 
-/* Marca: Cormorant (orgánico) + Figtree (técnico) — §4.2. */
+/* Marca: Cormorant (orgânico) + Figtree (técnico) — §4.2. */
 .maniva-brand {
   display: inline-flex;
   align-items: center;
@@ -201,16 +217,26 @@ function onGlobalKey(event: KeyboardEvent) {
   flex: none;
   text-decoration: none;
 }
-.maniva-brand__logo {
+.maniva-brand__symbol {
   height: 2.5rem;
-  width: auto;
+  width: 2.5rem;
   display: block;
 }
-
-/* Navegación desktop: solo >= 1024px. */
-.maniva-nav {
-  display: none;
+.maniva-brand__wordmark {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 1.0625rem;
+  line-height: 1;
+  color: var(--color-root-500);
 }
+.maniva-brand__name {
+  font-family: var(--font-display);
+  font-size: 1.375rem;
+  font-weight: 600;
+}
+
+/* Navegação desktop: somente >= 1024px. */
+.maniva-nav { display: none; }
 .maniva-nav ul {
   display: flex;
   gap: 0.5rem;
@@ -244,12 +270,10 @@ function onGlobalKey(event: KeyboardEvent) {
   font-weight: 600;
 }
 
-/* CTA superior contextual. */
-.maniva-cta {
-  display: none;
-}
+/* CTA superior contextual: oculto no mobile, Button destaque no desktop. */
+.maniva-header__cta { display: none; }
 
-/* Burger: visible sólo < 1024px. */
+/* Burger: visível somente < 1024px. */
 .maniva-burger {
   display: inline-flex;
   flex-direction: column;
@@ -269,28 +293,12 @@ function onGlobalKey(event: KeyboardEvent) {
   background: currentColor;
 }
 
-/* Media query de progreso: desktop expresa la navegación completa. */
+/* Media query de progresso: desktop expressa a navegação completa. */
 @media (width >= 1024px) {
   .maniva-nav {
     display: flex;
   }
-  .maniva-cta {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background-color: var(--color-root-300);
-    color: var(--color-root-800);
-    font-family: var(--font-ui);
-    font-size: 0.875rem;
-    font-weight: 600;
-    padding: 0.5rem 1.25rem; /* base 6px: 8 + 20 */
-    border-radius: var(--radius-bud);
-    text-decoration: none;
-  }
-  .maniva-cta:hover {
-    background-color: var(--color-root-500);
-    color: var(--color-root-50);
-  }
+  .maniva-header__cta { display: inline-flex; }
   .maniva-burger,
   .maniva-menu-panel {
     display: none;
@@ -351,16 +359,6 @@ function onGlobalKey(event: KeyboardEvent) {
   font-weight: 600;
 }
 .maniva-menu-panel__cta {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
   margin-top: 1.5rem;
-  background-color: var(--color-root-300);
-  color: var(--color-root-800);
-  font-family: var(--font-ui);
-  font-weight: 600;
-  padding: 0.5rem 1.25rem; /* base 6px: 8 + 20 */
-  border-radius: var(--radius-bud);
-  text-decoration: none;
 }
 </style>
