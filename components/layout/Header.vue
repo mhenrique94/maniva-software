@@ -3,15 +3,16 @@
 
   Sticky com:
     - Marca Maniva Software (símbolo "M" PWA + wordmark em HTML).
-    - Navegação segmentada por dor (pt-BR, CONTEXT.md) com scroll spy.
+    - Navegação segmentada por dor (pt-BR, CONTEXT.md) com scroll spy
+      via IntersectionObserver (composable `useScrollSpy`).
     - CTA superior contextual (WhatsApp pre-escrito) como Button action.
     - Menu mobile suave (burger + slide), a11y (`aria-expanded`,
       `aria-controls`, Esc para fechar).
 
-  O scroll spy se resolve com `utils/scroll.js` (debounce +
-  acompanhamento da seção sob o header). Todo o comportamento
-  vive na seção cliente (onMounted) para não romper o prerender
-  SSG de vike.
+  O scroll spy vive no composable (activation line + keep-last +
+  bottom sentinel). Clique em âncora força a seção ativa (sem piscar),
+  rola suave (ou instantâneo com reduced-motion) e move o foco para a
+  seção após o `scrollend` (ou timeout 3s).
 -->
 <template>
   <header class="maniva-header" :class="{ 'maniva-header--scrolled': scrolled }">
@@ -38,7 +39,7 @@
               :href="item.href"
               class="maniva-nav__link"
               :class="{ 'maniva-nav__link--active': item.active }"
-              :aria-current="item.active ? 'true' : null"
+              :aria-current="ariaCurrentId === item.id ? 'location' : null"
               @click="onAnchor"
             >
               {{ item.label }}
@@ -83,8 +84,8 @@
             :href="item.href"
             class="maniva-menu-panel__link"
             :class="{ 'maniva-menu-panel__link--active': item.active }"
-            :aria-current="item.active ? 'true' : null"
-            @click="onAnchor($event); closeMenu()"
+            :aria-current="ariaCurrentId === item.id ? 'location' : null"
+            @click="onAnchor"
           >
             {{ item.label }}
           </a>
@@ -108,62 +109,97 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, ref } from "vue";
+import { computed, onUnmounted, ref } from "vue";
+import { useWindowScroll } from "@vueuse/core";
 import { Button } from "@ui";
 import Container from "@layout/Container.vue";
 import { navLinks, headerCta, resolveNav, spyTargets } from "@layout/nav.js";
 import { waLink } from "@layout/whatsapp.js";
-import {
-  anchorIdOf,
-  findActiveTarget,
-  smoothScrollTo,
-  debounceScroll,
-} from "@util/scroll.js";
+import { anchorIdOf } from "@util/scroll.js";
+import { DEFAULT_HEADER_HEIGHT } from "../../composables/scrollSpyLogic.js";
+import { useScrollSpy } from "../../composables/useScrollSpy.ts";
 
-const scrolled = ref(false);
+/* Posição de rolagem: só isso alimenta `scrolled` (sem listeners manuais). */
+const { y: scrollY } = useWindowScroll();
+const scrolled = computed(() => scrollY.value > 8);
+
 const menuOpen = ref(false);
-const currentId = ref<string | null>(null);
+/** `aria-current="location"` só após clique (sem ruído em scroll passivo). */
+const ariaCurrentId = ref<string | null>(null);
 
 const ctaHref = waLink(headerCta.message);
 const ctaLabel = headerCta.label;
 
-const resolvedNav = computed(() =>
-  resolveNav({ links: navLinks, currentId: currentId.value }),
-);
-
-const ids = spyTargets(navLinks);
-
-/** Debounce do scroll: atualiza `scrolled` e a seção ativa. */
-const spy = debounceScroll({
-  wait: 60,
-  onScroll: updateSpy,
-});
-
-function updateSpy() {
-  scrolled.value = window.scrollY > 8;
-  const offsets = ids
-    .map((id) => ({
-      id,
-      top: document.getElementById(id)?.getBoundingClientRect().top ?? Infinity,
-    }))
-    .filter((s) => Number.isFinite(s.top));
-  currentId.value = findActiveTarget({ offsets, headerHeight: headerHeight() });
-}
-
 function headerHeight() {
   const el = document.querySelector(".maniva-header");
-  return el ? el.getBoundingClientRect().height : 96;
+  return el ? el.getBoundingClientRect().height : DEFAULT_HEADER_HEIGHT;
 }
 
-function onAnchor(event: Event) {
+const { activeId, forceActive, release } = useScrollSpy(spyTargets(navLinks), {
+  headerHeight,
+});
+
+const resolvedNav = computed(() =>
+  resolveNav({ links: navLinks, currentId: activeId.value }),
+);
+
+const SCROLL_END_FALLBACK_MS = 3000;
+
+function prefersReducedMotion() {
+  return (
+    window.matchMedia?.("(prefers-reduced-motion: reduce)")?.matches ?? false
+  );
+}
+
+/** `scrollend` (Baseline set/2025) ou timeout de 3s como rede de segurança. */
+function waitScrollEnd(signal: AbortSignal): Promise<void> {
+  return new Promise((resolve) => {
+    if ("onscrollend" in window) {
+      window.addEventListener("scrollend", () => resolve(), {
+        once: true,
+        signal,
+      });
+    }
+    const timer = setTimeout(() => resolve(), SCROLL_END_FALLBACK_MS);
+    signal.addEventListener("abort", () => clearTimeout(timer), { once: true });
+  });
+}
+
+/** Foco pós-scroll: novo clique cancela pendência (scrollend é `once`). */
+let abortFocus: AbortController | null = null;
+
+async function moveFocusToSection(id: string) {
+  const signal = new AbortController();
+  abortFocus = signal;
+  await waitScrollEnd(signal.signal);
+  if (signal.signal.aborted) return;
+  const target = document.getElementById(id);
+  target?.focus({ preventScroll: true });
+}
+
+let clickCount = 0;
+
+/** Clique em âncora: força a seção ativa (keep-last do force-mode evita piscar). */
+async function onAnchor(event: Event) {
   const href = (event.currentTarget as HTMLAnchorElement).getAttribute("href");
   const id = anchorIdOf(href);
-  if (!id) return;
-  smoothScrollTo(id);
-  if (typeof history.replaceState === "function") {
-    history.replaceState(null, "", href);
+  if (id) {
+    event.preventDefault();
+    if (menuOpen.value) closeMenu();
+    forceActive(id);
+    ariaCurrentId.value = id;
+    if (typeof history.replaceState === "function") {
+      history.replaceState(null, "", href);
+    }
+    const behavior = prefersReducedMotion() ? "instant" : "smooth";
+    const target = document.getElementById(id);
+    if (target) {
+      target.scrollIntoView({ behavior, block: "start" });
+    }
+    const seq = ++clickCount;
+    await moveFocusToSection(id);
+    if (seq === clickCount) release();
   }
-  event.preventDefault();
 }
 
 function closeMenu() {
@@ -174,18 +210,21 @@ function toggleMenu() {
   menuOpen.value = !menuOpen.value;
 }
 
-onMounted(() => {
-  updateSpy();
-  window.addEventListener("scroll", spy.notify, { passive: true });
-  window.addEventListener("resize", spy.notify, { passive: true });
-  document.addEventListener("keydown", onGlobalKey);
-});
-
 function onGlobalKey(event: KeyboardEvent) {
   if (event.key === "Escape") {
     closeMenu();
   }
 }
+
+if (typeof document !== "undefined") {
+  document.addEventListener("keydown", onGlobalKey);
+}
+onUnmounted(() => {
+  if (typeof document !== "undefined") {
+    document.removeEventListener("keydown", onGlobalKey);
+  }
+  if (abortFocus) abortFocus.abort();
+});
 </script>
 
 <style scoped>

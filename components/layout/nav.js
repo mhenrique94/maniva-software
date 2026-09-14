@@ -24,7 +24,8 @@ export const headerCta = {
 };
 
 /**
- * Resuelve la sección activa de un enlace comparando con el id actual.
+ * Resolve a seção ativa de um enlace comparando com o id atual
+ * (`activeId` do composable useScrollSpy).
  * @param {{links?: typeof navLinks; currentId?: string|null}} [options]
  * @returns {{id: string, label: string, href: string, active: boolean}[]}
  */

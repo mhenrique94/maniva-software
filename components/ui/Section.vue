@@ -14,6 +14,7 @@
     :style="surfaceStyle"
     :aria-label="ariaLabel"
     :data-connect-to="connectTo"
+    tabindex="-1"
     v-bind="$attrs"
   >
     <slot />

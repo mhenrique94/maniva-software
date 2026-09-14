@@ -13,6 +13,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@vueuse/core": "^14.4.0",
     "phosphor-vue": "^4.4.1",
     "vike": "^0.4.260",
     "vike-vue": "^0.9.13",

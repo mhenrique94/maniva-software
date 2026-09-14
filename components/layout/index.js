@@ -32,9 +32,4 @@ export {
 } from "./whatsapp.js";
 
 // Helpers de navegación/scroll
-export {
-  anchorIdOf,
-  smoothScrollTo,
-  findActiveTarget,
-  debounceScroll,
-} from "@util/scroll.js";
+export { anchorIdOf, debounceScroll } from "@util/scroll.js";
