@@ -37,8 +37,14 @@ export const headingScale = {
   6: "xl",
 };
 
-/** Tamaños do body (sm/base/lg). */
-export const bodyLevels = { sm: "sm", base: "base", lg: "lg" };
+/** Tamaños do body (sm/base/lg/xl/2xl). */
+export const bodyLevels = {
+  sm: "sm",
+  base: "base",
+  lg: "lg",
+  xl: "xl",
+  "2xl": "2xl",
+};
 
 /** Grupo de pesos por familia. */
 const weightGroup = {

@@ -48,19 +48,6 @@
         </ul>
       </nav>
 
-      <Button
-        as="a"
-        :href="ctaHref"
-        variant="action"
-        size="base"
-        class="maniva-header__cta shadow-elevation-1"
-        target="_blank"
-        rel="noopener"
-        leading-icon="whatsapp"
-      >
-        {{ ctaLabel }}
-      </Button>
-
       <button
         type="button"
         class="maniva-burger"
@@ -128,7 +115,6 @@ const menuOpen = ref(false);
 const ariaCurrentId = ref<string | null>(null);
 
 const ctaHref = waLink(headerCta.message);
-const ctaLabel = headerCta.label;
 
 function headerHeight() {
   const el = document.querySelector(".maniva-header");
@@ -179,6 +165,20 @@ async function moveFocusToSection(id: string) {
 
 let clickCount = 0;
 
+/**
+ * Correção pós-scrollend: se o alvo se moveu durante a animação
+ * (imagens async, fontes, lazy sections), re-snapa suavemente
+ * usando a mesma fonte de verdade do hash nativo (scroll-margin-top).
+ */
+function correctScrollPosition(target: HTMLElement, behavior: ScrollBehavior) {
+  const headerBottom = headerHeight();
+  const targetTop = target.getBoundingClientRect().top + window.scrollY;
+  const expected = targetTop - headerBottom;
+  if (Math.abs(window.scrollY - expected) > 0.5) {
+    window.scrollTo({ top: expected, behavior });
+  }
+}
+
 /** Clique em âncora: força a seção ativa (keep-last do force-mode evita piscar). */
 async function onAnchor(event: Event) {
   const href = (event.currentTarget as HTMLAnchorElement).getAttribute("href");
@@ -198,7 +198,10 @@ async function onAnchor(event: Event) {
     }
     const seq = ++clickCount;
     await moveFocusToSection(id);
-    if (seq === clickCount) release();
+    if (seq === clickCount && target) {
+      correctScrollPosition(target, behavior);
+      release();
+    }
   }
 }
 
@@ -274,6 +277,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+  padding-block: 0.75rem; /* base 6px: respiro vertical (marca/burger não colam nas bordas) */
 }
 
 /* Marca: Cormorant (orgânico) + Figtree (técnico) — §4.2. */
@@ -337,13 +341,12 @@ onUnmounted(() => {
   font-weight: 600;
 }
 
-/* CTA superior contextual: oculto no mobile, Button destaque no desktop. */
-.maniva-header__cta { display: none; }
-
 /* Burger: visível somente < 1024px. */
 .maniva-burger {
   display: inline-flex;
   flex-direction: column;
+  align-items: center; /* barras centradas no eixo horizontal */
+  justify-content: center; /* 3 barras centradas no eixo vertical */
   gap: 6px; /* base 6px */
   width: 48px; /* base 6px: 8 * 6 */
   height: 48px;
@@ -360,15 +363,30 @@ onUnmounted(() => {
   background: currentColor;
 }
 
-/* Media query de progresso: desktop expressa a navegação completa. */
+/* Desktop: nav aparece a partir de 1024px (marca à esquerda, nav à direita). */
 @media (width >= 1024px) {
   .maniva-nav {
     display: flex;
   }
-  .maniva-header__cta { display: inline-flex; }
   .maniva-burger,
   .maniva-menu-panel {
     display: none;
+  }
+}
+
+/* Telas largas (>= 1280px): a nav ganha o centro via grid de 3 zonas. */
+@media (width >= 1280px) {
+  .maniva-header__inner {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
+  .maniva-brand {
+    grid-column: 1;
+    justify-self: start;
+  }
+  .maniva-nav {
+    grid-column: 2;
+    justify-self: center;
   }
 }
 
@@ -429,3 +447,4 @@ onUnmounted(() => {
   margin-top: 1.5rem;
 }
 </style>
+ 

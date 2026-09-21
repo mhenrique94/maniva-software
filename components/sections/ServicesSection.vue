@@ -3,7 +3,7 @@
   <Section id="pmes" variant="pulp" class="py-20">
     <div class="container mx-auto px-6">
       <div class="max-w-3xl mx-auto text-center mb-16">
-        <Typography variant="display-md" class="mb-6">
+        <Typography type="heading" level="2" class="mb-6">
           Seu negócio ainda não tem site ou o atual não funciona? <br class="hidden lg:block" />
           Está na hora do digital de verdade.
         </Typography>
@@ -11,15 +11,15 @@
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <Card v-for="(benefit, idx) in segment1Benefits" :key="idx" 
-          :elevation="idx === 0 ? 'raised' : 'soft'"
-          :class="['p-8 border border-root-100', idx === 0 ? 'md:col-span-2 lg:col-span-1' : '']">
+          elevation="soft"
+          class="p-8 border border-root-100">
           <div class="text-root-500 mb-4">
             <Icon :name="benefit.icon" size="32" duotone />
           </div>
-          <Typography variant="text-md" class="font-semibold mb-2">
+          <Typography type="body" level="base" weight="semibold" class="mb-2">
             {{ benefit.title }}
           </Typography>
-          <Typography variant="text-sm" class="text-text-secondary">
+          <Typography type="body" level="sm" tone="secondary">
             {{ benefit.desc }}
           </Typography>
         </Card>
@@ -37,7 +37,7 @@
   <Section id="empresas" variant="root" organic :connect-to="'services-segment-2'" class="py-20">
     <div class="container mx-auto px-6">
         <div class="max-w-4xl mx-auto mb-20 text-center">
-           <Typography variant="display-md" tone="pulp" class="mb-6">
+           <Typography type="heading" level="2" tone="pulp" class="mb-6">
              Seu sistema trava seu crescimento? <br class="hidden lg:block" />
              Vamos desemperrar sua operação digital.
           </Typography>
@@ -46,7 +46,7 @@
             <div class="space-y-3 text-left">
               <div v-for="pain in segment2Pains" :key="pain" class="flex items-center gap-3 p-3 bg-root-50 rounded-lg border border-root-100">
                 <Icon name="warning" class="text-root-500 flex-shrink-0" size="20" duotone />
-                <Typography variant="text-sm" class="font-medium text-text-primary">
+                <Typography type="body" level="sm" weight="semibold" tone="primary">
                   {{ pain }}
                 </Typography>
               </div>
@@ -60,10 +60,10 @@
           texture
           class="p-8 border border-root-100">
           <div class="h-1 w-12 bg-root-500 mb-6" />
-          <Typography variant="text-lg" class="font-bold mb-4">
+          <Typography type="body" level="lg" weight="bold" class="mb-4">
             {{ solution.title }}
           </Typography>
-          <Typography variant="text-md" class="text-text-secondary">
+          <Typography type="body" level="base" tone="secondary">
             {{ solution.desc }}
           </Typography>
         </Card>

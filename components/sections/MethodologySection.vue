@@ -2,10 +2,10 @@
   <Section id="metodo" variant="earth" organic :aria-label="'Methodology Section'">
     <div class="container mx-auto px-6 py-20">
       <div class="text-center max-w-3xl mx-auto mb-20">
-        <Typography variant="display-md" tone="pulp" class="mb-6">
+        <Typography type="heading" level="2" tone="pulp" class="mb-6">
           Sem surpresas. Processo claro do primeiro contato à entrega
         </Typography>
-         <Typography variant="text-lg" tone="pulp">
+         <Typography type="body" level="lg" tone="pulp">
            Trabalhamos com transparência e previsibilidade, para que você tenha controle total sobre o que está sendo construído.
         </Typography>
       </div>
@@ -27,16 +27,16 @@
 
             <!-- Step Indicator -->
             <div class="absolute left-8 lg:left-1/2 lg:-translate-x-1/2 w-12 h-12 rounded-full bg-root-500 flex items-center justify-center text-root-50 z-10 shadow-elevation-2">
-              <Typography variant="text-sm" class="font-bold">{{ idx + 1 }}</Typography>
+              <Typography type="body" level="sm" weight="bold">{{ idx + 1 }}</Typography>
             </div>
 
             <!-- Step Content Card -->
             <div class="w-full lg:w-1/2 pl-20 lg:pl-0" :class="idx % 2 === 0 ? 'lg:text-right' : 'lg:text-left'">
               <div class="bg-root-50 p-8 rounded-card shadow-elevation-1 border border-root-100 relative">
-                <Typography variant="text-lg" class="font-bold mb-3">
+                <Typography type="body" level="lg" weight="bold" class="mb-3">
                   {{ step.title }}
                 </Typography>
-                <Typography variant="text-sm" class="text-text-secondary leading-relaxed">
+                <Typography type="body" level="sm" tone="secondary" class="leading-relaxed">
                   {{ step.desc }}
                 </Typography>
               </div>
@@ -51,10 +51,10 @@
           <div class="w-16 h-16 mx-auto mb-6 bg-root-100 rounded-full flex items-center justify-center text-root-800">
             <Icon :name="diff.icon" size="32" duotone />
           </div>
-           <Typography variant="text-md" tone="pulp" class="font-bold mb-2">
+           <Typography type="body" level="base" tone="pulp" weight="bold" class="mb-2">
              {{ diff.title }}
            </Typography>
-           <Typography variant="text-sm" tone="pulp">
+           <Typography type="body" level="sm" tone="pulp">
              {{ diff.desc }}
           </Typography>
         </div>

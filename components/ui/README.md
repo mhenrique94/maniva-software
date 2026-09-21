@@ -12,7 +12,7 @@ registro de íconos, contraste) — testeado con `node --test` (sin framework).
 | `Button.vue` | O Broto | `variant` (primary/secondary/action) · `size` (sm/base/lg) · `loading` · `disabled` · `full` · `leadingIcon`/`trailingIcon` · `type` | `button.js` |
 | `Card.vue` | Seção Transversal | `elevation` (none/soft/raised/deep) · `density` (compact/comfortable/loose) · `padding` · `flat` · `texture` · `element` · slots `header`/default/`actions` | `card.js` |
 | `Section.vue` | Solo/Camadas da Terra | `variant` (pulp/root/leaf/earth/vitality) · `organic` (clip-path desktop) · `connectTo` (rizoma SVG) · `as` | `section.js` |
-| `Typography.vue` | Herança vs Precisão | `type` (display/heading/body/caption) · `level` (1–6 o sm/base/lg) · `tone` (cor semántica) · `weight` | `typography.js` |
+| `Typography.vue` | Herança vs Precisão | `type` (display/heading/body/caption) · `level` (1–6 o sm/base/lg/xl/2xl) · `tone` (cor semántica) · `weight` | `typography.js` |
 | `Icon.vue` | Fibras & Nervuras | `name` (registro `icons.js`) · `weight` (thin…duotone) · `size` · `duotone` · `color`/`nerveColor` · `rotation` · `animated` · `path-d` (custom) | `icons.js` |
 
 `index.js` sirve el barrel: `import { Button, Card, Icon } from "@ui"`.
