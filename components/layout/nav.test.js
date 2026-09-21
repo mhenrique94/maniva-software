@@ -17,7 +17,7 @@ test("navLinks: links segmentados com âncoras válidas (§5.2)", () => {
 
 test("navLinks: rótulos pt-BR canônicos (sem 'estabelecidas' nem personagem)", () => {
   const labels = navLinks.map((l) => l.label);
-  assert.ok(labels.includes("Para empresas em crescimento"));
+  assert.ok(labels.includes("Empresas em crescimento"));
   assert.ok(!labels.some((l) => /estabelecidas/i.test(l)));
 });
 

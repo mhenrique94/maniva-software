@@ -31,7 +31,10 @@ export default function designTokens(): Plugin {
     name: "maniva:design-tokens",
     enforce: "pre",
     async transform(code, id) {
-      if (!id.endsWith(`/${INPUT_CSS}`)) return;
+      // O SSR do Vike pede o CSS como `input.css?direct`; a query não pode
+      // invalidar o match (senão o dev fica sem os tokens do design system).
+      const file = id.split("?")[0];
+      if (!file.endsWith(`/${INPUT_CSS}`)) return;
       if (!code.includes(PLACEHOLDER)) return;
 
       const mod = await loadThemeBuilder();

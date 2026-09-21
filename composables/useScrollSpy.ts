@@ -9,7 +9,7 @@
  */
 import { onMounted, onUnmounted, ref } from "vue";
 import { useIntersectionObserver } from "@vueuse/core";
-// @ts-ignore — módulo JS puro, testado com `node --test`
+// @ts-expect-error — módulo JS puro, testado com `node --test`
 import { pickActiveId, DEFAULT_HEADER_HEIGHT } from "./scrollSpyLogic.js";
 
 interface ScrollSpyOptions {

@@ -11,9 +11,9 @@ import { defaultMessage } from "./whatsapp.js";
 /** Secciones objetivo del scroll spy + navegación. */
 export const navLinks = [
   { id: "inicio", label: "Início", href: "#inicio" },
-  { id: "pmes", label: "Para pessoas e pequenos negócios", href: "#pmes" },
-  { id: "empresas", label: "Para empresas em crescimento", href: "#empresas" },
-  { id: "projetos", label: "Para projetos ambiciosos", href: "#projetos" },
+  { id: "pmes", label: "Pessoas e negócios", href: "#pmes" },
+  { id: "empresas", label: "Empresas em crescimento", href: "#empresas" },
+  { id: "projetos", label: "Projetos ambiciosos", href: "#projetos" },
   { id: "metodo", label: "Como trabalhamos", href: "#metodo" },
 ];
 
