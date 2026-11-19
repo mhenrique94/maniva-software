@@ -11,7 +11,7 @@
 |-------|-----------|--------|
 | **Maniva** | A maniva-da-mandioca — haste que origina a planta — como metáfora de fundação sólida, crescimento orgânico e resiliência; inspira o design system e a tagline. | Usar "Maniva" sozinho para nomear a empresa. |
 | **Maniva Software** | Marca pública (logo, título, rodapé); no JSON-LD como `Organization.name`. | Usar a razão social no lugar da marca; abreviar para somente "Maniva" em contexto corporativo. |
-| **Mandioca Rizomática** | Design system da landing — paleta semântica, formas orgânicas, tipografia (Cormorant + Figtree), grid/base 6px (§4). Termo canônico da estética. | "Modern Organic Tech", "Age Maniva Tech", "Estética Maniva" (rótulos anteriores). |
+| **Mandioca Rizomática** | Design system da landing — paleta paper/ink/leaf/clay, tipografia (Fraunces + Figtree), grid/base 6px; organicidade na estrutura e no desenho da raiz, não em ornamento. | "Modern Organic Tech", "Age Maniva Tech", "Estética Maniva" (rótulos anteriores). |
 | **Razão social (identidade legal)** | "MANIVA SOFTWARE E TECNOLOGIA LTDA", CNPJ `66.739.634/0001-79` (§5.8); em JSON-LD como `legalName` + `taxID`. | Usar no lugar da marca visivelmente (rodapé institucional é o lugar). |
 | **Sede fiscal** | Endereço de cadastro no CNPJ (Porto Alegre). É conformidade legal; **não** é atendimento e não aparece como local de operação no conteúdo. | Retratar como unidade de atendimento presencial. |
 
@@ -42,6 +42,6 @@
 | **Cloudflare Pages** | CDN/hosting do site; o deploy ocorre **somente** via GitHub Actions (§8). |
 | **Custom domain (CNAME)** | `manivasoftware.com.br` + `www` no Pages, proxied, com redirect 301 do www para o apex (§8.4). |
 | **Tag GA4 / measurement ID** | `G-9HV03VP5FL`; acesso aos dados via MCP `analytics-mcp` (§6.9). |
-| **Fontes** | `@fontsource` (Cormorant 600 display, Figtree 400/600/700 UI), preload das críticas (§7.2). |
+| **Fontes** | `@fontsource` (Fraunces 400 display, Figtree 400/500 UI), preload da crítica. |
 | **Assets** | AVIF + WebP em `public/images/`, commitados manualmente (sem plugin de otimização no build) (§7.1). |
 | **Lighthouse CI** | Budgets como gate de merge em PR (LCP ≤ 2500ms, CLS ≤ 0.1, FCP ≤ 1800ms, TBT ≤ 300ms) (§7.7). |

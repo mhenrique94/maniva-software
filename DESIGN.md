@@ -1,54 +1,62 @@
 ---
-name: Mandioca Rizomática — Maniva Software
-description: Landing one-page orgânica e terrosa, engenheirada sobre um grid de 6px.
+name: Raiz Firme — Maniva Software
+description: Landing sóbria de engenharia, plana e de alto contraste, sobre um grid de 6px.
 colors:
-  root-50: "#F8F4E9"
-  root-100: "#EFE7D6"
-  root-300: "#C9B037"
-  root-500: "#8B6B3C"
-  root-800: "#3E2E23"
-  leaf-300: "#4A7C4A"
-  leaf-500: "#2E5D34"
-  text-primary: "rgb(62 46 35 / 0.9)"
-  text-secondary: "#6B5C4D"
+  paper: "#F4F0E6"
+  paper-2: "#EAE3D4"
+  ink: "#121A15"
+  ink-2: "#1B261F"
+  muted: "#56645B"
+  muted-dark: "#B9C4BA"
+  line: "#D5CEBE"
+  line-dark: "#2E3A32"
+  leaf: "#1E5B3B"
+  leaf-hover: "#174A30"
+  leaf-light: "#9CC7A8"
+  clay: "#9A4E35"
+  clay-dark: "#7A3E2A"
+  bone: "#F4F0E6"
 typography:
   display:
-    fontFamily: "Cormorant Garamond, Georgia, serif"
-    fontSize: "3.375rem"
-    fontWeight: 600
-    lineHeight: "3.5rem"
-    letterSpacing: "-0.025em"
+    fontFamily: "Fraunces Variable, Fraunces, Georgia, serif"
+    fontSize: "clamp(2.375rem, 4.2vw + 1rem, 4.5rem)"
+    fontWeight: 400
+    lineHeight: "1.02"
+    letterSpacing: "-0.03em"
   headline:
-    fontFamily: "Cormorant Garamond, Georgia, serif"
-    fontSize: "2.625rem"
-    fontWeight: 500
-    lineHeight: "3rem"
+    fontFamily: "Fraunces Variable, Fraunces, Georgia, serif"
+    fontSize: "clamp(1.875rem, 2.4vw + 1.2rem, 3rem)"
+    fontWeight: 400
+    lineHeight: "1.08"
     letterSpacing: "-0.02em"
   title:
     fontFamily: "Figtree, system-ui, -apple-system, sans-serif"
-    fontSize: "1.5rem"
-    fontWeight: 600
-    lineHeight: "2rem"
+    fontSize: "clamp(1.25rem, 0.6vw + 1.1rem, 1.5rem)"
+    fontWeight: 500
+    lineHeight: "1.2"
     letterSpacing: "-0.01em"
+  lead:
+    fontFamily: "Figtree, system-ui, -apple-system, sans-serif"
+    fontSize: "clamp(1.125rem, 0.4vw + 1.05rem, 1.25rem)"
+    fontWeight: 400
+    lineHeight: "1.5"
+    letterSpacing: "0"
   body:
     fontFamily: "Figtree, system-ui, -apple-system, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
-    lineHeight: "1.5rem"
+    lineHeight: "1.625"
     letterSpacing: "0"
   label:
     fontFamily: "Figtree, system-ui, -apple-system, sans-serif"
-    fontSize: "0.75rem"
-    fontWeight: 600
-    lineHeight: "1.125rem"
-    letterSpacing: "0"
+    fontSize: "0.8125rem"
+    fontWeight: 500
+    lineHeight: "1.3846"
+    letterSpacing: "0.01em"
 rounded:
-  bud: "12px 24px 12px 24px"
-  bud-soft: "12px 18px 12px 18px"
-  bud-wide: "16px 32px 16px 32px"
-  card: "48px 12px 6px 6px"
-  pill: "999px"
-  menu: "8px"
+  card: "0"
+  button: "2px"
+  frame: "6px"
 spacing:
   unit: "0.375rem"
   1: "0.375rem"
@@ -61,183 +69,274 @@ spacing:
   10: "3.75rem"
 components:
   button-primary:
-    backgroundColor: "{colors.leaf-500}"
-    textColor: "{colors.root-50}"
+    backgroundColor: "{colors.leaf}"
+    textColor: "{colors.bone}"
     typography: "{typography.body}"
-    rounded: "{rounded.bud}"
-    padding: "12px 24px"
+    rounded: "{rounded.button}"
+    minHeight: "48px"
   button-primary-hover:
-    backgroundColor: "{colors.leaf-300}"
+    backgroundColor: "{colors.leaf-hover}"
   button-secondary:
     backgroundColor: "transparent"
-    textColor: "{colors.root-800}"
-    typography: "{typography.body}"
-    rounded: "{rounded.bud}"
-    padding: "12px 24px"
-  button-action:
-    backgroundColor: "{colors.root-300}"
-    textColor: "{colors.root-800}"
-    typography: "{typography.body}"
-    rounded: "{rounded.bud}"
-    padding: "12px 24px"
-  button-action-hover:
-    backgroundColor: "{colors.root-500}"
-    textColor: "{colors.root-50}"
+    textColor: "{colors.ink}"
+    border: "1px solid {colors.ink}"
+    rounded: "{rounded.button}"
+    minHeight: "48px"
+  button-inverse:
+    backgroundColor: "{colors.bone}"
+    textColor: "{colors.ink}"
+    rounded: "{rounded.button}"
+    minHeight: "48px"
   card:
-    backgroundColor: "{colors.root-50}"
+    backgroundColor: "{colors.paper}"
+    border: "1px solid {colors.line}"
     rounded: "{rounded.card}"
-    padding: "36px"
-  nav-link:
-    textColor: "{colors.text-secondary}"
-    rounded: "{rounded.pill}"
-    padding: "6px 12px"
-  nav-link-active:
-    backgroundColor: "{colors.root-100}"
-    textColor: "{colors.root-800}"
-  whatsapp-float:
-    backgroundColor: "{colors.leaf-500}"
-    textColor: "{colors.root-50}"
-    rounded: "{rounded.bud}"
-    size: "56px"
+    padding: "24px"
+    accentTop: "3px"
+  section-paper:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.ink}"
+  section-surface:
+    backgroundColor: "{colors.paper-2}"
+    textColor: "{colors.ink}"
+  section-ink:
+    backgroundColor: "{colors.ink}"
+    textColor: "{colors.bone}"
 ---
 
-# Design System: Mandioca Rizomática — Maniva Software
+# Design System: Raiz Firme — Maniva Software
 
 ## Overview
 
-**Creative North Star: "Mandioca Rizomática"**
+**Creative North Star: "Raiz Firme" — botânica de engenharia.**
 
-A mandioca é uma raiz que se ramifica: uma fundação subterrânea, sólida e resiliente, da qual brotam muitas hastes. O sistema visual traduz isso em duas forças que convivem — alinhamento ortopédico (grid de 6px, tipografia de engenharia, contraste rigoroso) e conexões orgânicas (cantos assimétricos, ondas de solo, traços de rizoma, textura de casca). Nada é orgânico por acaso: cada gesto expressivo nasce de uma estrutura rígida.
+Uma prancha botânica desenhada por engenheiros: papel bone, tinta verde-escura,
+folha profunda e argila; serifa editorial (Fraunces) para as ideias e grotesca
+de UI (Figtree) para a interface; grid de 12 colunas, superfícies planas, fios de
+1px e zero sombra. A organicidade está na estrutura e no desenho da raiz, não no
+ornamento.
 
-A materialidade é terrosa e quente. As superfícies são feitas de **Polpa** (creme claro) e **Terra** (marrom profundo); a **Folha** (verde) é a voz da ação; a **Vitalidade** (dourado) é reservada à conversão. A profundidade não é permanente: superfícies nascem planas e ganham sombra quente apenas quando o estado pede (hover, elevação, foco).
+O conceito operacional é **a raiz é estrutura, não ornamento**: o tronco é a
+proposta de valor no hero; os ramos são os três segmentos, cada um com seu
+caminho de WhatsApp; a raiz profunda é o HelpMed, a prova que sustenta a
+promessa; o corte transversal é a marca (arcos concêntricos + haste).
 
-O sistema rejeita deliberadamente a estética genérica de SaaS/tech — sem azuis corporativos, gradientes neon, glassmorphism ou cantos uniformemente arredondados. Ele quer parecer artesanal e engenheirado ao mesmo tempo: a prova técnica (HelpMed) ao lado da calidez da raiz.
+O sistema rejeita duas estéticas: o artesanal terroso (creme, marrom e mostarda,
+ondas, textura) e o SaaS genérico (azul corporativo, gradiente, glassmorphism,
+dashboard fake). Ele quer parecer engenharia de software premium: sóbrio,
+autoral, previsível e de alto contraste.
 
 **Key Characteristics:**
-- **Base 6px** — todo espaçamento, raio e gap é múltiplo de 0.375rem.
-- **Cantos assimétricos** — botões e cards nunca são simétricos; o movimento diagonal é a assinatura.
-- **Sombras terrosas** — toda profundidade deriva do tom Terra, nunca de cinza ou preto.
-- **Orgânico só no desktop** — clip-paths e conexões rizomáticas são progressive enhancement a partir de 1024px.
-- **Movimento com consentimento** — toda animação é gated por `prefers-reduced-motion`.
-- **Contraste AA como piso** — as três variantes de botão são validadas em `contrast.test.js`.
+
+- **Base 6px** — todo espaçamento e gap é múltiplo de `0.375rem`.
+- **Plano de verdade** — sem sombra, gradiente, textura, blur ou clip-path.
+  Profundidade é hierarquia tipográfica e mudança de superfície.
+- **Uma ação preenchida** — `leaf` em superfícies claras, `bone` em escuras.
+- **Duas vozes, papéis fixos** — Fraunces 400 em display/headline; Figtree
+  400/500 no resto. Sem 600/700.
+- **Contraste com folga** — texto principal ≥ 7:1; pares validados em teste.
+- **Movimento com consentimento** — tudo gated por `prefers-reduced-motion`.
+- **Cada seção em 1 tela** em 1440×900 (no phone, empilha).
 
 ## Colors
 
-Uma paleta quente de solo: cremes de polpa, marrons de raiz e terra, um verde de folha e um dourado de vitalidade. Não há cor fria no sistema.
+Papel bone e tinta verde-escura carregam a leitura; folha é ação; argila é
+acento. Não há cor fria e a paleta antiga não existe.
 
 ### Primary
-- **Folha** (#2E5D34): ação principal. Preenche botões `primary`, o CTA flutuante de WhatsApp e ícones de estado positivo. Contraste 7:1 com a Polpa.
-- **Folha Clara** (#4A7C4A): estado hover da ação principal — o botão "clareia como broto", nunca escurece.
 
-### Secondary
-- **Raiz** (#8B6B3C): estrutura da marca. Bordas de botão secundário, títulos de acento em display, traços de rizoma (a 20% de opacidade), textura de casca.
-- **Raiz Clara** (#C9B037, **Vitalidade**): reservada à conversão. Preenche o botão `action` (CTA de WhatsApp por segmento), contraste 6:1 com Terra. Hover ganha Raiz.
+- **Leaf** (#1E5B3B): ação principal. Preenche o botão `primary` e é a cor da
+  palavra de acento no statement. Contraste 7,06:1 com `paper`; `bone` sobre
+  `leaf` também 7,06:1.
+- **Leaf Hover** (#174A30): hover da ação principal — escurece, nunca clareia.
+- **Leaf Light** (#9CC7A8): acento sobre `ink` (9,41:1) e cor do anel de foco em
+  superfícies escuras.
 
 ### Neutral
-- **Polpa** (#F8F4E9): fundo principal de toda a página.
-- **Polpa Suave** (#EFE7D6): hover de superfícies, bordas de card, fundo de item ativo na navegação.
-- **Terra** (#3E2E23): texto primário (a 90%) e fundo do rodapé escuro.
-- **Terra Suave** (#6B5C4D): texto secundário, labels e links de navegação.
+
+- **Paper** (#F4F0E6): fundo principal.
+- **Paper 2** (#EAE3D4): única faixa de superfície clara (Soluções).
+- **Ink** (#121A15): texto principal (15,58:1 sobre paper) e faixa escura
+  (Prova HelpMed e rodapé).
+- **Muted** (#56645B): texto secundário (5,48:1 sobre paper).
+- **Muted Dark** (#B9C4BA): texto secundário sobre `ink` (9,85:1).
+- **Line** (#D5CEBE): fios e bordas de card sobre paper.
+- **Line Dark** (#2E3A32): fios sobre `ink`.
+- **Bone** (#F4F0E6): texto sobre `ink` (15,58:1).
+
+### Secondary
+
+- **Clay** (#9A4E35): acento do segmento 2 (5,25:1 sobre paper).
+- **Clay Dark** (#7A3E2A): hover/texto de acento (7,24:1 sobre paper).
 
 ### Named Rules
-**The Terra Rule.** Toda sombra é derivada de `rgba(62, 46, 35, …)` — o tom Terra. Sombra acinzentada ou preta é proibida; a profundidade também é solo.
 
-**The One Action Rule.** Folha é ação, Vitalidade é conversão. Nunca use as duas no mesmo elemento ou no mesmo grupo visual; a raridade da Vitalidade é o que a torna um CTA.
+**The Ink Rule.** Texto de leitura é `ink` sobre `paper` ou `bone` sobre `ink`.
+Nunca texto pequeno em `clay`, `leaf-light` ou `line`.
+
+**The One Action Rule.** Só existe uma ação preenchida: `leaf` com texto `bone`
+em superfícies claras; `bone` com texto `ink` em superfícies escuras. Links
+contextuais são texto com seta e sublinhado no hover. Nada de dois botões
+preenchidos no mesmo grupo.
+
+**The No-Ornament Rule.** Sem sombra, gradiente, textura, clip-path, onda ou
+blur.
+
+**The Contrast Reserve Rule.** Todo par novo entra com ≥ 4,5:1 para texto normal
+e ≥ 3:1 para texto grande/ícones; o texto principal busca ≥ 7:1.
 
 ## Typography
 
-**Display Font:** Cormorant Garamond (com Georgia, serif)
+**Display Font:** Fraunces Variable (com Georgia, serif)
 **Body Font:** Figtree (com system-ui, -apple-system, sans-serif)
-**Label/Mono Font:** Figtree — não há família mono no sistema.
+**Label Font:** Figtree — não há família mono no sistema.
 
-**Character:** *Herança vs Precisão.* A serifa de alto contraste do Cormorant traz herança editorial e calor orgânico aos títulos; a sans geométrica do Figtree traz precisão de engenharia ao corpo e à interface. O contraste entre as duas é a voz tipográfica da marca — nunca misture os papéis.
+**Character:** *Prancha de engenharia.* A Fraunces traz o tom editorial das
+ideias; a Figtree traz precisão de interface. Duas vozes, papéis fixos: nunca
+troque as famílias de papel.
 
 ### Hierarchy
-- **Display** (Cormorant 600, 3.375rem/3.5rem, tracking −0.025em): hero e aberturas de seção. Um por viewport.
-- **Headline** (Cormorant 500, 2.625rem/3rem, tracking −0.02em): títulos de seção (`h2`).
-- **Title** (Figtree 600, 1.5rem/2rem, tracking −0.01em): títulos de card e subtítulos (`h3`+).
-- **Body** (Figtree 400, 1rem/1.5rem): parágrafos e descrições; linha de leitura confortável, alvo 60–75ch.
-- **Label** (Figtree 600, 0.75rem/1.125rem): captions, legendas de figura e microcopy de UI.
+
+- **Display / h1** (Fraunces 400, `clamp(2.375rem, …, 4.5rem)`, 1.02, tracking
+  −0.03em): hero. Um por página.
+- **Headline / h2** (Fraunces 400, `clamp(1.875rem, …, 3rem)`, 1.08, tracking
+  −0.02em): títulos de seção.
+- **Title / h3** (Figtree 500, `clamp(1.25rem, …, 1.5rem)`, 1.2): cards e
+  passos.
+- **Lead** (Figtree 400, `clamp(1.125rem, …, 1.25rem)`, 1.5): subtítulos.
+- **Body** (Figtree 400, 1rem/1.625): parágrafos e listas; medida 60–68ch.
+- **Small** (Figtree 400, 0.875rem/1.5): apoio.
+- **Label** (Figtree 500, 0.8125rem/1.3846, tracking 0.01em): labels de seção no
+  formato `01 — SOLUÇÕES`, em caixa alta (único uso de caixa alta fora do
+  rodapé).
 
 ### Named Rules
-**The Two Voices Rule.** Cormorant só em display/headline; Figtree só em title/body/label. Trocar as famílias de papel quebra a identidade.
 
-> **Pesos carregados:** Cormorant Garamond 500/600 e Figtree 400/600/700 (self-hosted via `@fontsource`). O preload das duas fontes críticas (§7.2) ainda não está implementado.
+**The Two Voices Rule.** Fraunces só em display/headline e no statement; Figtree
+só em title/body/label/UI.
+
+> **Pesos carregados:** Fraunces 400 (variável) e Figtree 400/500, self-hosted
+> via `@fontsource`. Preload apenas da Fraunces: o LCP é o texto do h1.
 
 ## Layout
 
-O layout vive sobre um **grid base 6px**: o tema do Tailwind define `--spacing: 0.375rem`, então toda utility numérica é um múltiplo de 6px (`px-6` = 36px, `py-20` = 120px, `gap-8` = 48px). A base é divisível por 2 e 3 — mais orgânica que os 8px tradicionais.
+O layout vive sobre um **grid base 6px**: o tema define `--spacing: 0.375rem`.
 
-- **Container:** `max-width` 1400px (`lg`), centrado, padding lateral default `px-6` (36px). Tamanhos `sm`/`md` usam 768px/1024px.
-- **Ritmo de seção:** padding vertical denso — `py-20` (120px) no mobile, escalando para `lg:py-32` (192px) no hero.
-- **Breakpoints:** `sm` 640px · `md` 768px · `lg` 1024px · container 1400px. O limiar de 1024px é decisivo: é onde a navegação desktop aparece, as formas orgânicas se ativam e o rodapé vira 3 colunas.
-- **Progressive enhancement:** mobile é retangular e leve (sem clip-path); desktop recebe a expressão orgânica. Performance é parte da experiência (budget LCP ≤ 2500ms).
+- **Wrap:** `min(100% - 2 * gutter, 1280px)`, centrado. Gutters 24px (<640),
+  48px (640–1023) e 80px (≥1024). Em 1440, conteúdo de x=80 a 1360.
+- **Grid:** 12 colunas, gutter 24px. Split canônico 6/6 (hero e HelpMed), texto
+  à esquerda e visual à direita, topo alinhado — nunca espelhar.
+- **Ritmo:** cada seção ocupa exatamente 1 tela em 1440×900 (`min-height:
+  100svh`), padding superior 120px e inferior 64px; no phone, 96px/48px.
+- **Separação:** só por mudança de superfície (`paper` → `paper-2` → `ink`) ou
+  espaço. Sem fios entre seções; fios de 1px só dentro de listas, cards e
+  tabelas.
+- **Responsivo:** 1024 é o limiar de navegação desktop e do split; abaixo disso
+  tudo empilha com texto primeiro. Sem overflow horizontal em 320.
 
 ## Elevation & Depth
 
-O sistema é **terroso e reativo**: elevação é resposta, não decoração. Superfícies nascem planas (Polpa sobre Polpa, separadas por borda `root-100`) e ganham sombra quente apenas sob estado — hover, card elevado, foco. Não há glassmorphism estrutural; o único blur do sistema é o `backdrop-filter: blur(8px)` do header ao rolar, que reforça a sensação de camadas de solo.
+**Não há elevação.** O sistema é plano por contrato: nenhuma sombra, nenhum blur
+estrutural, nenhum gradiente. Profundidade é criada por:
 
-### Shadow Vocabulary
-- **Ambient** (`--shadow-elevation-1` → `0 1px 3px rgba(62,46,35,0.08)`): repouso de cards e do CTA do header.
-- **Raised** (`--shadow-elevation-2` → `0 4px 12px rgba(62,46,35,0.12)`): hover de card e botão, header com scroll.
-- **Deep** (`--shadow-elevation-3` → `0 16px 32px -12px rgba(62,46,35,0.18)`): elementos flutuantes e indicadores de timeline.
-- **Earth** (`--shadow-earth` → `0 6px 12px rgba(62,46,35,0.15)`): hover denso do botão "O Broto".
+1. mudança de superfície (`paper` → `paper-2` → `ink`);
+2. hierarquia tipográfica (Fraunces grande contra Figtree pequena);
+3. fios de 1px (`line`/`line-dark`) delimitando cards e listas;
+4. espaço em branco generoso.
 
-### Named Rules
-**The Flat-Until-Touched Rule.** Em repouso, a superfície é plana e delimitada por borda Polpa Suave. Sombra só aparece como resposta a estado; nada flutua sem motivo.
+Hover não levanta sombra: o card sobe 2px e escurece o fio; o botão sobe 1px e
+afunda 1px no `:active`.
 
 ## Shapes
 
-A linguagem de forma é **assimétrica com um lado firme e um lado que cresce**. O raio canônico do botão "O Broto" é `12px 24px 12px 24px` — um movimento diagonal sutil. O card "Seção Transversal" exagera o gesto com um canto superior esquerdo proeminente: `48px 12px 6px 6px`. Variantes de botão (`soft`, `wide`) apenas escalam o mesmo princípio; nunca viram pílula simétrica.
-
-As seções usam **ondas de solo** via `clip-path` (inclinação ≤ 5°, validada por `maxSlopeOf`), aplicadas só a partir de 1024px. Os traços de **rizoma** são curvas Bézier decorativas a 20% de opacidade, ligando semanticamente seções relacionadas. Cantos totalmente redondos existem em dois lugares apenas: links de navegação (pílula `999px`) e o CTA flutuante de WhatsApp no desktop (círculo).
+Raios são quase inexistentes: **card `0`**, **botão `2px`**, **frame do
+screenshot `6px`**. Círculos só no símbolo da marca e nos nós do diagrama de
+raiz. Nada de canto assimétrico, pílula ou onda.
 
 ## Components
 
-### Buttons
-- **Shape:** canto assimétrico "O Broto" (`12px 24px 12px 24px`).
-- **Primary:** Fundo Folha, texto Polpa, `px-4 py-2` na base (`px-5 py-3` em `lg`); hover clareia para Folha Clara, `scale(1.03)` e sombra Raised.
-- **Action:** Fundo Vitalidade, texto Terra, canto idêntico; hover troca para Raiz com texto Polpa. É o CTA de conversão por segmento.
-- **Secondary:** Fundo transparente, borda `2px` Raiz, texto Terra.
-- **Hover / Focus:** transição de `160ms cubic-bezier(0.2, 0.8, 0.3, 1)` em transform/shadow/cor; `:active` afunda (`translateY(1px) scale(0.99)`); foco visível com anel `2px` Raiz e offset. Tudo gated por `prefers-reduced-motion`.
+### Button
 
-### Cards / Containers
-- **Corner Style:** "Seção Transversal" (`48px 12px 6px 6px`) — canto superior esquerdo proeminente.
-- **Background:** Polpa (`root-50`) com borda `root-100`; opção de textura de casca (SVG noise) por baixo do conteúdo.
-- **Shadow Strategy:** flat por default, `elevation-1`/`2`/`3` conforme estado (ver Elevation).
-- **Internal Padding:** escala rizomática progressiva — `compact` `p-4→lg:p-6`, `comfortable` `p-6→lg:p-10`.
-- **Hover:** sobe levemente (`-translate-y-0.5`) e ganha `elevation-2`.
+- **Shape:** retângulo de 2px, altura mínima 48px, Figtree 500.
+- **Primary:** `leaf` + `bone`; hover `leaf-hover`.
+- **Secondary:** transparente, fio 1px `ink`, texto `ink`; hover inverte.
+- **Inverse:** `bone` + `ink`, para fundo escuro.
+- **Hover / Focus:** `translateY(-1px)` no hover e `translateY(1px)` no active,
+  ambos gated por reduced motion. Foco: anel 2px `leaf` com offset 2px; sobre
+  `ink`, `leaf-light`.
+
+### Card
+
+- **Shape:** raio 0, fio 1px `line`, padding 24px (`compact`), 32px
+  (`comfortable`) ou 40px (`loose`).
+- **Variantes:** `plain` (`paper`) e `surface` (`paper-2`).
+- **Acento:** fio superior de 3px — `leaf` (01), `clay` (02), `ink` (03).
+- **Hover:** sobe 2px; o fio escurece para `ink` a 35%.
+
+### Section
+
+- **Variantes:** `paper`, `surface` (`paper-2`) e `ink`.
+- **Ritmo:** `min-height: 100svh`, `scroll-margin-top` do header.
+- Sem clip-path, sem rizoma, sem variantes de vitalidade.
+
+### Typography
+
+API `type` + `level` + `tone` + `weight`. `type`: `display`, `heading`, `body`,
+`caption`. `tone`: `primary`, `secondary`, `on-dark`, `accent`, `leaf`. O
+elemento real (`h1`…`h6`/`p`) deriva de `type`, sem pular níveis.
 
 ### Navigation
-- **Desktop (≥1024px):** links em pílula, Figtree `0.875rem`/500, cor Terra Suave; hover ganha Raiz; item ativo recebe fundo Polpa Suave, texto Terra e peso 600. CTA de WhatsApp à direita.
-- **Mobile (<1024px):** burger de 48px com barras de 2px; painel slide-down suave (`200ms ease`), com os mesmos links em bloco e CTA full-width.
 
-### Section ("Solo / Camadas da Terra")
-- **Variantes semânticas:** `pulp`, `root`, `leaf`, `earth`, `vitality` — cada uma é um fundo de token.
-- **Orgânico:** no desktop, cada variante recebe uma onda própria (`rootEdge`, `leafEdge`, `waveDown`, `waveUp`).
-- **Conexão rizomática:** prop `connectTo` desenha um traço Bézier a 20% entre seções relacionadas.
+- **Desktop (≥1024px):** links em Figtree 0.875rem/500 `muted`; hover `ink`;
+  item ativo em `ink` com fio inferior `leaf`. CTA "Falar no WhatsApp" à direita.
+- **Mobile (<1024px):** burger de 48px; menu full-screen com links grandes em
+  Fraunces, CTA e e-mail. `aria-expanded`, `aria-controls`, Esc, foco no
+  primeiro link e retorno ao burger.
 
-### WhatsApp Float (signature)
-CTA flutuante contextual que aparece após um limiar de scroll. Fundo Folha, `56px`, canto "O Broto" no mobile e círculo no desktop (`50%`), sombra Deep, com `safe-area-inset` respeitado. É a assinatura de conversão do produto.
+### Root Diagram (signature)
 
-### Timeline ("Método") (signature)
-Trilha vertical com gradiente Polpa Suave → Vitalidade, indicadores numerados circulares em Raiz com sombra Deep e cards alternando esquerda/direita no desktop. É o padrão para conteúdo sequencial.
+O único gesto desenhado da página: tronco, três ramos e raízes em SVG inline,
+com três nós numerados. É decorativo (`aria-hidden`); a interface real são três
+links de âncora para os cards de segmento. No desktop, desenho de 240px à
+esquerda da lista; no phone, só a lista com fio vertical.
+
+### Statement (signature)
+
+Word-highlight acessível: o texto completo está no HTML. Sem JS, todas as
+palavras em tinta cheia. Com JS, as palavras ainda não alcançadas ficam em
+`muted` e ganham `ink` conforme a seção cruza a tela; a palavra `raiz` recebe
+`leaf`. Reduced motion: tudo em tinta.
+
+### Mobile Action Bar (signature)
+
+Barra fixa inferior no phone com o CTA de WhatsApp full-width. Aparece quando o
+CTA do hero sai da viewport e some quando o rodapé (`#contato`) aparece. Respeita
+`safe-area-inset-bottom`; o rodapé reserva o espaço para não cobrir o legal.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** expressar espaçamento, raios e gaps em múltiplos da base 6px (`0.375rem`); use as utilities do tema.
-- **Do** manter o canto assimétrico "O Broto" em todo botão e o "Seção Transversal" em todo card.
-- **Do** derivar sombras do tom Terra (`rgba(62, 46, 35, …)`) e usar a escala `elevation-1/2/3`.
-- **Do** usar `Typography` com `type` + `level` (`type="display"`, `type="heading"`, `type="body"`, `type="caption"`) e `tone` semântico.
-- **Do** gatear todo movimento por `prefers-reduced-motion` — o sistema já tem o padrão em cada componente.
-- **Do** reservar a Vitalidade (`root-300`) para conversão e validar contraste AA ao introduzir novas combinações.
+
+- **Do** expressar espaçamento e gaps em múltiplos da base 6px (`0.375rem`).
+- **Do** usar raio 0 em cards, 2px em botões e 6px no frame do HelpMed.
+- **Do** separar seções por superfície (`paper`, `paper-2`, `ink`) e espaço.
+- **Do** usar `Typography` com `type` + `level` e `tone` semântico.
+- **Do** manter todo CTA de WhatsApp como `<a href="https://wa.me/...">` real,
+  com `target="_blank"` e `rel="noopener"`; o tracking é `@click` sem
+  `preventDefault`.
+- **Do** gatear todo movimento por `prefers-reduced-motion`.
+- **Do** validar contraste ao introduzir qualquer par novo (AA como piso, AAA no
+  texto principal).
 
 ### Don't:
-- **Don't** introduzir azuis corporativos, cinzas frios, gradientes SaaS ou `#000`/`#fff` puros — a paleta é exclusivamente terrosa.
-- **Don't** arredondar botões simetricamente (`rounded-full` só é permitido no CTA flutuante em desktop e em pílulas de navegação).
-- **Don't** achatar a assimetria do card: `48px 12px 6px 6px` é a assinatura, não um default a ser "limpo".
-- **Don't** aplicar formas orgânicas ou conexões rizomáticas abaixo de 1024px — o mobile é retangular de propósito.
-- **Don't** passar `variant=` ao componente `Typography`: a API é `type` + `level`; um `variant` desconhecido não aplica classe alguma e cai no corpo base.
-- **Don't** usar tons `leaf-100`/`leaf-600`: só `leaf-300` e `leaf-500` existem no tema.
-- **Don't** criar sombras cinzentas ou pretas — quebra a The Terra Rule.
+
+- **Don't** introduzir sombra, gradiente, textura, blur ou clip-path.
+- **Don't** arredondar cards ou botões "para suavizar": a forma é reta.
+- **Don't** usar a paleta antiga (creme, marrom e mostarda).
+- **Don't** trocar as famílias de papel: Fraunces não vai para body, Figtree não
+  vai para display.
+- **Don't** usar pesos 600/700 — não são carregados e quebram a hierarquia.
+- **Don't** centralizar headings ou parágrafos acima de meia largura; o único
+  centro é o símbolo da marca.
+- **Don't** esconder CNPJ, razão social ou contato para "parecer maior".
+- **Don't** inventar métricas, depoimentos, clientes ou fotos de banco de imagem.

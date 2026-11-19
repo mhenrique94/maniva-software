@@ -1,41 +1,38 @@
-# Design System "Mandioca Rizomática"
+# Design System "Raiz Firme"
 
-Vocabulário visual canônico da landing Maniva Software (§4 da spec).
-Tokens JS são a **fonte única de verdade**: `design/tokens/theme.js` os converte
-no bloco `@theme` do Tailwind v4, injetado via o plugin
-`plugins/design-tokens.ts` em `assets/css/input.css`.
+Vocabulário visual canônico da landing Maniva Software. Tokens JS são a
+**fonte única de verdade**: `design/tokens/theme.js` os converte no bloco
+`@theme` do Tailwind v4, injetado via o plugin `plugins/design-tokens.ts` em
+`assets/css/input.css`.
 
 ## Módulos
 
 | Caminho | Conteúdo |
 |---------|----------|
-| `design/tokens/colors.js` | Paleta Mandioca (§4.1) + aliases de papel |
-| `design/tokens/spacing.js` | Escala rizomática base 6px (§4.3) |
-| `design/tokens/typography.js` | Famílias (Cormorant + Figtree) e escala §4.2 |
-| `design/tokens/effects.js` | Sombras, blurs, textura de casca, gradientes, rizoma |
+| `design/tokens/colors.js` | Paleta paper/ink/leaf/clay + aliases de papel |
+| `design/tokens/spacing.js` | Escala base 6px |
+| `design/tokens/typography.js` | Famílias (Fraunces + Figtree) e escala h1…h6/lead/body/small/label |
+| `design/tokens/effects.js` | Foco visível e fios de borda (sem sombras/blurs/texturas) |
 | `design/tokens/theme.js` | Gerador do `@theme` + `tokenDependencies` |
-| `design/shapes/organic.js` | clip-paths de seção (desktop, ≤5°) |
-| `design/shapes/buttons.js` | Raio "O Broto" e do Card |
-| `design/utils/generators.js` | Ruído/ondas/curvas rizomáticas (SVG) |
+| `design/shapes/buttons.js` | Raios: botão 2px, card 0, frame 6px |
 
-## Princípios de implementação (§4.6)
+## Princípios
 
-1. **Progressive enhancement**: mobile limpo e retangular → desktop expressivo
-   (`>1024px`); formas orgânicas nunca no mobile.
-2. **Acessibilidade primeiro**: contraste WCAG AA, navegação por teclado,
-   `prefers-reduced-motion`.
-3. **Performance consciente**: as formas complexas (texturas/shadows orgânicas)
-   entram só onde compensa; SVG otimizado; sem plugins de compressão.
-4. **Manutenibilidade**: tokens centralizados e semanticamente nomeados; nada de
-   hex solto em componentes.
+1. **Plano de verdade**: sem sombra, gradiente, textura, blur ou clip-path.
+   Profundidade é hierarquia tipográfica e mudança de superfície.
+2. **Contraste com folga**: texto principal ≥ 7:1; pares validados em
+   `design/tokens/colors.test.js` e `components/ui/contrast.test.js`.
+3. **Base 6px**: `--spacing: 0.375rem`; toda escala numérica é múltipla de 6px.
+4. **Orgânico na estrutura, não no ornamento**: o desenho da raiz e o grid
+   carregam a metáfora; nada de onda decorativa.
 
 ## Como usar
 
-- Utilities Tailwind geradas a partir dos tokens: `bg-root-500`, `text-leaf-500`,
-  `rounded-bud`, `rounded-card`, `shadow-earth`, `blur-organic`, `font-display`,
-  `text-display-2`, `p-4` (24px = base 6px), etc.
-- Materialidade fora do Tailwind (textura/gradientes) via custom props
-  `--texture-bark`, `--gradient-pulp` no `:root`.
+- Utilities Tailwind geradas a partir dos tokens: `bg-paper`, `bg-paper-2`,
+  `bg-ink`, `text-ink`, `text-bone`, `text-muted`, `bg-leaf`, `text-leaf`,
+  `border-line`, `rounded-card`, `rounded-button`, `font-display`, `text-h1`,
+  `p-4` (24px = base 6px), etc.
+- Foco e fios vêm de custom properties (`--focus-*`, `--border-*`) no `@theme`.
 - Para valores programáticos (SVG, estilos dinâmicos): `import { colors } from "../design/tokens/colors.js"`.
 
 ## Mudar um token
