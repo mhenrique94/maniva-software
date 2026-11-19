@@ -1,9 +1,9 @@
 /**
- * Barrel de componentes base do Design System "Mandioca Rizomática" (§4.4).
+ * Barrel de componentes base do Design System "Raiz Firme".
  *
- * `components/ui/` agrupa os átomos UI (Fase 3): buttons, cards, sections,
- * typography e íconos. Cada SFC consume seu seam puro (`*.js`) — a lógica de
- * mapping vive alí e está testada con `node --test`.
+ * `components/ui/` agrupa os átomos UI: button, card, section, typography e
+ * ícones. Cada SFC consume seu seam puro (`*.js`) — a lógica de mapping vive
+ * ali e está testada com `node --test`.
  */
 
 // Componentes UI
@@ -21,21 +21,17 @@ export {
 } from "./button.js";
 export {
   cardClasses,
-  elevations as cardElevations,
+  variants as cardVariants,
+  accents as cardAccents,
   densities as cardDensities,
 } from "./card.js";
-export { typographyClasses, typeMap, toneClasses } from "./typography.js";
 export {
-  sectionClasses,
-  sectionRhizome,
-  variantBg,
-  variantClip,
-} from "./section.js";
-export {
-  getIcon,
-  iconNames,
-  icons,
-  defaultIconName,
-  resolveWeight,
-} from "./icons.js";
+  typographyClasses,
+  elementFor,
+  familyFor,
+  weightFor,
+  toneClasses,
+} from "./typography.js";
+export { sectionClasses, variantClasses } from "./section.js";
+export { getIcon, iconNames, icons, defaultIconName } from "./icons.js";
 export { contrastRatio, passesAa, passesAaa } from "./contrast.js";

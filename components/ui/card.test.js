@@ -1,51 +1,45 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { elevations, densities, cardClasses } from "./card.js";
+import { cardClasses, densities, accents } from "./card.js";
 
-test("elevações usam sombras dos tokens de efeitos", () => {
-  assert.deepEqual(elevations.soft, ["shadow-elevation-1"]);
-  assert.deepEqual(elevations.raised, ["shadow-elevation-2"]);
-  assert.deepEqual(elevations.deep, ["shadow-elevation-3"]);
-  assert.deepEqual(elevations.none, []);
+test("variante plain: papel com fio de linha, sem sombra", () => {
+  const plain = cardClasses({ variant: "plain" });
+  assert.ok(plain.classes.includes("bg-paper"));
+  assert.ok(plain.classes.includes("border-line"));
+  assert.ok(!plain.classes.some((c) => c.includes("shadow")));
 });
 
-test("densidades por escala 6px com escalada por breakpoint (§4.3)", () => {
-  assert.deepEqual(densities.compact, ["p-4", "sm:p-5", "lg:p-6"]);
-  assert.deepEqual(densities.comfortable, ["p-6", "sm:p-8", "lg:p-10"]);
-  assert.ok(densities.loose[0] === "p-8");
-  // a densidade padrão é responsiva
-  const { classes } = cardClasses();
-  assert.ok(classes.includes("sm:p-8"));
-  assert.ok(classes.includes("lg:p-10"));
+test("variante surface: faixa paper-2", () => {
+  assert.ok(cardClasses({ variant: "surface" }).classes.includes("bg-paper-2"));
 });
 
-test("classes base: forma 'Seção Transversal', fundo Polpa, borda sutil", () => {
-  const { classes } = cardClasses();
-  assert.ok(classes.includes("rounded-card"));
-  assert.ok(classes.includes("bg-root-50"));
-  assert.ok(classes.includes("border-root-100"));
-  assert.ok(classes.includes("h-full"));
+test("acento superior de 3px na cor do segmento", () => {
+  const accent = cardClasses({ accent: "clay" });
+  assert.ok(accent.classes.includes("border-t-clay"));
+  assert.ok(accent.classes.includes("border-t-[3px]"));
 });
 
-test("elevação padrão soft", () => {
-  assert.ok(cardClasses().classes.includes("shadow-elevation-1"));
+test("acentos disponíveis: leaf, clay e ink", () => {
+  assert.deepEqual(Object.keys(accents), ["leaf", "clay", "ink"]);
+  assert.equal(cardClasses({ accent: null }).classes.includes("border-t-[3px]"), false);
 });
 
-test("flat descarta elevação", () => {
-  const { classes } = cardClasses({ flat: true });
-  assert.ok(!classes.some((c) => c.startsWith("shadow-")));
+test("densidades pela escala 6px", () => {
+  assert.deepEqual(densities.compact, ["p-6"]);
+  assert.deepEqual(densities.comfortable, ["p-8"]);
+  assert.deepEqual(densities.loose, ["p-10"]);
+  assert.ok(cardClasses().classes.includes("p-8"));
+  assert.ok(cardClasses({ density: "compact" }).classes.includes("p-6"));
 });
 
-test("padding custom pode substituir densidade", () => {
-  const { classes } = cardClasses({ padding: ["p-12", "px-4"] });
+test("padding custom substitui a densidade", () => {
+  const { classes } = cardClasses({ padding: ["p-12"] });
   assert.ok(classes.includes("p-12"));
-  assert.ok(classes.includes("px-4"));
-  assert.ok(!classes.includes("sm:p-8"));
+  assert.ok(!classes.includes("p-8"));
 });
 
-test("microinterações: transição de sombra e elevação suave no hover", () => {
+test("hover sobe 2px e escurece o fio", () => {
   const { classes } = cardClasses();
-  assert.ok(classes.includes("transition-shadow"));
-  assert.ok(classes.includes("hover:shadow-elevation-2"));
-  assert.ok(classes.includes("hover:-translate-y-0.5"));
+  assert.ok(classes.includes("hover:-translate-y-[2px]"));
+  assert.ok(classes.includes("hover:border-ink/35"));
 });

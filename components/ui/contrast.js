@@ -9,8 +9,9 @@
 
 /** Normaliza `#abc` → [170, 187, 204] a partir de um hex. */
 export function hexToRgb(hex) {
+  if (typeof hex !== "string") throw new Error(`hex inválido: "${hex}"`);
   const value = hex.replace(/^#/, "").trim();
-  if (value.length === 3) {
+  if (value.length === 3 && /^[0-9a-f]{3}$/i.test(value)) {
     const [r, g, b] = value;
     return [
       parseInt(`${r}${r}`, 16),
@@ -18,7 +19,7 @@ export function hexToRgb(hex) {
       parseInt(`${b}${b}`, 16),
     ];
   }
-  if (value.length === 6) {
+  if (value.length === 6 && /^[0-9a-f]{6}$/i.test(value)) {
     return [
       parseInt(value.slice(0, 2), 16),
       parseInt(value.slice(2, 4), 16),

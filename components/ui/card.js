@@ -1,58 +1,59 @@
 /**
- * Lógica pura da Card "Seção Transversal" (§4.4). Elevação, densidade e
- * padding custom da escala 6px — consumido por `Card.vue`. A densidade
- * escala por breakpoint (mobile → desktop), em coerência com o grid
- * base 6px do design system.
+ * Lógica pura da Card "Raiz Firme". Superfícies planas com fio de 1px;
+ * acento opcional de 3px no topo. Sem elevação, sem textura.
  */
 
-/** Elevações derivadas dos tokens de sombra (`effects.js`). */
-export const elevations = {
-  none: [],
-  soft: ["shadow-elevation-1"],
-  raised: ["shadow-elevation-2"],
-  deep: ["shadow-elevation-3"],
+/** Variantes de superfície. */
+export const variants = {
+  plain: ["bg-paper", "border-line"],
+  surface: ["bg-paper-2", "border-line"],
 };
 
-/** Densidades: padding pela escala rizomática, progressiva por breakpoint. */
+/** Acento do fio superior por segmento. */
+export const accents = {
+  leaf: ["border-t-[3px]", "border-t-leaf"],
+  clay: ["border-t-[3px]", "border-t-clay"],
+  ink: ["border-t-[3px]", "border-t-ink"],
+};
+
+/** Densidades: padding pela escala 6px. */
 export const densities = {
-  compact: ["p-4", "sm:p-5", "lg:p-6"],
-  comfortable: ["p-6", "sm:p-8", "lg:p-10"],
-  loose: ["p-8", "lg:p-10"],
+  compact: ["p-6"],
+  comfortable: ["p-8"],
+  loose: ["p-10"],
 };
 
 const baseClasses = [
-  "rounded-card",
-  "bg-root-50",
-  "border",
-  "border-root-100",
   "relative",
-  "overflow-clip",
   "h-full",
+  "rounded-card",
+  "border",
+  "transition-[transform,border-color]",
+  "duration-150",
 ];
 
-/** Microinterações terrosas: sombra + leve elevação no hover. */
-const interactionClasses = [
-  "transition-shadow",
-  "hover:shadow-elevation-2",
-  "hover:-translate-y-0.5",
-];
+const interactionClasses = ["hover:-translate-y-[2px]", "hover:border-ink/35"];
 
 /**
  * Classes da Card.
- * @param {{elevation?: keyof typeof elevations; density?: keyof typeof densities;
- *          padding?: string[]|null; flat?: boolean}} [options]
+ * @param {{variant?: keyof typeof variants; accent?: keyof typeof accents|null;
+ *          density?: keyof typeof densities; padding?: string[]|null}} [options]
  * @returns {{classes: string[]}}
  */
 export function cardClasses({
-  elevation = "soft",
+  variant = "plain",
+  accent = null,
   density = "comfortable",
   padding = null,
-  flat = false,
 } = {}) {
-  const classes = [...baseClasses, ...interactionClasses];
-  if (!flat) classes.push(...(elevations[elevation] ?? elevations.soft));
+  const classes = [
+    ...baseClasses,
+    ...interactionClasses,
+    ...(variants[variant] ?? variants.plain),
+  ];
+  if (accent) classes.push(...(accents[accent] ?? []));
   classes.push(...(padding ?? densities[density] ?? densities.comfortable));
   return { classes };
 }
 
-export default { elevations, densities, cardClasses };
+export default { variants, accents, densities, cardClasses };

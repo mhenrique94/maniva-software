@@ -1,106 +1,64 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  typeMap,
-  elementFor,
-  headingScale,
   bodyLevels,
-  weightClasses,
-  fontWeightDefault,
+  elementFor,
+  familyFor,
+  headingScale,
   toneClasses,
   typographyClasses,
+  weightFor,
 } from "./typography.js";
 
-test("type → familia (§4.2)", () => {
-  assert.equal(typeMap.display.family, "font-display");
-  assert.equal(typeMap.heading.family, "font-display");
-  assert.equal(typeMap.body.family, "font-ui");
-  assert.equal(typeMap.caption.family, "font-ui");
-});
-
-test("jerarquía real: display h1, heading hN según level, body/caption p", () => {
+test("elemento HTML por type/level", () => {
   assert.equal(elementFor("display", 1), "h1");
-  assert.equal(elementFor("heading", 3), "h3");
+  assert.equal(elementFor("heading", 2), "h2");
   assert.equal(elementFor("heading", 6), "h6");
-  assert.equal(elementFor("heading", 99), "h2");
   assert.equal(elementFor("body", "lg"), "p");
   assert.equal(elementFor("caption"), "p");
-  // typographyClasses exponha o mismo elemento
-  assert.equal(typographyClasses({ type: "heading", level: 4 }).element, "h4");
-  assert.equal(typographyClasses({ type: "display" }).element, "h1");
 });
 
-test("escala base 6px: headings 1–6 y body sm/base/lg", () => {
-  assert.equal(headingScale[1], "display-1");
-  assert.equal(headingScale[3], "4xl");
-  assert.equal(headingScale[6], "xl");
-  assert.equal(bodyLevels.base, "base");
-
-  const h1 = typographyClasses({ type: "heading", level: 1 });
-  assert.ok(h1.classes.includes("text-display-1"));
-  const h4 = typographyClasses({ type: "heading", level: 4 });
-  assert.ok(h4.classes.includes("text-3xl"));
-  const body = typographyClasses({ type: "body", level: "lg" });
-  assert.ok(body.classes.includes("text-lg"));
-  assert.equal(
-    typographyClasses({ type: "caption" }).classes.includes("text-xs"),
-    true,
-  );
+test("escala: h1…h6, lead e label", () => {
+  assert.deepEqual(headingScale, { 1: "h1", 2: "h2", 3: "h3", 4: "h4", 5: "h5", 6: "h6" });
+  assert.deepEqual(bodyLevels, { sm: "small", base: "body", lg: "lead" });
+  assert.ok(typographyClasses({ type: "display" }).classes.includes("text-h1"));
+  assert.ok(typographyClasses({ type: "heading", level: 2 }).classes.includes("text-h2"));
+  assert.ok(typographyClasses({ type: "body", level: "lg" }).classes.includes("text-lead"));
+  assert.ok(typographyClasses({ type: "caption" }).classes.includes("text-label"));
 });
 
-test("pesos por familia", () => {
-  assert.equal(weightClasses.display.semibold, "font-semibold");
-  assert.equal(weightClasses.ui.bold, "font-bold");
-  assert.equal(weightClasses.ui.regular, "");
-
-  assert.ok(
-    typographyClasses({ type: "display" }).classes.includes("font-medium"),
-  );
-  assert.ok(
-    typographyClasses({ type: "display", weight: "semibold" }).classes.includes(
-      "font-semibold",
-    ),
-  );
-  assert.ok(
-    typographyClasses({ type: "body", weight: "bold" }).classes.includes(
-      "font-bold",
-    ),
-  );
-  assert.ok(
-    !typographyClasses({ type: "body", weight: "regular" }).classes.includes(
-      "font-bold",
-    ),
-  );
-  assert.ok(
-    typographyClasses({ type: "display", weight: "bogus" }).classes.includes(
-      "font-medium",
-    ),
-  );
+test("duas vozes: Fraunces em display/h1-h2, Figtree no resto", () => {
+  assert.equal(familyFor("display"), "font-display");
+  assert.equal(familyFor("heading", 2), "font-display");
+  assert.equal(familyFor("heading", 3), "font-ui");
+  assert.equal(familyFor("body"), "font-ui");
+  assert.ok(typographyClasses({ type: "heading", level: 2 }).classes.includes("font-display"));
+  assert.ok(typographyClasses({ type: "heading", level: 3 }).classes.includes("font-ui"));
 });
 
-test("peso por defecto por familia", () => {
-  assert.equal(fontWeightDefault("display"), "font-medium");
-  assert.equal(fontWeightDefault("heading"), "font-medium");
-  assert.equal(fontWeightDefault("body"), "");
+test("pesos: Fraunces 400, h3+ e captions em Figtree 500", () => {
+  assert.equal(weightFor("display"), "font-normal");
+  assert.equal(weightFor("heading", 2), "font-normal");
+  assert.equal(weightFor("heading", 3), "font-medium");
+  assert.equal(weightFor("body", "base", "medium"), "font-medium");
+  assert.ok(typographyClasses({ type: "heading", level: 3 }).classes.includes("font-medium"));
 });
 
-test("tono semántico → clase de color", () => {
-  assert.equal(toneClasses.primary, "text-root-800");
-  assert.equal(toneClasses.secondary, "text-text-secondary");
-  assert.equal(toneClasses.leaf, "text-leaf-500");
-
-  assert.ok(
-    typographyClasses({ tone: "leaf" }).classes.includes("text-leaf-500"),
-  );
-  assert.ok(
-    typographyClasses({ tone: "bogus" }).classes.includes("text-root-800"),
-  );
+test("tons semânticos", () => {
+  assert.equal(toneClasses.primary, "text-ink");
+  assert.equal(toneClasses.secondary, "text-muted");
+  assert.equal(toneClasses["on-dark"], "text-bone");
+  assert.equal(toneClasses.accent, "text-clay");
+  assert.equal(toneClasses.leaf, "text-leaf");
+  assert.ok(typographyClasses({ tone: "on-dark" }).classes.includes("text-bone"));
+  assert.ok(typographyClasses({ tone: "bogus" }).classes.includes("text-ink"));
 });
 
-test("fallbacks de type/level desconocidos", () => {
-  const t = typographyClasses({ type: "bogus" });
-  assert.equal(t.element, "p");
-  const lvl = typographyClasses({ type: "heading", level: "abc" });
-  assert.equal(lvl.element, "h2");
-  assert.ok(lvl.classes.includes("text-display-1"));
+test("peso medium explícito", () => {
+  assert.ok(typographyClasses({ weight: "medium" }).classes.includes("font-medium"));
+});
+
+test("fallbacks de type/level desconhecidos", () => {
+  assert.equal(typographyClasses({ type: "bogus" }).element, "p");
+  assert.equal(typographyClasses({ type: "heading", level: "abc" }).element, "h2");
 });
