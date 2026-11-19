@@ -1,18 +1,18 @@
 /**
- * Construtor do tema CSS do Tailwind v4.
+ * Construtor do tema CSS do Tailwind v4 — Design System "Raiz Firme".
  *
  * Consome os módulos de tokens (cores, espaçamento, tipografia, efeitos e
- * formas) e devolve o bloco `@theme` + custom props de materialidade.
- * O plugin Vite `plugins/design-tokens.ts` injeta este CSS em
- * `assets/css/input.css` no marcador de tokens.
+ * formas) e devolve o bloco `@theme` plano. O plugin Vite
+ * `plugins/design-tokens.ts` injeta este CSS em `assets/css/input.css` no
+ * marcador de tokens.
  */
 
 import { fileURLToPath } from "node:url";
 import { colors } from "./colors.js";
 import { spacing, spacingUnitRem } from "./spacing.js";
 import { fontFamilies, typeScale } from "./typography.js";
-import { shadows, blurs, textures, gradients } from "./effects.js";
-import { buttonCorners, cardRadius } from "../shapes/buttons.js";
+import { borders, focus } from "./effects.js";
+import { buttonCorners, cardRadius, frameRadius } from "../shapes/buttons.js";
 
 /**
  * Módulos que alimentam o tema — fonte única para o plugin Vite vigiar.
@@ -26,20 +26,9 @@ export const tokenDependencies = [
   "../shapes/buttons.js",
 ].map((rel) => fileURLToPath(new URL(rel, import.meta.url)));
 
-/** Linhas `--color-*` do tema a partir da paleta semântica. */
+/** Linhas `--color-*` do tema a partir da paleta plana. */
 function colorLines() {
-  const lines = [];
-  for (const [group, shades] of Object.entries(colors)) {
-    if (group === "text") {
-      lines.push(`  --color-text-primary: ${colors.text.primary.value};`);
-      lines.push(`  --color-text-secondary: ${colors.text.secondary};`);
-      continue;
-    }
-    for (const [tone, value] of Object.entries(shades)) {
-      lines.push(`  --color-${group}-${tone}: ${value};`);
-    }
-  }
-  return lines;
+  return Object.entries(colors).map(([name, value]) => `  --color-${name}: ${value};`);
 }
 
 /** Linhas `--text-*` da escala tipográfica (+ line-height/letter-spacing). */
@@ -56,13 +45,13 @@ function typeLines() {
 }
 
 /**
- * Monta o CSS do tema design system "Mandioca Rizomática".
+ * Monta o CSS do tema design system "Raiz Firme".
  * @returns {string}
  */
 export function buildThemeCss() {
   const theme = ["@theme {"];
 
-  // base 6px do grid rizomático
+  // base 6px
   theme.push(`  --spacing: ${spacingUnitRem}rem;`);
   for (const [n, value] of Object.entries(spacing)) {
     theme.push(`  --spacing-${n}: ${value};`);
@@ -73,28 +62,21 @@ export function buildThemeCss() {
   theme.push(`  --font-ui: ${fontFamilies.ui};`);
   theme.push(...typeLines());
 
-  for (const [name, value] of Object.entries(shadows)) {
-    theme.push(`  --shadow-${name}: ${value};`);
-  }
-  for (const [name, value] of Object.entries(blurs)) {
-    theme.push(`  --blur-${name}: ${value};`);
-  }
-
-  theme.push(`  --radius-bud: ${buttonCorners};`);
+  theme.push(`  --radius-button: ${buttonCorners};`);
   theme.push(`  --radius-card: ${cardRadius};`);
+  theme.push(`  --radius-frame: ${frameRadius};`);
+
+  theme.push(`  --focus-width: ${focus.width};`);
+  theme.push(`  --focus-offset: ${focus.offset};`);
+  theme.push(`  --focus-color: ${focus.color};`);
+  theme.push(`  --focus-inverse-color: ${focus.inverseColor};`);
+
+  theme.push(`  --border-hairline: ${borders.hairline};`);
+  theme.push(`  --border-accent: ${borders.accent};`);
+
   theme.push("}");
 
-  // Materialidade fora do namespace @theme (sem utilities, uso via `<style>`/inline)
-  const props = [":root {"];
-  for (const [name, value] of Object.entries(textures)) {
-    props.push(`  --texture-${name}: ${value};`);
-  }
-  for (const [name, value] of Object.entries(gradients)) {
-    props.push(`  --gradient-${name}: ${value};`);
-  }
-  props.push("}");
-
-  return `${[...theme, ...props].join("\n")}\n`;
+  return `${theme.join("\n")}\n`;
 }
 
 export default { buildThemeCss };
