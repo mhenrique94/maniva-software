@@ -37,7 +37,14 @@
       </div>
 
       <div class="mt-12 text-center">
-        <Button variant="primary" @click="openServicesSegment1CTA">
+        <Button
+          as="a"
+          :href="ctaLink('segment1')"
+          variant="primary"
+          target="_blank"
+          rel="noopener"
+          @click="trackCta('segment_1', 'small_business')"
+        >
           Quero meu site profissional sem dor técnica
         </Button>
       </div>
@@ -82,7 +89,14 @@
       </div>
 
       <div class="mt-12 text-center">
-        <Button variant="primary" @click="openServicesSegment2CTA">
+        <Button
+          as="a"
+          :href="ctaLink('segment2')"
+          variant="primary"
+          target="_blank"
+          rel="noopener"
+          @click="trackCta('segment_2', 'growing_business')"
+        >
           Diagnóstico técnico do seu sistema atual
         </Button>
       </div>
@@ -92,10 +106,7 @@
 
 <script setup>
 import { Button, Card, Section, Typography, Icon } from "@ui";
-import {
-  openServicesSegment1CTA,
-  openServicesSegment2CTA,
-} from "@util/ctaActions";
+import { ctaLink, trackCta } from "@util/ctaActions";
 
 const segment1Benefits = [
   {

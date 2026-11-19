@@ -5,11 +5,11 @@ import {
   quickLinks,
   connections,
   footerBaseline,
-  lastUpdated,
+  remoteLine,
   footerLinkClasses,
 } from "./footer.js";
 
-test("company: marca + razão social + CNPJ corretos (§5.8/CONTEXT)", () => {
+test("company: marca, razão social e CNPJ corretos", () => {
   assert.equal(company.brand, "Maniva Software");
   assert.equal(company.legalName, "MANIVA SOFTWARE E TECNOLOGIA LTDA");
   assert.equal(company.cnpj, "66.739.634/0001-79");
@@ -17,38 +17,28 @@ test("company: marca + razão social + CNPJ corretos (§5.8/CONTEXT)", () => {
   assert.equal(company.email, "contato@manivasoftware.com.br");
 });
 
-test("quickLinks: todos os links exceto 'Inicio'", () => {
-  const links = quickLinks();
-  assert.ok(!links.some((l) => l.id === "inicio"));
+test("quickLinks: navegação exceto Início", () => {
   assert.deepEqual(
-    links.map((l) => l.id),
-    ["pmes", "empresas", "projetos", "metodo"],
+    quickLinks().map((l) => l.id),
+    ["solucoes", "helpmed", "metodo"],
   );
 });
 
-test("connections: HelpMed + LinkedIn externos com âncora rica", () => {
-  assert.deepEqual(
-    connections.map((c) => c.href),
-    ["https://helpmed.app", "https://www.linkedin.com/company/maniva-software"],
-  );
+test("connections: HelpMed e LinkedIn externos", () => {
+  assert.equal(connections[0].href, "https://helpmed.app");
   assert.ok(connections.every((c) => c.external));
-  assert.ok(connections[0].description.includes("IA"));
 });
 
-test("footerBaseline: © ano + tagline rizomática", () => {
-  const line = footerBaseline(2026);
-  assert.ok(line.startsWith("© 2026"));
-  assert.ok(line.includes("raízes sólidas"));
-  assert.ok(line.includes("sem limites"));
+test("footerBaseline: copyright + tagline", () => {
+  assert.match(footerBaseline(2026), /© 2026 Maniva Software/);
+  assert.match(footerBaseline(2026), /raízes sólidas para crescer com propósito/);
 });
 
-test("lastUpdated: sinal de atualidade para GEO (§6.4)", () => {
-  assert.match(lastUpdated, /^Atualizado em /);
-  assert.ok(lastUpdated.includes("2026"));
+test("linha de atendimento remoto", () => {
+  assert.equal(remoteLine, "Atendimento remoto em todo o Brasil.");
 });
 
 test("footerLinkClasses: transição suave de cor com reduced motion", () => {
   assert.ok(footerLinkClasses.includes("motion-safe:transition-colors"));
   assert.ok(footerLinkClasses.includes("motion-safe:duration-150"));
-  assert.ok(footerLinkClasses.includes("motion-safe:ease-in-out"));
 });

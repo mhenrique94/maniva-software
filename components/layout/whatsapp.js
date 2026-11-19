@@ -1,26 +1,26 @@
 /**
- * Lógica pura del WhatsApp flotante y CTAs contextuales (§5.10).
+ * Lógica pura do WhatsApp e dos CTAs contextuais.
  *
- * Número canónico: `+55 15 93618-2755` (E.164: `5515936182755`).
- * Mensajes contextuales por segmento; el flotante aparece tras un umbral
- * de scroll. Consumido por `WhatsAppFloat.vue` y el `Header.vue`.
+ * Número canônico: `+55 15 93618-2755` (E.164: `5515936182755`).
+ * Todo CTA é um link real `wa.me`; o tracking é um `@click` que não bloqueia
+ * a navegação.
  */
 
-/** Número canónico en formato E.164 (solo dígitos, para wa.me). */
+/** Número canônico em formato E.164 (só dígitos, para wa.me). */
 export const whatsappE164 = "5515936182755";
 
-/** Número canónico en formato de visualización pt-BR. */
+/** Número canônico em formato de visualização pt-BR. */
 export const whatsappDisplay = "+55 15 93618-2755";
 
-/** Umbral de scroll (px) para mostrar el flotante — §4.6. */
-export const floatAfter = 400;
+/** Umbral de scroll (px) da barra de ação mobile. */
+export const floatAfter = 640;
 
-/** Mensaje contextual por defecto (§5.3/§4.6, pt-BR). */
+/** Mensagem padrão (header, hero e fechamento). */
 export const defaultMessage =
-  "Olá! Vi o site da Maniva Software e gostaria de conversar sobre um projeto digital.";
+  "Olá! Vi o site da Maniva e quero conversar sobre o meu projeto.";
 
 /**
- * Construye el enlace wa.me con mensaje pre-escrito (URL-encode).
+ * Constrói o link wa.me com mensagem pré-escrita (URL-encode).
  * @param {string} [message]
  * @returns {string}
  */
@@ -30,7 +30,7 @@ export function waLink(message = defaultMessage) {
 }
 
 /**
- * Indica si el flotante debe mostrarse según el scroll del documento.
+ * Indica se a barra de ação deve aparecer pelo scroll do documento.
  * @param {number} scrollY
  * @param {{after?: number}} [options]
  * @returns {boolean}
@@ -43,6 +43,7 @@ export default {
   whatsappE164,
   whatsappDisplay,
   floatAfter,
+  defaultMessage,
   waLink,
   shouldShowFloat,
 };

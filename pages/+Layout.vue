@@ -1,15 +1,13 @@
 <!--
-  +Layout.vue — App principal (Fase 4). Shell global de la landing:
+  +Layout.vue — shell global da landing "Raiz Firme".
 
-    - Header sticky con navegación segmentada + CTA contextual.
-    - Main con el contenido de la página (slot de vike).
-    - Footer institucional.
-    - WhatsApp flotante contextual (§4.6).
+    - Header fixo com marca, navegação e CTA de WhatsApp.
+    - Main com o conteúdo da página (slot do vike).
+    - Footer institucional (fechamento + rodapé).
+    - Barra de ação mobile (CTA fixo no phone).
 
-  Aquí vive también el comportamiento global de scroll suave: `html`
-  con `scroll-behavior: smooth` (desactivado bajo `prefers-reduced-motion`).
-  El `scroll-margin-top` de las seções está en `Section.vue` (scoped),
-  usando la variable dinámica `--maniva-header-height` (§4.5).
+  O scroll suave e a tipografia base vivem aqui. O `scroll-margin-top` das
+  seções está em `Section.vue` (scoped), usando `--maniva-header-height`.
 -->
 
 <template>
@@ -19,20 +17,18 @@
     <slot />
   </main>
   <Footer />
-  <WhatsAppFloat />
+  <MobileActionBar />
 
   <!-- Global Structured Data -->
   <component :is="'script'" type="application/ld+json" v-text="JSON.stringify(organizationSchema)" />
 </template>
 
 <script setup lang="ts">
-import { Header, Footer, WhatsAppFloat } from "@layout";
+import { Header, Footer, MobileActionBar } from "@layout";
 import { getOrganizationSchema } from "@util/structuredData";
-import "@fontsource/cormorant-garamond/latin-500.css";
-import "@fontsource/cormorant-garamond/latin-600.css";
+import "@fontsource-variable/fraunces/standard.css";
 import "@fontsource/figtree/latin-400.css";
-import "@fontsource/figtree/latin-600.css";
-import "@fontsource/figtree/latin-700.css";
+import "@fontsource/figtree/latin-500.css";
 
 const organizationSchema = getOrganizationSchema();
 </script>
@@ -46,19 +42,19 @@ const organizationSchema = getOrganizationSchema();
   z-index: 100;
   transform: translateY(-200%);
   padding: 0.75rem 1.125rem;
-  border-radius: var(--radius-bud);
-  background-color: var(--color-root-800);
-  color: var(--color-root-50);
+  border-radius: var(--radius-button);
+  background-color: var(--color-ink);
+  color: var(--color-bone);
   font-family: var(--font-ui);
   font-size: 0.875rem;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
-  transition: transform 160ms ease;
+  transition: transform 150ms ease;
 }
 .maniva-skip:focus-visible {
   transform: translateY(0);
-  outline: 2px solid var(--color-root-300);
-  outline-offset: 2px;
+  outline: var(--focus-width) solid var(--focus-inverse-color);
+  outline-offset: var(--focus-offset);
 }
 main:focus {
   outline: none;
@@ -69,11 +65,30 @@ main:focus {
   }
 }
 
+/* Label de prancha: 01 — SOLUÇÕES (único uso de caixa alta). */
+.t-label {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--text-label);
+  line-height: var(--text-label--line-height);
+  letter-spacing: 0.08em;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-paper);
+}
 body {
   margin: 0;
   font-family: var(--font-ui);
-  color: var(--color-text-primary);
-  background: var(--color-root-50);
+  font-size: var(--text-body);
+  line-height: var(--text-body--line-height);
+  color: var(--color-ink);
+  background: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
 }
 * {
   box-sizing: border-box;
@@ -81,8 +96,17 @@ body {
 a {
   text-decoration: none;
 }
-html {
-  scroll-behavior: smooth;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+figure {
+  margin: 0;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -91,4 +115,3 @@ html {
   }
 }
 </style>
-

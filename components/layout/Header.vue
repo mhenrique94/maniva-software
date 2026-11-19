@@ -1,34 +1,25 @@
 <!--
-  Header.vue — "Navegação Orgânica" (§5.2).
+  Header.vue — navegação "Raiz Firme".
 
-  Sticky com:
-    - Marca Maniva Software (símbolo "M" PWA + wordmark em HTML).
-    - Navegação segmentada por dor (pt-BR, CONTEXT.md) com scroll spy
-      via IntersectionObserver (composable `useScrollSpy`).
-    - CTA superior contextual (WhatsApp pre-escrito) como Button action.
-    - Menu mobile suave (burger + slide), a11y (`aria-expanded`,
-      `aria-controls`, Esc para fechar).
-
-  O scroll spy vive no composable (activation line + keep-last +
-  bottom sentinel). Clique em âncora força a seção ativa (sem piscar),
-  rola suave (ou instantâneo com reduced-motion) e move o foco para a
-  seção após o `scrollend` (ou timeout 3s).
+  Header fixo de 72px sobre papel, fio inferior de 1px, marca com símbolo
+  "Corte" + wordmark. Quatro links com scroll spy via IntersectionObserver
+  (composable `useScrollSpy`), CTA de WhatsApp no desktop e menu full-screen
+  no phone (aria-expanded/aria-controls, Esc, foco no primeiro link e retorno
+  ao burger). Sem blur e sem sombra.
 -->
 <template>
-  <header class="maniva-header" :class="{ 'maniva-header--scrolled': scrolled }">
-    <Container size="lg" class="maniva-header__inner">
-      <a href="#inicio" class="maniva-brand" aria-label="Maniva Software — ir ao início" @click="onAnchor">
-        <img
-          src="/images/icons/icon-192x192.png"
-          alt=""
-          width="34"
-          height="34"
-          loading="eager"
-          decoding="async"
-          class="maniva-brand__symbol"
-        />
+  <header class="maniva-header">
+    <div class="maniva-header__inner">
+      <a
+        href="#inicio"
+        class="maniva-brand"
+        aria-label="Maniva Software — ir ao início"
+        @click="onAnchor"
+      >
+        <LogoMark :size="28" />
         <span class="maniva-brand__wordmark">
-          <span class="maniva-brand__name">Maniva</span> Software
+          <span class="maniva-brand__name">Maniva</span>
+          <span class="maniva-brand__software">Software</span>
         </span>
       </a>
 
@@ -51,16 +42,19 @@
       <Button
         as="a"
         :href="ctaHref"
-        variant="action"
+        variant="primary"
+        size="sm"
         leading-icon="whatsapp"
         target="_blank"
         rel="noopener"
         class="maniva-header__cta"
+        @click="trackCta('header_cta', 'all')"
       >
         {{ headerCta.label }}
       </Button>
 
       <button
+        ref="burgerRef"
         type="button"
         class="maniva-burger"
         :aria-expanded="menuOpen ? 'true' : 'false'"
@@ -70,59 +64,61 @@
       >
         <span class="maniva-burger__bar" aria-hidden="true" />
         <span class="maniva-burger__bar" aria-hidden="true" />
-        <span class="maniva-burger__bar" aria-hidden="true" />
       </button>
-    </Container>
+    </div>
 
     <Transition name="maniva-menu">
-      <div v-if="menuOpen" id="maniva-menu-panel" class="maniva-menu-panel">
+      <div v-if="menuOpen" id="maniva-menu-panel" ref="menuRef" class="maniva-menu-panel">
         <nav class="maniva-menu-panel__nav" aria-label="Menu de navegação">
           <a
             v-for="item in resolvedNav"
             :key="item.id"
             :href="item.href"
             class="maniva-menu-panel__link"
-            :class="{ 'maniva-menu-panel__link--active': item.active }"
             :aria-current="ariaCurrentId === item.id ? 'location' : null"
             @click="onAnchor"
           >
             {{ item.label }}
           </a>
         </nav>
-        <Button
-          as="a"
-          :href="ctaHref"
-          variant="action"
-          full
-          leading-icon="whatsapp"
-          target="_blank"
-          rel="noopener"
-          @click="closeMenu()"
-          class="maniva-menu-panel__cta"
-        >
-          Conversar por WhatsApp
-        </Button>
+        <div class="maniva-menu-panel__foot">
+          <Button
+            as="a"
+            :href="ctaHref"
+            variant="primary"
+            full
+            leading-icon="whatsapp"
+            target="_blank"
+            rel="noopener"
+            @click="trackCta('header_cta', 'all')"
+          >
+            {{ headerCta.label }}
+          </Button>
+          <a class="maniva-menu-panel__email" :href="`mailto:${company.email}`">
+            {{ company.email }}
+          </a>
+        </div>
       </div>
     </Transition>
   </header>
 </template>
 
 <script lang="ts" setup>
-import { computed, onMounted, onUnmounted, ref } from "vue";
-import { useWindowScroll } from "@vueuse/core";
+import { computed, nextTick, onMounted, onUnmounted, ref } from "vue";
 import { Button } from "@ui";
-import Container from "@layout/Container.vue";
-import { navLinks, headerCta, resolveNav, spyTargets } from "@layout/nav.js";
+import LogoMark from "@layout/LogoMark.vue";
+import { company } from "@layout/footer.js";
+import { headerCta, navLinks, resolveNav, spyTargets } from "@layout/nav.js";
 import { waLink } from "@layout/whatsapp.js";
+import { ctaLink, trackCta } from "@util/ctaActions";
 import { anchorIdOf } from "@util/scroll.js";
 import { DEFAULT_HEADER_HEIGHT } from "../../composables/scrollSpyLogic.js";
 import { useScrollSpy } from "../../composables/useScrollSpy.ts";
 
-/* Posição de rolagem: só isso alimenta `scrolled` (sem listeners manuais). */
-const { y: scrollY } = useWindowScroll();
-const scrolled = computed(() => scrollY.value > 8);
-
+/* Posição de rolagem: só alimenta o estado visual do header. */
 const menuOpen = ref(false);
+const burgerRef = ref<HTMLButtonElement | null>(null);
+const menuRef = ref<HTMLElement | null>(null);
 /** `aria-current="location"` só após clique (sem ruído em scroll passivo). */
 const ariaCurrentId = ref<string | null>(null);
 
@@ -179,8 +175,8 @@ let clickCount = 0;
 
 /**
  * Correção pós-scrollend: se o alvo se moveu durante a animação
- * (imagens async, fontes, lazy sections), re-snapa suavemente
- * usando a mesma fonte de verdade do hash nativo (scroll-margin-top).
+ * (imagens async, fontes, lazy sections), re-snapa suavemente usando a mesma
+ * fonte de verdade do hash nativo (scroll-margin-top).
  */
 function correctScrollPosition(target: HTMLElement, behavior: ScrollBehavior) {
   const headerBottom = headerHeight();
@@ -191,43 +187,48 @@ function correctScrollPosition(target: HTMLElement, behavior: ScrollBehavior) {
   }
 }
 
-/** Clique em âncora: força a seção ativa (keep-last do force-mode evita piscar). */
+/** Clique em âncora: força a seção ativa e move o foco para ela. */
 async function onAnchor(event: Event) {
   const href = (event.currentTarget as HTMLAnchorElement).getAttribute("href");
   const id = anchorIdOf(href);
-  if (id) {
-    event.preventDefault();
-    if (menuOpen.value) closeMenu();
-    forceActive(id);
-    ariaCurrentId.value = id;
-    if (typeof history.replaceState === "function") {
-      history.replaceState(null, "", href);
-    }
-    const behavior = prefersReducedMotion() ? "instant" : "smooth";
-    const target = document.getElementById(id);
-    if (target) {
-      target.scrollIntoView({ behavior, block: "start" });
-    }
-    const seq = ++clickCount;
-    await moveFocusToSection(id);
-    if (seq === clickCount && target) {
-      correctScrollPosition(target, behavior);
-      release();
-    }
+  if (!id) return;
+  event.preventDefault();
+  if (menuOpen.value) closeMenu();
+  forceActive(id);
+  ariaCurrentId.value = id;
+  if (typeof history.replaceState === "function") {
+    history.replaceState(null, "", href);
+  }
+  const behavior = prefersReducedMotion() ? "instant" : "smooth";
+  const target = document.getElementById(id);
+  if (target) target.scrollIntoView({ behavior, block: "start" });
+  const seq = ++clickCount;
+  await moveFocusToSection(id);
+  if (seq === clickCount && target) {
+    correctScrollPosition(target, behavior);
+    release();
   }
 }
 
-function closeMenu() {
+async function closeMenu({ restoreFocus = false } = {}) {
   menuOpen.value = false;
+  if (restoreFocus) {
+    await nextTick();
+    burgerRef.value?.focus();
+  }
 }
 
-function toggleMenu() {
+async function toggleMenu() {
   menuOpen.value = !menuOpen.value;
+  if (menuOpen.value) {
+    await nextTick();
+    menuRef.value?.querySelector<HTMLElement>("a")?.focus();
+  }
 }
 
 function onGlobalKey(event: KeyboardEvent) {
-  if (event.key === "Escape") {
-    closeMenu();
+  if (event.key === "Escape" && menuOpen.value) {
+    void closeMenu({ restoreFocus: true });
   }
 }
 
@@ -237,7 +238,7 @@ if (typeof document !== "undefined") {
 
 /**
  * Publica a altura real do header em `--maniva-header-height` para o
- * `scroll-margin-top` das seções (âncora não esconde o topo do header).
+ * `scroll-margin-top` das seções.
  */
 function syncHeaderScrollOffset() {
   document.documentElement.style.setProperty(
@@ -271,135 +272,139 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
-/* Header principal: sticky, sobre todo o conteúdo. */
 .maniva-header {
-  position: sticky;
+  position: fixed;
+  inset-inline: 0;
   top: 0;
   z-index: 50;
-  background-color: var(--color-root-50);
-  border-bottom: 1px solid var(--color-root-100);
-}
-.maniva-header--scrolled {
-  box-shadow: var(--shadow-elevation-2);
-  backdrop-filter: blur(8px);
-  background-color: color-mix(in srgb, var(--color-root-50) 90%, transparent);
+  height: 4.5rem;
+  background-color: var(--color-paper);
+  border-bottom: 1px solid var(--color-line);
 }
 .maniva-header__inner {
+  width: min(100% - 3rem, 1280px);
+  height: 100%;
+  margin-inline: auto;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
-  padding-block: 0.75rem; /* base 6px: respiro vertical (marca/burger não colam nas bordas) */
+  gap: 1.5rem;
+}
+@media (min-width: 640px) {
+  .maniva-header__inner {
+    width: min(100% - 6rem, 1280px);
+  }
+}
+@media (min-width: 1024px) {
+  .maniva-header__inner {
+    width: min(100% - 10rem, 1280px);
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+  }
 }
 
-/* Marca: Cormorant (orgânico) + Figtree (técnico) — §4.2. */
 .maniva-brand {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
   flex: none;
-  min-height: 2.75rem; /* alvo de toque 44px */
+  min-height: 2.75rem;
+  color: var(--color-ink);
   text-decoration: none;
 }
-.maniva-brand__symbol {
-  height: 2.5rem;
-  width: 2.5rem;
-  display: block;
+.maniva-brand:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
 }
 .maniva-brand__wordmark {
-  font-family: var(--font-ui);
-  font-weight: 700;
-  font-size: 1.0625rem;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
   line-height: 1;
-  color: var(--color-root-800);
 }
 .maniva-brand__name {
   font-family: var(--font-display);
   font-size: 1.375rem;
-  font-weight: 600;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+.maniva-brand__software {
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--color-muted);
 }
 
-/* Navegação desktop: somente >= 1024px. */
-.maniva-nav { display: none; }
-/* CTA desktop (DESIGN.md, Navigation): aparece quando há espaço real. */
-.maniva-header__cta { display: none; }
+.maniva-nav {
+  display: none;
+}
 .maniva-nav ul {
   display: flex;
-  gap: 0.5rem;
+  gap: 0.25rem;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 .maniva-nav__link {
-  display: inline-block;
-  padding: 0.375rem 0.75rem; /* base 6px: 6 + 12 */
-  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0.375rem 0.75rem;
   font-family: var(--font-ui);
   font-size: 0.875rem;
   font-weight: 500;
-  color: var(--color-text-secondary);
+  color: var(--color-muted);
   text-decoration: none;
-  transition:
-    background-color 160ms ease,
-    color 160ms ease;
+  transition: color 150ms ease;
 }
 .maniva-nav__link:hover {
-  color: var(--color-root-500);
+  color: var(--color-ink);
 }
 .maniva-nav__link:focus-visible {
-  outline: 2px solid var(--color-leaf-500);
-  outline-offset: 2px;
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
 }
 .maniva-nav__link--active {
-  background-color: var(--color-root-100);
-  color: var(--color-root-800);
-  font-weight: 600;
+  color: var(--color-ink);
+  box-shadow: inset 0 -2px 0 var(--color-leaf);
 }
 
-/* Burger: visível somente < 1024px. */
+.maniva-header__cta {
+  display: none;
+}
+
 .maniva-burger {
   display: inline-flex;
   flex-direction: column;
-  align-items: center; /* barras centradas no eixo horizontal */
-  justify-content: center; /* 3 barras centradas no eixo vertical */
-  gap: 6px; /* base 6px */
-  width: 48px; /* base 6px: 8 * 6 */
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: 48px;
   height: 48px;
+  margin-inline-start: auto;
   padding: 0;
   border: none;
   background: transparent;
   cursor: pointer;
-  color: var(--color-root-800);
+  color: var(--color-ink);
+}
+.maniva-burger:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
 }
 .maniva-burger__bar {
   width: 24px;
-  height: 2px;
-  border-radius: 1px;
+  height: 1.5px;
   background: currentColor;
 }
 
-/* Desktop: nav aparece a partir de 1024px (marca à esquerda, nav à direita). */
 @media (width >= 1024px) {
-  .maniva-nav {
-    display: flex;
-  }
-  .maniva-burger,
-  .maniva-menu-panel {
-    display: none;
-  }
-}
-
-/* Telas largas (>= 1280px): a nav ganha o centro via grid de 3 zonas. */
-@media (width >= 1280px) {
-  .maniva-header__inner {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-  }
   .maniva-brand {
     grid-column: 1;
     justify-self: start;
   }
   .maniva-nav {
+    display: flex;
     grid-column: 2;
     justify-self: center;
   }
@@ -408,25 +413,70 @@ onUnmounted(() => {
     grid-column: 3;
     justify-self: end;
   }
+  .maniva-burger {
+    display: none;
+  }
 }
 
-/* Menú mobile: slide-down suave (a11y + reduced motion). */
+/* Menu full-screen: links grandes, CTA e contato. */
+.maniva-menu-panel {
+  position: fixed;
+  inset: 4.5rem 0 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2rem 1.5rem calc(2rem + env(safe-area-inset-bottom));
+  background-color: var(--color-paper);
+  overflow-y: auto;
+}
+.maniva-menu-panel__nav {
+  display: flex;
+  flex-direction: column;
+}
+.maniva-menu-panel__link {
+  display: flex;
+  align-items: center;
+  min-height: 3.5rem;
+  padding-block: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  line-height: 1.1;
+  color: var(--color-ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--color-line);
+}
+.maniva-menu-panel__link[aria-current="location"] {
+  color: var(--color-leaf);
+}
+.maniva-menu-panel__link:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
+}
+.maniva-menu-panel__foot {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 2rem;
+}
+.maniva-menu-panel__email {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  color: var(--color-muted);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .maniva-menu-enter-active,
   .maniva-menu-leave-active {
-    transition:
-      opacity 200ms ease,
-      transform 200ms ease;
+    transition: opacity 180ms ease;
   }
   .maniva-menu-enter-from,
   .maniva-menu-leave-to {
     opacity: 0;
-    transform: translateY(-100%);
-  }
-  .maniva-menu-enter-to,
-  .maniva-menu-leave-from {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -435,38 +485,9 @@ onUnmounted(() => {
     transition: none;
   }
 }
-.maniva-menu-panel {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 100%;
-  background-color: var(--color-root-50);
-  border-bottom: 1px solid var(--color-root-100);
-  box-shadow: var(--shadow-elevation-2);
-  padding: 1.5rem;
-}
-.maniva-menu-panel__nav {
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
-}
-.maniva-menu-panel__link {
-  display: flex;
-  align-items: center;
-  min-height: 2.75rem; /* alvo de toque 44px */
-  padding: 0.5rem 0.75rem; /* base 6px: 8 + 12 */
-  border-radius: 8px;
-  font-family: var(--font-ui);
-  font-size: 1rem;
-  color: var(--color-text-secondary);
-  text-decoration: none;
-}
-.maniva-menu-panel__link--active {
-  color: var(--color-root-800);
-  font-weight: 600;
-}
-.maniva-menu-panel__cta {
-  margin-top: 1.5rem;
+@media (width >= 1024px) {
+  .maniva-menu-panel {
+    display: none;
+  }
 }
 </style>
- 

@@ -1,88 +1,68 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import {
-  openHeroCTA,
-  openServicesSegment1CTA,
-  openServicesSegment2CTA,
-  openHelpMedShowcaseCTA,
-} from "./ctaActions.js";
-import { whatsappE164 } from "../components/layout/whatsapp.js";
+import { ctaLink, ctaMessages, trackCta } from "./ctaActions.js";
 
-const originalWindow = globalThis.window;
-const originalGtag = globalThis.gtag;
-const opened = [];
+test("mensagens canônicas por CTA", () => {
+  assert.deepEqual(Object.keys(ctaMessages), [
+    "hero",
+    "segment1",
+    "segment2",
+    "segment3",
+    "helpmed",
+    "close",
+  ]);
+  assert.equal(
+    ctaMessages.segment1,
+    "Olá! Vi o site da Maniva e quero um site profissional simples e eficiente.",
+  );
+  assert.equal(ctaMessages.helpmed, ctaMessages.segment3);
+  assert.equal(ctaMessages.hero, ctaMessages.close);
+});
 
-function setup(windowLike) {
-  globalThis.window = windowLike;
-  globalThis.gtag = () => {};
-  opened.length = 0;
-}
+test("ctaLink devolve sempre um link wa.me real", () => {
+  for (const key of Object.keys(ctaMessages)) {
+    assert.match(ctaLink(key), /^https:\/\/wa\.me\/5515936182755\?text=/);
+  }
+  assert.match(ctaLink("segment2"), /diagn%C3%B3stico/);
+  assert.match(ctaLink("segment3"), /tecnicamente%20desafiador/);
+});
 
-function teardown() {
-  globalThis.window = originalWindow;
-  globalThis.gtag = originalGtag;
-}
+test("ctaLink com chave desconhecida cai na mensagem do hero", () => {
+  assert.equal(ctaLink("bogus"), ctaLink("hero"));
+});
 
-const cases = [
-  {
-    name: "hero",
-    fn: openHeroCTA,
-    snippet: "qual solução faz sentido",
-    segment: "all",
-  },
-  {
-    name: "services_segment_1",
-    fn: openServicesSegment1CTA,
-    snippet: "site profissional simples",
-    segment: "small_business",
-  },
-  {
-    name: "services_segment_2",
-    fn: openServicesSegment2CTA,
-    snippet: "diagnóstico técnico",
-    segment: "growing_business",
-  },
-  {
-    name: "helpmed_showcase",
-    fn: openHelpMedShowcaseCTA,
-    snippet: "projeto tecnicamente desafiador",
-    segment: "ambitious_projects",
-  },
-];
-
-for (const { name, fn, snippet } of cases) {
-  test(`${name}: faz tracking e abre WhatsApp com mensagem contextual`, () => {
-    setup({
-      open: (url, target) => {
-        opened.push({ url, target });
-      },
-    });
-    try {
-      fn();
-      assert.equal(opened.length, 1);
-      assert.ok(opened[0].url.startsWith(`https://wa.me/${whatsappE164}`));
-      assert.ok(opened[0].url.includes(encodeURIComponent(snippet)));
-      assert.equal(opened[0].target, "_blank");
-    } finally {
-      teardown();
-    }
-  });
-}
-
-test("ações não quebram quando window.open não existe", () => {
-  setup({});
+test("trackCta não bloqueia a navegação nem abre janela", () => {
+  const originalWindow = globalThis.window;
+  const originalGtag = globalThis.gtag;
+  const events = [];
+  const originalWarn = console.log;
+  console.log = () => {};
   try {
-    assert.doesNotThrow(() => openHeroCTA());
+    globalThis.window = {
+      open: () => assert.fail("não deve abrir janela"),
+      gtag: (type, event, payload) => events.push({ type, event, payload }),
+    };
+    globalThis.gtag = globalThis.window.gtag;
+    assert.doesNotThrow(() => trackCta("hero_primary_cta", "all"));
+    assert.equal(events.length, 1);
+    assert.equal(events[0].payload.cta_name, "hero_primary_cta");
+    assert.equal(events[0].payload.audience_segment, "all");
   } finally {
-    teardown();
+    console.log = originalWarn;
+    globalThis.window = originalWindow;
+    globalThis.gtag = originalGtag;
   }
 });
 
-test("ações não quebram em ambiente SSR (window undefined)", () => {
-  setup(undefined);
+test("trackCta funciona em SSR (sem window)", () => {
+  const originalWindow = globalThis.window;
+  const originalLog = console.log;
+  console.log = () => {};
   try {
-    assert.doesNotThrow(() => openHeroCTA());
+    globalThis.window = undefined;
+    assert.doesNotThrow(() => trackCta("hero_primary_cta", "all"));
   } finally {
-    teardown();
+    globalThis.window = originalWindow;
+    console.log = originalLog;
   }
 });

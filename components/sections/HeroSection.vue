@@ -25,7 +25,15 @@
       </Typography>
 
       <div class="maniva-hero__cta flex flex-col sm:flex-row gap-4">
-        <Button variant="primary" size="lg" @click="openHeroCTA">
+        <Button
+          as="a"
+          :href="ctaLink('hero')"
+          variant="primary"
+          size="lg"
+          target="_blank"
+          rel="noopener"
+          @click="trackCta('hero_primary_cta', 'all')"
+        >
           Conversar sobre meu projeto
         </Button>
       </div>
@@ -35,7 +43,7 @@
 
 <script setup>
 import { Button, Section, Typography } from "@ui";
-import { openHeroCTA } from "@util/ctaActions";
+import { ctaLink, trackCta } from "@util/ctaActions";
 </script>
 
 <style scoped>

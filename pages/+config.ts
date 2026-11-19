@@ -7,9 +7,17 @@ import vikeVue from "vike-vue/config";
 const config: Config = {
   // https://vike.dev/head-tags
   lang: "pt-BR",
-  title: "Maniva Software | Engenharia de Software e Soluções Digitais",
+  title: "Maniva Software | Software sob medida para o seu negócio",
   description:
-    "Maniva Software: transformamos necessidade digital em solução técnica. Desenvolvimento web, modernização de sistemas e projetos complexos como o HelpMed. Engenharia de software com código limpo e entregas claras.",
+    "Sites, sistemas e produtos de IA sob medida. Engenharia de quem colocou o HelpMed em produção. Atendimento remoto em todo o Brasil.",
+  image: "https://manivasoftware.com.br/images/og-maniva.png",
+
+  // Atributos do <html> (lidos pelo vike)
+  htmlAttributes: {
+    "data-type": "service",
+    "data-radius": "sharp",
+    "data-buttons": "solid",
+  },
 
   // https://vike.dev/pre-rendering (SSG)
   prerender: {

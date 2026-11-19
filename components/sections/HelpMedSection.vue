@@ -67,7 +67,15 @@
           </ul>
 
           <div class="pt-2">
-            <Button variant="primary" size="lg" @click="openHelpMedShowcaseCTA">
+            <Button
+              as="a"
+              :href="ctaLink('helpmed')"
+              variant="primary"
+              size="lg"
+              target="_blank"
+              rel="noopener"
+              @click="trackCta('helpmed_showcase_cta', 'ambitious_projects')"
+            >
               Tenho um projeto desafiador
             </Button>
           </div>
@@ -79,7 +87,7 @@
 
 <script setup>
 import { Button, Section, Typography, Icon } from "@ui";
-import { openHelpMedShowcaseCTA } from "@util/ctaActions";
+import { ctaLink, trackCta } from "@util/ctaActions";
 
 const helpMedCapabilities = [
   "Processamento de documentos complexos",

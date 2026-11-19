@@ -1,9 +1,9 @@
 {
-  "name": "Maniva Software | Engenharia de Software e Soluções Digitais",
+  "name": "Maniva Software | Software sob medida",
   "short_name": "Maniva Software",
-  "description": "Maniva Software transforma necessidade digital em solução técnica: desenvolvimento web, modernização de sistemas e projetos de IA complexos.",
-  "theme_color": "#8B6B3C",
-  "background_color": "#F8F4E9",
+  "description": "Sites, sistemas e produtos de IA sob medida. Engenharia de quem colocou o HelpMed em produção.",
+  "theme_color": "#F4F0E6",
+  "background_color": "#F4F0E6",
   "display": "standalone",
   "orientation": "any",
   "start_url": "/",
