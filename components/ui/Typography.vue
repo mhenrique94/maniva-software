@@ -1,9 +1,9 @@
 <!--
-  Typography.vue — sistema tipográfico "Herança vs Precisión" (§4.2).
+  Typography.vue — sistema tipográfico "Raiz Firme".
 
-  Unifica Cormorant (display/heading) y Figtree (body/caption) con la escala
-  base 6px. Respeto de jerarquía: el elemento real se deriva de `type`
-  (h1/h2/p), no rompe el orden de encabezados.
+  Unifica Fraunces (display e h1/h2) e Figtree (h3–h6, body, caption) na
+  escala do sistema. O elemento real deriva de `type`, preservando a
+  hierarquia de headings.
 -->
 <template>
   <component
@@ -24,9 +24,9 @@ const props = defineProps({
   type: { type: String, default: "body" },
   /** Para headings: 1–6. Para body: sm | base | lg. */
   level: { type: [Number, String], default: "base" },
-  /** Peso opcional por familia (display: medium/semibold; ui: regular/semibold/bold). */
+  /** Peso opcional (normal/medium). */
   weight: { type: String, default: null },
-  /** Tono semántico (primary/secondary/root/leaf/vitality/pulp). */
+  /** Tono semántico (primary/secondary/on-dark/accent/leaf). */
   tone: { type: String, default: "primary" },
   id: { type: String, default: null },
 });

@@ -18,6 +18,7 @@
     "verify:build": "node scripts/verify-build.mjs dist/client"
   },
   "dependencies": {
+    "@fontsource-variable/fraunces": "^5.3.0",
     "@vueuse/core": "^14.4.0",
     "phosphor-vue": "^4.4.1",
     "vike": "^0.4.260",
@@ -26,7 +27,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.5.7",
-    "@fontsource/cormorant-garamond": "^5.3.0",
     "@fontsource/figtree": "^5.3.0",
     "@tailwindcss/vite": "^4.3.3",
     "@types/node": "^26.5.1",

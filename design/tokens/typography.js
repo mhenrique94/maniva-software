@@ -1,45 +1,52 @@
 /**
- * Sistema tipográfico "Herança vs Precisão" (§4.2 da spec).
+ * Sistema tipográfico "Raiz Firme".
  *
- * - Display/Orgânico: Cormorant Garamond (500/600) — hero, títulos editoriais.
- * - UI/Técnico: Figtree (400/600/700) — interface, parágrafos, botões.
+ * - Display/headline: Fraunces variável (400) — hero, títulos de seção e
+ *   statement.
+ * - UI/body: Figtree (400/500) — interface, parágrafos, botões.
  *
- * Escala base 6px (0.375rem), de `text-xs` até `display-2`.
- * As fontes (self-hosted via `@fontsource`) são carregadas na Fase 7;
- * aqui ficam os tokens de família, peso e escala.
+ * Duas vozes, papéis fixos. Sem pesos 600/700: o peso da marca vem do
+ * tamanho e do contraste. Escala com `clamp` para display/headline.
  */
 
 export const fontFamilies = {
-  display: "'Cormorant Garamond', Georgia, serif",
+  display: "'Fraunces Variable', 'Fraunces', Georgia, serif",
   ui: "'Figtree', system-ui, -apple-system, sans-serif",
 };
 
 export const fontWeights = {
-  display: [500, 600],
-  ui: [400, 600, 700],
+  display: [400],
+  ui: [400, 500],
 };
 
-/** Escala tipográfica base 6px — chave, tamanho, line-height e letter-spacing. */
+/** Escala tipográfica — chave, tamanho, line-height e letter-spacing. */
 export const typeScale = {
-  xs: { size: "0.75rem", lineHeight: "1.125rem", letterSpacing: "0" },
-  sm: { size: "0.875rem", lineHeight: "1.25rem", letterSpacing: "0" },
-  base: { size: "1rem", lineHeight: "1.5rem", letterSpacing: "0" },
-  lg: { size: "1.125rem", lineHeight: "1.75rem", letterSpacing: "0" },
-  xl: { size: "1.25rem", lineHeight: "1.875rem", letterSpacing: "0" },
-  "2xl": { size: "1.5rem", lineHeight: "2rem", letterSpacing: "-0.01em" },
-  "3xl": { size: "1.875rem", lineHeight: "2.25rem", letterSpacing: "-0.01em" },
-  "4xl": { size: "2.25rem", lineHeight: "2.5rem", letterSpacing: "-0.02em" },
-  "5xl": { size: "2.625rem", lineHeight: "3rem", letterSpacing: "-0.02em" },
-  "display-1": {
-    size: "3rem",
-    lineHeight: "3.25rem",
+  h1: {
+    size: "clamp(2.375rem, 4.2vw + 1rem, 4.5rem)",
+    lineHeight: "1.02",
+    letterSpacing: "-0.03em",
+  },
+  h2: {
+    size: "clamp(1.875rem, 2.4vw + 1.2rem, 3rem)",
+    lineHeight: "1.08",
     letterSpacing: "-0.02em",
   },
-  "display-2": {
-    size: "3.375rem",
-    lineHeight: "3.5rem",
-    letterSpacing: "-0.025em",
+  h3: {
+    size: "clamp(1.25rem, 0.6vw + 1.1rem, 1.5rem)",
+    lineHeight: "1.2",
+    letterSpacing: "-0.01em",
   },
+  h4: { size: "1.25rem", lineHeight: "1.5", letterSpacing: "-0.01em" },
+  h5: { size: "1.125rem", lineHeight: "1.5", letterSpacing: "0" },
+  h6: { size: "1rem", lineHeight: "1.5", letterSpacing: "0" },
+  lead: {
+    size: "clamp(1.125rem, 0.4vw + 1.05rem, 1.25rem)",
+    lineHeight: "1.5",
+    letterSpacing: "0",
+  },
+  body: { size: "1rem", lineHeight: "1.625", letterSpacing: "0" },
+  small: { size: "0.875rem", lineHeight: "1.5", letterSpacing: "0" },
+  label: { size: "0.8125rem", lineHeight: "1.3846", letterSpacing: "0.01em" },
 };
 
 export default { fontFamilies, fontWeights, typeScale };

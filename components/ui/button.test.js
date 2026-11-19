@@ -1,87 +1,56 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { variants, sizes, buttonClasses } from "./button.js";
+import { buttonClasses, sizes, variants } from "./button.js";
 
-test("variantes usan tokens de color (§4.4)", () => {
-  assert.deepEqual(variants.primary, [
-    "bg-leaf-500",
-    "text-root-50",
-    "hover:bg-leaf-300",
-  ]);
-  assert.deepEqual(variants.secondary, [
-    "border-2",
-    "border-root-500",
-    "text-root-800",
-    "bg-transparent",
-  ]);
-  assert.deepEqual(variants.action, [
-    "bg-root-300",
-    "text-root-800",
-    "hover:bg-root-500",
-    "hover:text-root-50",
-  ]);
-});
-
-test("hover perceptível: sombra elevation-2 e shift de cor por variante (§2.4 melhorias)", () => {
-  const { classes } = buttonClasses({ variant: "action" });
-  assert.ok(
-    classes.includes("hover:shadow-elevation-2"),
-    "sombra de hover mais forte",
-  );
-  assert.ok(
-    classes.includes("hover:bg-root-500"),
-    "action escurece para root-500",
-  );
-  assert.ok(
-    classes.includes("hover:text-root-50"),
-    "texto do action clareia no hover",
-  );
-
+test("variante primary: folha com texto bone e raio 2px", () => {
   const primary = buttonClasses({ variant: "primary" });
-  assert.ok(
-    primary.classes.includes("hover:bg-leaf-300"),
-    "primary clareia para leaf-300 no hover",
-  );
+  assert.ok(primary.classes.includes("bg-leaf"));
+  assert.ok(primary.classes.includes("text-bone"));
+  assert.ok(primary.classes.includes("rounded-button"));
+  assert.ok(!primary.classes.some((c) => c.includes("shadow")));
 });
 
-test("tamaños padding por escala 6px", () => {
-  const { classes } = buttonClasses({ size: "sm" });
-  assert.ok(classes.some((c) => c.startsWith("px-")));
-  const base = buttonClasses({ size: "base" });
-  const lg = buttonClasses({ size: "lg" });
-  assert.ok(base.classes.includes("px-4"));
-  assert.ok(lg.classes.includes("px-5"));
+test("variante secondary: transparente com fio de tinta", () => {
+  assert.deepEqual(variants.secondary, [
+    "bg-transparent",
+    "text-ink",
+    "border",
+    "border-ink",
+    "hover:bg-ink",
+    "hover:text-bone",
+  ]);
 });
 
-test("clases base incluyen forma 'O Broto', foco visible e interacción", () => {
-  const { classes } = buttonClasses();
-  assert.ok(classes.includes("rounded-bud"));
-  assert.ok(classes.includes("focus-visible:ring-2"));
-  assert.ok(classes.includes("hover:shadow-elevation-2"));
-  assert.ok(classes.includes("font-ui"));
+test("variante inverse: bone com texto ink para fundo escuro", () => {
+  const inverse = buttonClasses({ variant: "inverse" });
+  assert.ok(inverse.classes.includes("bg-bone"));
+  assert.ok(inverse.classes.includes("text-ink"));
+  assert.ok(inverse.classes.includes("focus-visible:outline-leaf-light"));
 });
 
-test("fallbacks por variante/tamaño desconocidos", () => {
-  assert.ok(
-    buttonClasses({ variant: "bogus" }).classes.includes("bg-leaf-500"),
-  );
-  assert.ok(buttonClasses({ size: "xxl" }).classes.includes("px-4"));
+test("alvo de toque de 48px em todos os tamanhos", () => {
+  for (const size of Object.keys(sizes)) {
+    assert.ok(
+      buttonClasses({ size }).classes.includes("min-h-8"),
+      `min-h-8 ausente em ${size}`,
+    );
+  }
 });
 
-test("estados: disabled y loading", () => {
-  const idle = buttonClasses();
-  assert.equal(idle.busy, false);
-  assert.equal(idle.disabled, false);
-
-  const loading = buttonClasses({ loading: true });
-  assert.equal(loading.busy, true);
-  assert.equal(loading.disabled, true);
-
-  const disabled = buttonClasses({ disabled: true });
-  assert.equal(disabled.disabled, true);
-  assert.ok(disabled.classes.includes("disabled:cursor-not-allowed"));
-});
-
-test("full-width", () => {
+test("largura cheia, estados e fallback", () => {
   assert.ok(buttonClasses({ full: true }).classes.includes("w-full"));
+  assert.equal(buttonClasses({ disabled: true }).disabled, true);
+  assert.equal(buttonClasses({ loading: true }).busy, true);
+  assert.equal(buttonClasses({ loading: true }).disabled, true);
+  assert.ok(buttonClasses({ variant: "bogus" }).classes.includes("bg-leaf"));
+  assert.ok(buttonClasses({ size: "bogus" }).classes.includes("min-h-8"));
+});
+
+test("base sem animação de escala nem sombra", () => {
+  const { classes } = buttonClasses();
+  assert.ok(classes.includes("font-ui"));
+  assert.ok(classes.includes("font-medium"));
+  assert.ok(classes.includes("focus-visible:outline-2"));
+  assert.ok(classes.includes("disabled:cursor-not-allowed"));
+  assert.ok(!classes.includes("hover:shadow-elevation-2"));
 });

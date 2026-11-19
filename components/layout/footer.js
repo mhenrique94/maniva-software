@@ -1,15 +1,14 @@
 /**
- * Datos institucionales del rodapé (§5.8) — columna institucional, links
- * rápidos y conexiones rizomáticas. Consumido por `Footer.vue`.
+ * Dados institucionais do rodapé — coluna institucional, links de navegação
+ * e conexões. Consumido por `Footer.vue`.
  *
- * Fuente canónica: CONTEXT.md "Identidad & marca". Nada de la sede fiscal
- * como local de atención; el rodapé institucional es el lugar de la razón
- * social y el CNPJ.
+ * Fonte canônica: CONTEXT.md "Identidade & marca". A sede fiscal não é local
+ * de atendimento; o rodapé institucional é o lugar da razão social e do CNPJ.
  */
 
 import { navLinks } from "./nav.js";
 
-/** Columna 1 — Institucional (§5.8). */
+/** Coluna 1 — Institucional. */
 export const company = {
   brand: "Maniva Software",
   legalName: "MANIVA SOFTWARE E TECNOLOGIA LTDA",
@@ -18,12 +17,12 @@ export const company = {
   email: "contato@manivasoftware.com.br",
 };
 
-/** Columna 2 — Links rápidos (relacionados con navegación). */
+/** Coluna 2 — Links de navegação (exceto Início). */
 export function quickLinks({ links = navLinks } = {}) {
   return links.filter((link) => link.id !== "inicio");
 }
 
-/** Columna 3 — Conexiones rizomáticas (§5.8): HelpMed + LinkedIn. */
+/** Coluna 3 — Conexões: HelpMed + LinkedIn. */
 export const connections = [
   {
     label: "HelpMed.app",
@@ -40,15 +39,15 @@ export const connections = [
   },
 ];
 
-/** Base del rodapé: © año + tagline canónico (metáfora rizomática). */
+/** Linha de atuação (contrato CONTEXT.md: remoto, sem cidade de operação). */
+export const remoteLine = "Atendimento remoto em todo o Brasil.";
+
+/** Base do rodapé: © ano + tagline canônica. */
 export function footerBaseline(year = new Date().getFullYear()) {
-  return `© ${year} Maniva Software - Sistemas com raízes sólidas para crescerem sem limites`;
+  return `© ${year} Maniva Software · Sistemas com raízes sólidas para crescer com propósito.`;
 }
 
-/** Sinal de atualidade (GEO, §6.4) — "Atualizado em …" no rodapé. */
-export const lastUpdated = "Atualizado em setembro de 2026";
-
-/** Classes utilitárias para links do footer: transição suave de cor + reduced motion (§4). */
+/** Classes utilitárias para links do footer (reduced motion). */
 export const footerLinkClasses = [
   "motion-safe:transition-colors",
   "motion-safe:duration-150",
@@ -59,7 +58,7 @@ export default {
   company,
   quickLinks,
   connections,
+  remoteLine,
   footerBaseline,
-  lastUpdated,
   footerLinkClasses,
 };

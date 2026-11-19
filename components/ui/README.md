@@ -1,62 +1,56 @@
-# Componentes UI — Design System "Mandioca Rizomática"
+# Componentes UI — Design System "Raiz Firme"
 
-Fase 3 del plan (`docs/plans/2026-09-13/fase3-ui-components.md`). Átomos UI del
-landing Maniva Software que implementan §4.4 del spec. Cada componente consume
-un **seam puro** (`components/ui/*.js`) con la lógica de mapping (clases,
-registro de íconos, contraste) — testeado con `node --test` (sin framework).
+Átomos de interface da landing Maniva Software. Cada componente consome um
+**seam puro** (`components/ui/*.js`) com a lógica de mapping (classes, registro
+de ícones, contraste) — testado com `node --test`.
 
 ## Componentes
 
-| Componente | Metáfora | Props clave | Seam |
-|------------|----------|-------------|------|
-| `Button.vue` | O Broto | `variant` (primary/secondary/action) · `size` (sm/base/lg) · `loading` · `disabled` · `full` · `leadingIcon`/`trailingIcon` · `type` | `button.js` |
-| `Card.vue` | Seção Transversal | `elevation` (none/soft/raised/deep) · `density` (compact/comfortable/loose) · `padding` · `flat` · `texture` · `element` · slots `header`/default/`actions` | `card.js` |
-| `Section.vue` | Solo/Camadas da Terra | `variant` (pulp/root/leaf/earth/vitality) · `organic` (clip-path desktop) · `connectTo` (rizoma SVG) · `as` | `section.js` |
-| `Typography.vue` | Herança vs Precisão | `type` (display/heading/body/caption) · `level` (1–6 o sm/base/lg/xl/2xl) · `tone` (cor semántica) · `weight` | `typography.js` |
-| `Icon.vue` | Fibras & Nervuras | `name` (registro `icons.js`) · `weight` (thin…duotone) · `size` · `duotone` · `color`/`nerveColor` · `rotation` · `animated` · `path-d` (custom) | `icons.js` |
+| Componente | Props principais | Seam |
+|------------|------------------|------|
+| `Button.vue` | `variant` (primary/secondary/inverse) · `size` (sm/base/lg) · `loading` · `disabled` · `full` · `leadingIcon`/`trailingIcon` · `as`/`href` · `type` | `button.js` |
+| `Card.vue` | `variant` (plain/surface) · `accent` (leaf/clay/ink/null) · `density` (compact/comfortable/loose) · `padding` · `element` · slots `header`/default/`actions` | `card.js` |
+| `Section.vue` | `variant` (paper/surface/ink) · `as` · `ariaLabel` | `section.js` |
+| `Typography.vue` | `type` (display/heading/body/caption) · `level` (1–6 o sm/base/lg) · `tone` (primary/secondary/on-dark/accent/leaf) · `weight` | `typography.js` |
+| `Icon.vue` | `name` (whatsapp/arrow-right/arrow-up-right/envelope/linkedin) · `weight` · `size` · `color` · `label` | `icons.js` |
 
-`index.js` sirve el barrel: `import { Button, Card, Icon } from "@ui"`.
+`index.js` serve o barrel: `import { Button, Card, Icon } from "@ui"`.
 
 ## Uso rápido
 
 ```vue
-<Section variant="leaf" organic>
-  <Typography type="heading" level="2" tone="primary">Título da seção</Typography>
-  <Card elevation="raised" texture>
+<Section variant="surface">
+  <Typography type="heading" level="2">Título da seção</Typography>
+  <Card variant="plain" accent="leaf" density="compact">
     <template #header>…</template>
-    <p>Contenido con fondo Polpa y textura sutil.</p>
+    <p>Superfície plana com fio de 1px.</p>
     <template #actions>
-      <Button variant="action" size="lg" trailing-icon="arrow-right">Quero meu site</Button>
+      <Button as="a" href="https://wa.me/…" target="_blank" rel="noopener">
+        Quero meu site
+      </Button>
     </template>
   </Card>
 </Section>
 
-<Icon name="whatsapp" :size="32" duotone animated />
-<!-- custom path -->
-<Icon path-d="M 64 64 L 192 64 L 192 192 L 64 192 Z" :size="28" />
+<Icon name="whatsapp" :size="20" />
 ```
 
-## Acessibilidad
+## Acessibilidade
 
-- **Contraste WCAG AA**: `contrast.js` calcula ratios; los pares canónicos
-  (Primary 7:1, Action 6:1, texto primario 11.8:1) se validan en
-  `contrast.test.js`. Colores decorativos (ej. Vitalidade sobre Polpa) quedan
-  documentados y solo se usan para elementos grandes/decorativos.
-- **Keyboard**: foco visible con anillo (`focus-visible:ring-*`); los botones
-  son `<button>` nativos con `type`, `aria-busy` y `aria-label`.
-- **Reduced motion**: hover/active/pulse del botón y animación de íconos se
-  apagan con `@media (prefers-reduced-motion: reduce)`.
-- **Decoración**: texturas, rizomas e íconos decorativos llevan
-  `aria-hidden="true"`/`pointer-events: none`.
+- **Contraste WCAG AA**: `contrast.js` calcula ratios; os pares canônicos são
+  validados em `contrast.test.js`. Texto principal em AAA (≥ 7:1).
+- **Keyboard**: foco visível com anel de 2px (`--focus-width`), offset 2px;
+  sobre `ink`, `leaf-light`. Botões nativos com `type`, `aria-busy` e
+  `aria-label`.
+- **Alvos de toque**: botões com `min-h-8` (48px); links de navegação e rodapé
+  com 44px no phone.
+- **Reduced motion**: hover/active e loading se desligam com
+  `@media (prefers-reduced-motion: reduce)`.
+- **Decoração**: SVGs decorativos com `aria-hidden="true"`/`pointer-events:
+  none`.
 
-## Responsive & progressive enhancement
+## Regra
 
-- Mobile → rectangular y simple; desktop (`>1024px`) → clip-path orgánico
-  (`Section.vue` gateado por media query; token `--maniva-clip`).
-- El clip-path usa las ondas validadas ≤5° de `design/shapes/organic.js`.
-
-## Regla
-
-No repetir hex en componentes: las capas del ícono y los fondos salen de
-`design/tokens/colors.js`. Para superficies usar siempre utilities de tokens
-(`bg-leaf-500`, `text-root-800`, `rounded-bud`).
+Não repetir hex em componentes: as cores saem de `design/tokens/colors.js`. Para
+superfícies, usar sempre utilities de token (`bg-leaf`, `text-ink`,
+`rounded-button`). Sem sombra, gradiente, textura ou clip-path.

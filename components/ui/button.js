@@ -1,52 +1,66 @@
 /**
- * Lógica pura do botão "O Broto" (§4.4). Classes utilitárias por variante,
+ * Lógica pura do botão "Raiz Firme". Classes utilitárias por variante,
  * tamanho e estado — consumido por `Button.vue`. Aqui vive só o mapping:
- * as interações (hover/active/reduced-motion) se aplican por CSS no SFC.
+ * as interações (hover/active/reduced-motion) se aplicam por CSS no SFC.
+ *
+ * A regra de uma única ação preenchida: `primary` (folha/bone) em superfícies
+ * claras, `inverse` (bone/ink) em superfícies escuras. `secondary` é contorno.
  */
 
-/** Variantes semánticas (contraste AA validado em `contrast.test.js`). */
+/** Variantes semânticas (contraste AA validado em `contrast.test.js`). */
 export const variants = {
-  /** Folha + Polpa — ação principal (7:1); hover clareia para Folha clara. */
-  primary: ["bg-leaf-500", "text-root-50", "hover:bg-leaf-300"],
-  /** Borde Raiz + texto Terra — ação secundaria. */
-  secondary: ["border-2", "border-root-500", "text-root-800", "bg-transparent"],
-  /** Vitalidade + texto Terra — CTA de conversão (6:1); hover ganha Raiz. */
-  action: [
-    "bg-root-300",
-    "text-root-800",
-    "hover:bg-root-500",
-    "hover:text-root-50",
+  primary: [
+    "bg-leaf",
+    "text-bone",
+    "border",
+    "border-leaf",
+    "hover:bg-leaf-hover",
+  ],
+  secondary: [
+    "bg-transparent",
+    "text-ink",
+    "border",
+    "border-ink",
+    "hover:bg-ink",
+    "hover:text-bone",
+  ],
+  inverse: [
+    "bg-bone",
+    "text-ink",
+    "border",
+    "border-bone",
+    "hover:bg-leaf-light",
+    "focus-visible:outline-leaf-light",
   ],
 };
 
-/** Tamaños com padding da escala base 6px (§4.3). */
+/** Tamanhos com alvo de toque de 48px (min-h-8 = 3rem). */
 export const sizes = {
-  sm: ["px-3", "py-2", "text-sm", "gap-2"],
-  base: ["px-4", "py-2", "text-base", "gap-2"],
-  lg: ["px-5", "py-3", "text-lg", "gap-2"],
+  sm: ["min-h-8", "px-4", "text-sm", "gap-2"],
+  base: ["min-h-8", "px-6", "text-base", "gap-2"],
+  lg: ["min-h-8", "px-8", "text-base", "gap-3"],
 };
 
 const baseClasses = [
   "inline-flex",
   "items-center",
   "justify-center",
-  "rounded-bud",
+  "rounded-button",
   "font-ui",
-  "font-semibold",
+  "font-medium",
   "no-underline",
   "cursor-pointer",
-  "hover:shadow-elevation-2",
-  "focus-visible:ring-2",
-  "focus-visible:ring-offset-2",
-  "focus-visible:ring-root-500",
+  "transition-[transform,background-color,border-color,color]",
+  "duration-150",
+  "focus-visible:outline-2",
+  "focus-visible:outline-leaf",
+  "focus-visible:outline-offset-2",
   "disabled:cursor-not-allowed",
   "disabled:opacity-50",
 ];
 
 /**
- * Resolve as classes e o estado de acessibilidade do botón.
- * (As transições de hover/active vivem no CSS scoped do SFC, para não
- * chocar com `transition-colors`.)
+ * Resolve as classes e o estado de acessibilidade do botão.
  * @param {{variant?: keyof typeof variants; size?: keyof typeof sizes;
  *          disabled?: boolean; loading?: boolean; full?: boolean}} [options]
  * @returns {{classes: string[], busy: boolean, disabled: boolean}}

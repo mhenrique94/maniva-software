@@ -1,56 +1,44 @@
 /**
- * Ações de CTA — tracking + abertura de WhatsApp contextual (§4/§5.10).
+ * Ações de CTA — mensagens e links de WhatsApp contextual.
  *
- * Centraliza as mensagens e os links de conversão da landing, garantindo
- * que todo botão/CTA tenha ação atribuída e funcione mesmo em ambientes
- * sem `window` (SSG/prerender).
+ * Todo CTA é um link real: `ctaLink(key)` devolve a URL `wa.me` com a
+ * mensagem do segmento. O tracking é um `@click` sem `preventDefault` e sem
+ * `window.open` — o navegador segue o link normalmente, mesmo sem JS.
  */
 
+import { defaultMessage, waLink } from "../components/layout/whatsapp.js";
 import { trackCTA } from "./ctaTracking.js";
-import { whatsappE164 } from "../components/layout/whatsapp.js";
 
 /** Mensagens contextuais por CTA (fonte única de verdade pt-BR). */
-const ctaMessages = {
-  hero: "Olá! Vi o site da Maniva e quero conversar sobre qual solução faz sentido para mim.",
-  servicesSegment1:
+export const ctaMessages = {
+  hero: defaultMessage,
+  segment1:
     "Olá! Vi o site da Maniva e quero um site profissional simples e eficiente.",
-  servicesSegment2:
+  segment2:
     "Olá! Vi o site da Maniva e preciso de diagnóstico técnico do nosso sistema atual.",
-  helpMedShowcase:
+  segment3:
     "Olá! Vi o site da Maniva e tenho um projeto tecnicamente desafiador para conversar.",
+  helpmed:
+    "Olá! Vi o site da Maniva e tenho um projeto tecnicamente desafiador para conversar.",
+  close: defaultMessage,
 };
 
-function openWhatsApp(message) {
-  if (typeof window === "undefined" || typeof window.open !== "function")
-    return;
-  const url = `https://wa.me/${whatsappE164}?text=${encodeURIComponent(message)}`;
-  window.open(url, "_blank");
+/**
+ * Link `wa.me` do CTA. Chave desconhecida cai na mensagem do hero.
+ * @param {keyof typeof ctaMessages} key
+ * @returns {string}
+ */
+export function ctaLink(key) {
+  return waLink(ctaMessages[key] ?? ctaMessages.hero);
 }
 
-function openCTA(name, segment, messageKey) {
-  trackCTA(name, segment);
-  openWhatsApp(ctaMessages[messageKey]);
+/**
+ * Registra o clique do CTA (GA4). Não bloqueia a navegação.
+ * @param {string} key
+ * @param {string} segment
+ */
+export function trackCta(key, segment) {
+  trackCTA(key, segment);
 }
 
-export function openHeroCTA() {
-  openCTA("hero_primary_cta", "all", "hero");
-}
-
-export function openServicesSegment1CTA() {
-  openCTA("services_segment_1", "small_business", "servicesSegment1");
-}
-
-export function openServicesSegment2CTA() {
-  openCTA("services_segment_2", "growing_business", "servicesSegment2");
-}
-
-export function openHelpMedShowcaseCTA() {
-  openCTA("helpmed_showcase_cta", "ambitious_projects", "helpMedShowcase");
-}
-
-export default {
-  openHeroCTA,
-  openServicesSegment1CTA,
-  openServicesSegment2CTA,
-  openHelpMedShowcaseCTA,
-};
+export default { ctaMessages, ctaLink, trackCta };

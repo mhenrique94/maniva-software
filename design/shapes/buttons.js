@@ -1,25 +1,28 @@
 /**
- * Formas de botões — border-radius assimétricos "O Broto" (§4.4/4.5 da spec).
+ * Escala de formas "Raiz Firme".
+ *
+ * Circulos só no símbolo da marca e nos nós do diagrama. Card é reto;
+ * botão quase reto; o frame do screenshot do HelpMed tem 6px.
  */
 
-/** Raio canônico: `12px 24px 12px 24px` (movimento diagonal sutil). */
-export const buttonCorners = "12px 24px 12px 24px";
+/** Raio canônico do botão. */
+export const buttonCorners = "2px";
 
-/** Raio do Card "Seção Transversal". */
-export const cardRadius = "48px 12px 6px 6px";
+/** Raio dos cards e faixas (retos). */
+export const cardRadius = "0";
+
+/** Raio do frame do screenshot. */
+export const frameRadius = "6px";
 
 export const radii = {
-  base: buttonCorners,
-  soft: "12px 18px 12px 18px",
-  wide: "16px 32px 16px 32px",
+  button: buttonCorners,
+  card: cardRadius,
+  frame: frameRadius,
 };
 
-/**
- * Retorna o border-radius de um botão por variante.
- * @param {{variant?: "base"|"soft"|"wide"}} [options]
- */
-export function buttonRadius({ variant = "base" } = {}) {
-  return radii[variant] ?? radii.base;
+/** Retorna o border-radius de um botão. */
+export function buttonRadius() {
+  return buttonCorners;
 }
 
-export default { buttonCorners, cardRadius, radii, buttonRadius };
+export default { buttonCorners, cardRadius, frameRadius, radii, buttonRadius };

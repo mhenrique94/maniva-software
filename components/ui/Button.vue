@@ -1,10 +1,9 @@
 <!--
-  Button.vue — "O Broto" (§4.4).
+  Button.vue — "Raiz Firme".
 
-  Botón con border-radius asimétrico `12px 24px 12px 24px`. Interacciones
-  terrosas (hover: escala sutil + sombra densa; active: afundamiento) que
-  respetan `prefers-reduced-motion`. Contraste AA validado en
-  `contrast.test.js` para las tres variantes.
+  Três variantes planas (`primary`, `secondary`, `inverse`), raio 2px, altura
+  de 48px. Interações sóbrias: hover sobe 1px, active afunda 1px — sempre
+  gated por `prefers-reduced-motion`. `as="a"` aceita `href` real (CTA).
 -->
 <template>
   <component
@@ -19,27 +18,18 @@
     :aria-busy="state.busy ? 'true' : null"
     :aria-label="ariaLabel"
   >
-    <Icon
-      v-if="loading"
-      name="leaf"
-      :duotone="true"
-      :size="sizeSpinner"
-      class="maniva-bud-spinner"
-      aria-hidden="true"
-    />
+    <span v-if="loading" class="maniva-bud-spinner" aria-hidden="true" />
     <Icon
       v-else-if="leadingIcon"
       :name="leadingIcon"
-      :duotone="true"
-      :size="sizeSpinner"
+      :size="iconSize"
       aria-hidden="true"
     />
     <slot />
     <Icon
       v-if="trailingIcon"
       :name="trailingIcon"
-      :duotone="true"
-      :size="sizeSpinner"
+      :size="iconSize"
       class="maniva-bud-trailing"
       aria-hidden="true"
     />
@@ -59,9 +49,9 @@ const props = defineProps({
   target: { type: String, default: null },
   /** Rel do link quando `as="a"`. */
   rel: { type: String, default: null },
-  /** Variante semântica: primary | secondary | action. */
+  /** Variante semântica: primary | secondary | inverse. */
   variant: { type: String, default: "primary" },
-  /** Tamanho: sm | base | lg (escala base 6px). */
+  /** Tamanho: sm | base | lg. */
   size: { type: String, default: "base" },
   disabled: { type: Boolean, default: false },
   loading: { type: Boolean, default: false },
@@ -80,44 +70,39 @@ const state = buttonClasses({
   full: props.full,
 });
 
-const sizeSpinner = props.size === "lg" ? "1.25em" : "1em";
+const iconSize = props.size === "lg" ? 20 : 18;
 </script>
 
 <style scoped>
-/* Interacciones terrosas: hover echa brote (escala), active afunda (press).
-   Todas as transições num único lugar (sem `transition-colors` do tema
-   para não písalas). */
 @media (prefers-reduced-motion: no-preference) {
-  .maniva-bud {
-    transition:
-      transform 160ms cubic-bezier(0.2, 0.8, 0.3, 1),
-      box-shadow 160ms ease,
-      background-color 160ms ease,
-      border-color 160ms ease,
-      color 160ms ease;
-    will-change: transform;
+  .maniva-bud:hover:not(:disabled) {
+    transform: translateY(-1px);
   }
-  .maniva-bud:not(:disabled):hover {
-     transform: scale(1.03);
-   }
-  .maniva-bud:not(:disabled):active {
-    transform: translateY(1px) scale(0.99);
+  .maniva-bud:active:not(:disabled) {
+    transform: translateY(1px);
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .maniva-bud {
-    transition: none;
-  }
+  .maniva-bud,
   .maniva-bud:hover,
   .maniva-bud:active {
+    transition: none;
     transform: none;
   }
 }
 
-/* Loading: a folha xira devagar como brote nacendo (só sem reduced-motion). */
+/* Loading: anel de borda girando (só sem reduced-motion). */
+.maniva-bud-spinner {
+  width: 1em;
+  height: 1em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  flex: none;
+}
 @media (prefers-reduced-motion: no-preference) {
-  .maniva-bud-spinner svg {
-    animation: maniva-bud-spin 1.4s linear infinite;
+  .maniva-bud-spinner {
+    animation: maniva-bud-spin 900ms linear infinite;
   }
 }
 

@@ -13,30 +13,45 @@ Landing page institucional one-page de **Maniva Software** (`manivasoftware.com.
 ## Scripts
 
 ```sh
-npm install       # instalar dependencias
-npm run dev       # desarrollo con hot-reload
-npm run build     # build de producción (SSG) → dist/
-npm run preview   # servir el build local
+npm install       # instalar dependências
+npm run dev       # desenvolvimento com hot-reload (http://localhost:3000)
+npm run build     # build de produção (SSG) → dist/
+npm run preview   # servir o build local
 npm run lint      # Biome (lint + format --write)
 npm run format    # Biome format
-npm run typecheck # chequeo de tipos TypeScript (tsc --noEmit)
+npm run typecheck # checagem de tipos (tsc --noEmit)
+npm test          # testes com node --test
+npm run verify:build # valida os arquivos obrigatórios do build
 ```
 
-## Estructura
+## Estrutura
 
 ```
 pages/              # Vike filesystem routing (+config, +Layout, +Head, +Page)
 components/
-├── ui/             # componentes base del Design System
-├── layout/         # Header, Footer, Container
-└── sections/       # Hero, Services, HelpMed, Methodology
+├── ui/             # primitivas do Design System (Button, Card, Section, Typography, Icon)
+├── layout/         # Header, Footer, Container, LogoMark, MobileActionBar
+└── sections/       # Hero, Segments, HelpMed, Statement, Method + content.js
+design/
+├── tokens/         # cores, tipografia, efeitos, espaçamento, tema
+└── shapes/         # raios de botão/card/frame
 assets/
 └── css/            # input Tailwind
-data/               # contenido estructurado por sección
-public/             # estáticos servidos tal cual (favicon, icons)
-docs/               # spec y plan de implementación
+public/             # estáticos servidos tal qual (favicon, ícones, OG)
+docs/               # artefatos de trabalho (não versionados)
 ```
+
+## Seções da landing
+
+1. **Hero** — proposta de valor e diagrama de triagem dos três segmentos.
+2. **Soluções** — três cards com CTAs contextuais de WhatsApp.
+3. **HelpMed** — prova própria em produção, com screenshot real e link.
+4. **Princípio** — statement tipográfico com word-highlight acessível.
+5. **Método** — quatro passos e três diferenciais.
+
+Cada CTA de WhatsApp é um link real `wa.me` com mensagem pré-preenchida; o
+tracking nunca bloqueia a navegação.
 
 ## Deploy
 
-Cloudflare Pages via GitHub Actions (se configura en la fase 8 del plan).
+Cloudflare Pages via GitHub Actions (deploy apenas pelo pipeline).

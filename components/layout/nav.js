@@ -1,31 +1,27 @@
 /**
- * Navegación segmentada (§5.2). Enlaces de ancla para la landing one-page,
- * en rótulos pt-BR canónicos (CONTEXT.md: segmentos por dor, no por porte).
- *
- * Los `href` son anclas suaves (`#inicio`, etc.) que el sistema de scroll
- * (`utils/scroll.js`) resuelve contra las secciones de Fase 5.
+ * Navegação da landing one-page — quatro seções e o CTA do header.
+ * Os `href` são âncoras suaves (`#inicio`, ...) resolvidas pelo sistema de
+ * scroll (`utils/scroll.js`) contra as seções da página.
  */
 
 import { defaultMessage } from "./whatsapp.js";
 
-/** Secciones objetivo del scroll spy + navegación. */
+/** Seções alvo do scroll spy + navegação. */
 export const navLinks = [
   { id: "inicio", label: "Início", href: "#inicio" },
-  { id: "pmes", label: "Pessoas e negócios", href: "#pmes" },
-  { id: "empresas", label: "Empresas em crescimento", href: "#empresas" },
-  { id: "projetos", label: "Projetos ambiciosos", href: "#projetos" },
+  { id: "solucoes", label: "Soluções", href: "#solucoes" },
+  { id: "helpmed", label: "HelpMed", href: "#helpmed" },
   { id: "metodo", label: "Como trabalhamos", href: "#metodo" },
 ];
 
-/** CTA superior del header (WhatsApp contextual) — §5.2. */
+/** CTA do header (WhatsApp contextual). */
 export const headerCta = {
-  label: "Conversar agora",
+  label: "Falar no WhatsApp",
   message: defaultMessage,
 };
 
 /**
- * Resolve a seção ativa de um enlace comparando com o id atual
- * (`activeId` do composable useScrollSpy).
+ * Resolve a seção ativa de um enlace comparando com o id atual.
  * @param {{links?: typeof navLinks; currentId?: string|null}} [options]
  * @returns {{id: string, label: string, href: string, active: boolean}[]}
  */
@@ -34,7 +30,7 @@ export function resolveNav({ links = navLinks, currentId = null } = {}) {
 }
 
 /**
- * Crea un array con las secciones a observar del scroll spy (ids no vacíos).
+ * Seções a observar do scroll spy (ids não vazios).
  * @param {typeof navLinks} [links]
  * @returns {string[]}
  */

@@ -1,105 +1,161 @@
+<!--
+  MethodologySection.vue — processo claro e diferenciais.
+
+  Faixa `paper`, timeline de quatro passos com fio de raiz e nós numerados
+  (sem ícones) e três diferenciais com fio superior. Uma ideia por passo.
+-->
 <template>
-  <Section id="metodo" variant="earth" organic :aria-label="'Methodology Section'">
-    <div class="container mx-auto px-6 py-20">
-      <div class="text-center max-w-3xl mx-auto mb-20">
-        <Typography type="heading" level="2" tone="pulp" class="mb-6">
-          Sem surpresas. Processo claro do primeiro contato à entrega
+  <Section id="metodo" variant="paper" aria-label="Como trabalhamos">
+    <Container>
+      <div class="section-head">
+        <p class="t-label">{{ method.label }}</p>
+        <Typography type="heading" level="2" class="section-head__title">
+          {{ method.title }}
         </Typography>
-         <Typography type="body" level="lg" tone="pulp">
-           Trabalhamos com transparência e previsibilidade, para que você tenha controle total sobre o que está sendo construído.
+        <Typography type="body" level="lg" tone="secondary" class="section-head__lead">
+          {{ method.lead }}
         </Typography>
       </div>
 
-      <!-- Timeline -->
-      <div class="relative max-w-5xl mx-auto">
-        <!-- Vertical line with gradient (Mobile) -->
-        <div class="absolute left-8 top-0 bottom-0 w-0.5 lg:left-1/2 lg:-translate-x-1/2" style="background: linear-gradient(to bottom, var(--color-root-100), var(--color-root-300));" />
-
-        <div class="space-y-12 lg:space-y-0">
-          <div v-for="(step, idx) in steps" :key="idx" 
-            :class="[
-              'relative flex flex-col lg:flex-row items-center gap-8 lg:gap-0',
-              idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
-            ]"
-          >
-            <!-- Spacer for desktop alignment -->
-            <div class="hidden lg:block w-1/2" />
-
-            <!-- Step Indicator -->
-            <div class="absolute left-8 lg:left-1/2 lg:-translate-x-1/2 w-12 h-12 rounded-full bg-root-500 flex items-center justify-center text-root-50 z-10 shadow-elevation-2">
-              <Typography type="body" level="sm" weight="bold">{{ idx + 1 }}</Typography>
-            </div>
-
-            <!-- Step Content Card -->
-            <div class="w-full lg:w-1/2 pl-20 lg:pl-0" :class="idx % 2 === 0 ? 'lg:text-right' : 'lg:text-left'">
-              <div class="bg-root-50 p-8 rounded-card shadow-elevation-1 border border-root-100 relative">
-                <Typography type="body" level="lg" weight="bold" class="mb-3">
-                  {{ step.title }}
-                </Typography>
-                <Typography type="body" level="sm" tone="secondary" class="leading-relaxed">
-                  {{ step.desc }}
-                </Typography>
-              </div>
-            </div>
+      <ol class="method-steps">
+        <li v-for="(step, i) in method.steps" :key="step.title" class="method-step">
+          <span class="method-step__num">{{ String(i + 1).padStart(2, "0") }}</span>
+          <div class="method-step__body">
+            <Typography type="heading" level="3">{{ step.title }}</Typography>
+            <p class="method-step__desc">{{ step.desc }}</p>
           </div>
+        </li>
+      </ol>
+
+      <div class="method-diffs">
+        <div v-for="diff in method.differentiators" :key="diff.title" class="method-diff">
+          <Typography type="heading" level="4">{{ diff.title }}</Typography>
+          <p class="method-diff__desc">{{ diff.desc }}</p>
         </div>
       </div>
-
-      <!-- Differentiators -->
-      <div class="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <div v-for="diff in differentiators" :key="diff.title" class="text-center">
-          <div class="w-16 h-16 mx-auto mb-6 bg-root-100 rounded-full flex items-center justify-center text-root-800">
-            <Icon :name="diff.icon" size="32" duotone />
-          </div>
-           <Typography type="body" level="base" tone="pulp" weight="bold" class="mb-2">
-             {{ diff.title }}
-           </Typography>
-           <Typography type="body" level="sm" tone="pulp">
-             {{ diff.desc }}
-          </Typography>
-        </div>
-      </div>
-    </div>
+    </Container>
   </Section>
 </template>
 
-<script setup>
-import { Section, Typography, Icon } from "@ui";
-
-const steps = [
-  {
-    title: "Entendemos",
-    desc: "Mapeamos seu problema, não só requisitos técnicos. O objetivo é entender a dor para propor a melhor solução.",
-  },
-  {
-    title: "Projetamos",
-    desc: "Prototipamos rápido para você validar o design e o fluxo antes de começarmos a codar.",
-  },
-  {
-    title: "Construímos",
-    desc: "Desenvolvimento com entregas semanais. Você acompanha o progresso real ao longo de todo o ciclo.",
-  },
-  {
-    title: "Entregamos",
-    desc: "Código documentado + suporte inicial. Você recebe um sistema pronto para uso e não apenas arquivos.",
-  },
-];
-
-const differentiators = [
-  {
-    title: "Código Limpo",
-    desc: "Documentamos o que construímos. Você herda um sistema, não um problema.",
-    icon: "file-text",
-  },
-  {
-    title: "Performance Obrigatória",
-    desc: "Sites rápidos não são opção, são obrigação para SEO e conversão.",
-    icon: "zap",
-  },
-  {
-    title: "Arquitetura Pensada",
-    desc: "Construímos para hoje, garantindo que o sistema funcione e escale amanhã.",
-    icon: "layers",
-  },
-];
+<script lang="ts" setup>
+import { Section, Typography } from "@ui";
+import Container from "@layout/Container.vue";
+import { method } from "./content.js";
 </script>
+
+<style scoped>
+.section-head {
+  margin-bottom: clamp(2.5rem, 4vw, 3.5rem);
+}
+.section-head__title {
+  margin-top: 1rem;
+  max-width: 40ch;
+}
+.section-head__lead {
+  margin-top: 1.25rem;
+  max-width: 52ch;
+}
+
+.method-steps {
+  position: relative;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+}
+/* Fio vertical no phone. */
+.method-steps::before {
+  content: "";
+  position: absolute;
+  left: 0.875rem;
+  top: 0.875rem;
+  bottom: 0.875rem;
+  width: 1px;
+  background: var(--color-line);
+}
+.method-step {
+  position: relative;
+  padding-left: 3.25rem;
+}
+.method-step__num {
+  position: absolute;
+  left: 0;
+  top: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  border-radius: 50%;
+  border: 1px solid var(--color-ink);
+  background: var(--color-paper);
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--color-ink);
+}
+.method-step__desc {
+  margin-top: 0.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-muted);
+  max-width: 28ch;
+}
+
+@media (min-width: 768px) {
+  .method-steps {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2.5rem 1.5rem;
+  }
+}
+@media (min-width: 1024px) {
+  .method-steps {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  /* Fio horizontal atrás dos nós. */
+  .method-steps::before {
+    left: 0;
+    right: 0;
+    top: 0.875rem;
+    bottom: auto;
+    width: auto;
+    height: 1px;
+  }
+  .method-step {
+    padding-left: 0;
+  }
+  .method-step__body {
+    margin-top: 1.5rem;
+  }
+}
+
+.method-diffs {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 2rem;
+  margin-top: clamp(3rem, 6vw, 5rem);
+}
+@media (min-width: 768px) {
+  .method-diffs {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+.method-diff {
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-line);
+}
+.method-diff__desc {
+  margin-top: 0.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--color-muted);
+  max-width: 32ch;
+}
+</style>
