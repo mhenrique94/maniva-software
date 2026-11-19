@@ -253,6 +253,12 @@ const baseline = footerBaseline();
   text-decoration: underline;
   text-underline-offset: 0.25rem;
 }
+/* O anel de foco aparece de uma vez (sem transição de outline-color). */
+.maniva-footer__contact a,
+.maniva-footer__links a,
+.maniva-footer__email {
+  transition-property: color, background-color, text-decoration-color;
+}
 .maniva-footer__contact a:focus-visible,
 .maniva-footer__links a:focus-visible {
   outline: var(--focus-width) solid var(--focus-inverse-color);

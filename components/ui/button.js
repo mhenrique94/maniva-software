@@ -30,8 +30,7 @@ export const variants = {
     "border",
     "border-bone",
     "hover:bg-leaf-light",
-    "focus-visible:ring-leaf-light",
-    "focus-visible:ring-offset-ink",
+    "focus-visible:outline-leaf-light",
   ],
 };
 
@@ -53,11 +52,9 @@ const baseClasses = [
   "cursor-pointer",
   "transition-[transform,background-color,border-color,color]",
   "duration-150",
-  "focus-visible:outline-none",
-  "focus-visible:ring-2",
-  "focus-visible:ring-leaf",
-  "focus-visible:ring-offset-2",
-  "focus-visible:ring-offset-paper",
+  "focus-visible:outline-2",
+  "focus-visible:outline-leaf",
+  "focus-visible:outline-offset-2",
   "disabled:cursor-not-allowed",
   "disabled:opacity-50",
 ];

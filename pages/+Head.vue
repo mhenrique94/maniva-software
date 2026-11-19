@@ -28,10 +28,6 @@
   <template v-if="stylesheetsInline">
     <style v-for="[href, css] in stylesheetsInline" :key="href" v-html="css"></style>
   </template>
-
-  <!-- GA4 -->
-  <script async :src="`https://www.googletagmanager.com/gtag/js?id=${gaMeasurementId}`"></script>
-  <script v-html="gaInitSnippet"></script>
 </template>
 
 <script setup lang="ts">
@@ -45,12 +41,4 @@ const stylesheetsInline = pageContext?.stylesheetsInline;
 const siteUrl = "https://manivasoftware.com.br";
 const pageUrl = `${siteUrl}${pageContext?.urlPathname ?? "/"}`;
 const isHome = pageContext?.urlPathname === "/";
-
-const gaMeasurementId = import.meta.env.VITE_GA_ID || "G-9HV03VP5FL";
-const gaInitSnippet = `window.dataLayer = window.dataLayer || [];
-function gtag(...args) {
-  dataLayer.push(args);
-}
-gtag("js", new Date());
-gtag("config", "${gaMeasurementId}");`;
 </script>

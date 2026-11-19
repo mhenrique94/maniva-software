@@ -1,3 +1,8 @@
 @import "tailwindcss";
 
+/* Artefatos de trabalho e auditoria não são código: não geram utilities. */
+@source not "../../docs/**";
+@source not "../../.taste-skill/**";
+@source not "../../.lighthouseci/**";
+
 /* @design-tokens */

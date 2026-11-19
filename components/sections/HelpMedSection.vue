@@ -99,14 +99,26 @@ import { ctaLink, trackCta } from "@util/ctaActions";
 }
 @media (width >= 1024px) {
   .helpmed-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+  .helpmed-copy,
+  .helpmed-shot {
+    grid-column: span 6;
   }
 }
 .helpmed-copy {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+}
+.helpmed-title,
+.helpmed-lead,
+.helpmed-facts {
   max-width: 34rem;
+}
+.helpmed-copy .t-label {
+  color: var(--color-muted-dark);
 }
 .helpmed-title {
   margin-top: 1.25rem;

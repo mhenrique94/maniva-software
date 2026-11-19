@@ -25,8 +25,7 @@ test("variante inverse: bone com texto ink para fundo escuro", () => {
   const inverse = buttonClasses({ variant: "inverse" });
   assert.ok(inverse.classes.includes("bg-bone"));
   assert.ok(inverse.classes.includes("text-ink"));
-  assert.ok(inverse.classes.includes("focus-visible:ring-leaf-light"));
-  assert.ok(inverse.classes.includes("focus-visible:ring-offset-ink"));
+  assert.ok(inverse.classes.includes("focus-visible:outline-leaf-light"));
 });
 
 test("alvo de toque de 48px em todos os tamanhos", () => {
@@ -51,7 +50,7 @@ test("base sem animação de escala nem sombra", () => {
   const { classes } = buttonClasses();
   assert.ok(classes.includes("font-ui"));
   assert.ok(classes.includes("font-medium"));
-  assert.ok(classes.includes("focus-visible:ring-2"));
+  assert.ok(classes.includes("focus-visible:outline-2"));
   assert.ok(classes.includes("disabled:cursor-not-allowed"));
   assert.ok(!classes.includes("hover:shadow-elevation-2"));
 });

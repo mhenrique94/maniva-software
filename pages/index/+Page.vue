@@ -5,9 +5,6 @@
   <StatementSection />
   <MethodologySection />
 
-  <!-- Bottom sentinel (scroll spy): força última seção ao fim da página. -->
-  <div aria-hidden="true" data-bottom-sentinel style="height: 1px; margin-top: -1px;"></div>
-
   <Head />
 </template>
 

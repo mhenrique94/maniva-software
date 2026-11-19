@@ -13,7 +13,6 @@
       <a
         href="#inicio"
         class="maniva-brand"
-        aria-label="Maniva Software — ir ao início"
         @click="onAnchor"
       >
         <LogoMark :size="28" />

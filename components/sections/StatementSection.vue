@@ -5,7 +5,7 @@
   Sem CTA.
 -->
 <template>
-  <Section id="principio" variant="paper" aria-label="Princípio">
+  <Section id="principio" variant="paper" class="maniva-statement" aria-label="Princípio">
     <Container>
       <p class="t-label">{{ statement.label }}</p>
       <StatementMoment :text="statement.text" :accent-word="statement.accentWord" />
@@ -19,3 +19,15 @@ import Container from "@layout/Container.vue";
 import StatementMoment from "./StatementMoment.vue";
 import { statement } from "./content.js";
 </script>
+
+<style scoped>
+/* No phone, o princípio também ocupa uma tela inteira (pausa entre provas). */
+@media (max-width: 1023px) {
+  .maniva-statement.maniva-layer {
+    min-height: 100svh;
+    display: flex;
+    align-items: center;
+    padding-block: 6rem 4rem;
+  }
+}
+</style>

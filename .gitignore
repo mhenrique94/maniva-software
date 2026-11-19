@@ -30,3 +30,6 @@ pnpm-debug.log*
 .wrangler/
 .dev.vars*
 !.dev.vars.example
+# Artefatos locais de auditoria
+.taste-skill/
+.lighthouseci/

@@ -18,11 +18,14 @@
   </main>
   <Footer />
   <MobileActionBar />
+
+  <!-- Bottom sentinel (scroll spy): força a última seção ao fim da página. -->
+  <div aria-hidden="true" data-bottom-sentinel style="height: 1px; margin-top: -1px;"></div>
 </template>
 
 <script setup lang="ts">
 import { Header, Footer, MobileActionBar } from "@layout";
-import "@fontsource-variable/fraunces/standard.css";
+import "../assets/css/fonts.css";
 import "@fontsource/figtree/latin-400.css";
 import "@fontsource/figtree/latin-500.css";
 </script>
@@ -43,20 +46,15 @@ import "@fontsource/figtree/latin-500.css";
   font-size: 0.875rem;
   font-weight: 500;
   text-decoration: none;
-  transition: transform 150ms ease;
 }
 .maniva-skip:focus-visible {
   transform: translateY(0);
-  outline: var(--focus-width) solid var(--focus-inverse-color);
+  outline: var(--focus-width) solid var(--focus-color);
   outline-offset: var(--focus-offset);
 }
-main:focus {
-  outline: none;
-}
-@media (prefers-reduced-motion: reduce) {
-  .maniva-skip {
-    transition: none;
-  }
+main:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: calc(-1 * var(--focus-width));
 }
 
 /* Label de prancha: 01 — SOLUÇÕES (único uso de caixa alta). */
@@ -72,7 +70,6 @@ main:focus {
 }
 
 html {
-  scroll-behavior: smooth;
   background: var(--color-paper);
 }
 body {
@@ -101,11 +98,5 @@ ul,
 ol,
 figure {
   margin: 0;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
 }
 </style>

@@ -5,7 +5,7 @@
   card abre uma conversa de WhatsApp com a mensagem do segmento.
 -->
 <template>
-  <Section id="solucoes" variant="surface" aria-label="Soluções">
+  <Section id="solucoes" variant="surface" class="maniva-segments" aria-label="Soluções">
     <Container>
       <div class="section-head">
         <div class="section-head__main">
@@ -56,12 +56,15 @@ import { segments, segmentsNote } from "./content.js";
 }
 @media (width >= 1024px) {
   .section-head {
-    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-columns: repeat(12, minmax(0, 1fr));
     align-items: end;
-    gap: 3rem;
+    gap: 1.5rem;
+  }
+  .section-head__main {
+    grid-column: span 6;
   }
   .section-head__lead {
-    justify-self: end;
+    grid-column: 7 / -1;
   }
 }
 
@@ -93,5 +96,28 @@ import { segments, segmentsNote } from "./content.js";
   font-size: 0.875rem;
   line-height: 1.5;
   color: var(--color-muted);
+}
+
+@media (max-width: 639px) {
+  .section-head {
+    margin-bottom: 2rem;
+  }
+  .segments-grid {
+    gap: 1.25rem;
+  }
+  /* No phone, o card compacto aperta um passo para caber em duas telas. */
+  .segments-grid :deep(.maniva-card) {
+    padding: 1.125rem;
+  }
+  .segments-note {
+    margin-top: 1.5rem;
+  }
+}
+
+/* A seção de soluções ocupa duas telas no phone (--h: 2). */
+@media (max-width: 639px) {
+  .maniva-segments.maniva-layer {
+    min-height: calc(2 * 100svh);
+  }
 }
 </style>

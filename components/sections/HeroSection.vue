@@ -7,45 +7,43 @@
 -->
 <template>
   <Section id="inicio" variant="paper" class="maniva-hero" aria-label="Início">
-    <Container>
-      <div class="hero-grid">
-        <div class="hero-copy hero-enter">
-          <p class="t-label">{{ hero.label }}</p>
-          <Typography type="display" class="hero-title">
-            {{ hero.title }}
-          </Typography>
-          <Typography type="body" level="lg" tone="secondary" class="hero-lead">
-            {{ hero.lead }}
-          </Typography>
-          <div class="hero-actions">
-            <Button
-              as="a"
-              :href="ctaLink('hero')"
-              variant="primary"
-              leading-icon="whatsapp"
-              target="_blank"
-              rel="noopener"
-              data-hero-cta
-              @click="trackCta('hero_primary_cta', 'all')"
-            >
-              {{ hero.primary }}
-            </Button>
-            <Button as="a" href="#solucoes" variant="secondary">
-              {{ hero.secondary }}
-            </Button>
-          </div>
-          <a
-            class="hero-proof"
-            :href="helpMed.href"
+    <Container class="hero-grid">
+      <div class="hero-copy hero-text hero-enter">
+        <p class="t-label">{{ hero.label }}</p>
+        <Typography type="display" class="hero-title">
+          {{ hero.title }}
+        </Typography>
+        <Typography type="body" level="lg" tone="secondary" class="hero-lead">
+          {{ hero.lead }}
+        </Typography>
+        <div class="hero-actions">
+          <Button
+            as="a"
+            :href="ctaLink('hero')"
+            variant="primary"
+            leading-icon="whatsapp"
             target="_blank"
             rel="noopener"
+            data-hero-cta
+            @click="trackCta('hero_primary_cta', 'all')"
           >
-            {{ hero.proof }} ↗
-          </a>
+            {{ hero.primary }}
+          </Button>
+          <Button as="a" href="#solucoes" variant="secondary">
+            {{ hero.secondary }}
+          </Button>
         </div>
-
-        <RootDiagram class="hero-diagram" />
+        <a
+          class="hero-proof"
+          :href="helpMed.href"
+          target="_blank"
+          rel="noopener"
+        >
+          {{ hero.proof }} ↗
+        </a>
       </div>
+
+      <RootDiagram class="hero-diagram" />
     </Container>
   </Section>
 </template>
@@ -68,13 +66,21 @@ import { ctaLink, trackCta } from "@util/ctaActions";
 }
 .hero-grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: clamp(2.5rem, 5vw, 4rem);
   align-items: start;
 }
 @media (width >= 1024px) {
   .hero-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 1.5rem;
     align-items: stretch;
+  }
+  .hero-text {
+    grid-column: span 6;
+  }
+  .hero-diagram {
+    grid-column: span 6;
   }
 }
 .hero-copy {
@@ -126,12 +132,23 @@ import { ctaLink, trackCta } from "@util/ctaActions";
 
 @media (max-width: 1023px) {
   .maniva-hero.maniva-layer {
-    min-height: auto;
-    padding-block: 96px 48px;
+    /* No tablet e no phone o hero continua sozinho na primeira tela. */
+    min-height: 100svh;
+    padding-block: 84px 36px;
+  }
+  .hero-lead {
+    margin-top: 1.125rem;
+  }
+  .hero-actions {
+    margin-top: 1.875rem;
+  }
+  .hero-proof {
+    margin-top: 1.125rem;
   }
 }
 
-/* Entrada única do hero: opacidade + 8px. */
+/* Entrada única do hero: as linhas sobem 8px (sem tocar a opacidade — o
+   texto precisa estar pintado no primeiro frame para o LCP). */
 @media (prefers-reduced-motion: no-preference) {
   .hero-enter {
     animation: hero-enter 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -139,11 +156,9 @@ import { ctaLink, trackCta } from "@util/ctaActions";
 }
 @keyframes hero-enter {
   from {
-    opacity: 0;
     transform: translateY(8px);
   }
   to {
-    opacity: 1;
     transform: none;
   }
 }

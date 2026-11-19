@@ -1,0 +1,16 @@
+/*
+ * Fontes self-hosted (Raiz Firme).
+ *
+ * A Fraunces é carregada como um único arquivo variável latin — o
+ * `standard.css` do pacote declara também os subsets latin-ext e vietnamese,
+ * que não são usados em pt-BR e só adicionam requisições ao caminho crítico.
+ * A Figtree 400/500 vem dos CSS `latin-*` do @fontsource (um arquivo cada).
+ */
+@font-face {
+  font-family: "Fraunces Variable";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 100 900;
+  src: url("@fontsource-variable/fraunces/files/fraunces-latin-standard-normal.woff2")
+    format("woff2-variations");
+}
