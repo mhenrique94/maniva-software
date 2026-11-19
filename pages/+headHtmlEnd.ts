@@ -16,7 +16,7 @@ function jsonLd(data: unknown): string {
  * (o LCP da página) no caminho crítico.
  */
 function gaSnippet(): string {
-  const id = process.env.VITE_GA_ID || "G-9HV03VP5FL";
+  const id = import.meta.env.VITE_GA_ID || "G-9HV03VP5FL";
   return `<script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}

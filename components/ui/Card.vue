@@ -63,6 +63,7 @@ const classes = cardClasses({
   .maniva-card {
     transition: none !important;
     transform: none !important;
+    translate: none !important;
   }
 }
 </style>

@@ -61,7 +61,7 @@ import { ctaLink, trackCta } from "@util/ctaActions";
 .maniva-hero.maniva-layer {
   min-height: 100svh;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   padding-block: 120px 64px;
 }
 .hero-grid {

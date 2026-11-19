@@ -112,15 +112,16 @@ onUnmounted(() => {
 :global(html.mo-js .mo-wh__word.is-on) {
   color: var(--color-ink);
 }
-:global(html.mo-js .mo-wh__accent.is-on) {
-  color: var(--color-leaf);
-}
-:global(html.mo-js .mo-wh__accent:not(.is-on)) {
-  color: var(--color-muted);
-}
+/* A palavra de acento segue o estado da palavra que a contém. */
 .mo-wh__accent {
   font-weight: 400;
   color: var(--color-leaf);
+}
+:global(html.mo-js .mo-wh__word.is-on .mo-wh__accent) {
+  color: var(--color-leaf);
+}
+:global(html.mo-js .mo-wh__word:not(.is-on) .mo-wh__accent) {
+  color: var(--color-muted);
 }
 
 @media (prefers-reduced-motion: reduce) {

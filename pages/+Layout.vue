@@ -63,14 +63,19 @@ main:focus-visible {
   font-family: var(--font-ui);
   font-size: var(--text-label);
   line-height: var(--text-label--line-height);
-  letter-spacing: 0.08em;
+  letter-spacing: var(--text-label--letter-spacing);
   font-weight: 500;
   text-transform: uppercase;
   color: var(--color-muted);
 }
 
 html {
+  scroll-behavior: smooth;
   background: var(--color-paper);
+}
+/* Teclado: o foco salta direto para o elemento, sem animação de rolagem. */
+html:has(:focus-visible) {
+  scroll-behavior: auto;
 }
 body {
   margin: 0;
@@ -98,5 +103,16 @@ ul,
 ol,
 figure {
   margin: 0;
+}
+
+/* Menu mobile aberto: a barra de ação sai da tela e do foco. */
+body:has(#maniva-menu-panel) .maniva-actionbar {
+  display: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 </style>
