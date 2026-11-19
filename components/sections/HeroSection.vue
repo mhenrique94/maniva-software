@@ -1,94 +1,155 @@
+<!--
+  HeroSection.vue — "Raiz Firme".
+
+  Split 6/6: proposta de valor à esquerda, diagrama de triagem à direita.
+  A primeira tela é só o hero; a entrada é uma única animação (8px, 600ms),
+  sempre gated por `prefers-reduced-motion`.
+-->
 <template>
-  <Section id="inicio" variant="pulp" organic :aria-label="'Início'">
-    <div class="maniva-hero container mx-auto px-6 flex flex-col items-center text-center relative overflow-hidden">
-      <!-- Background Organic Roots Decoration -->
-      <div class="absolute inset-0 -z-10 pointer-events-none opacity-10">
-        <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%]" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M400 100 C350 200, 300 250, 250 350 C200 450, 180 500, 200 550" stroke="var(--color-root-500)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-          <path d="M400 100 C450 200, 500 250, 550 350 C600 450, 620 500, 600 550" stroke="var(--color-root-500)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
-          <path d="M400 100 C380 180, 360 220, 340 300 C320 380, 310 420, 320 480" stroke="var(--color-root-500)" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
-          <path d="M400 100 C420 180, 440 220, 460 300 C480 380, 490 420, 480 480" stroke="var(--color-root-500)" stroke-width="1.5" stroke-linecap="round" opacity="0.4"/>
-          <circle cx="400" cy="100" r="4" fill="var(--color-root-500)" opacity="0.5"/>
-        </svg>
+  <Section id="inicio" variant="paper" class="maniva-hero" aria-label="Início">
+    <Container>
+      <div class="hero-grid">
+        <div class="hero-copy hero-enter">
+          <p class="t-label">{{ hero.label }}</p>
+          <Typography type="display" class="hero-title">
+            {{ hero.title }}
+          </Typography>
+          <Typography type="body" level="lg" tone="secondary" class="hero-lead">
+            {{ hero.lead }}
+          </Typography>
+          <div class="hero-actions">
+            <Button
+              as="a"
+              :href="ctaLink('hero')"
+              variant="primary"
+              leading-icon="whatsapp"
+              target="_blank"
+              rel="noopener"
+              data-hero-cta
+              @click="trackCta('hero_primary_cta', 'all')"
+            >
+              {{ hero.primary }}
+            </Button>
+            <Button as="a" href="#solucoes" variant="secondary">
+              {{ hero.secondary }}
+            </Button>
+          </div>
+          <a
+            class="hero-proof"
+            :href="helpMed.href"
+            target="_blank"
+            rel="noopener"
+          >
+            {{ hero.proof }} ↗
+          </a>
+        </div>
+
+        <RootDiagram class="hero-diagram" />
       </div>
-
-      <p class="maniva-hero__eyebrow">
-        Produto próprio de IA em produção&nbsp;· Atendimento remoto no Brasil
-      </p>
-
-      <Typography type="display" weight="semibold" class="maniva-hero__title">
-        <span class="text-root-500">Software sob medida</span> para o seu negócio, do site simples ao sistema complexo.
-      </Typography>
-
-      <Typography type="body" level="lg" tone="secondary" class="maniva-hero__lead">
-        Desenvolvimento web, modernização de sistemas e projetos de IA complexos, com a engenharia de quem já colocou uma plataforma de IA em produção.
-      </Typography>
-
-      <div class="maniva-hero__cta flex flex-col sm:flex-row gap-4">
-        <Button
-          as="a"
-          :href="ctaLink('hero')"
-          variant="primary"
-          size="lg"
-          target="_blank"
-          rel="noopener"
-          @click="trackCta('hero_primary_cta', 'all')"
-        >
-          Conversar sobre meu projeto
-        </Button>
-      </div>
-    </div>
+    </Container>
   </Section>
 </template>
 
-<script setup>
+<script lang="ts" setup>
 import { Button, Section, Typography } from "@ui";
+import Container from "@layout/Container.vue";
+import RootDiagram from "./RootDiagram.vue";
+import { helpMed, hero } from "./content.js";
 import { ctaLink, trackCta } from "@util/ctaActions";
 </script>
 
 <style scoped>
-/* Hero "Escala editorial": o display do Cormorant domina e o CTA recua.
-   A altura mínima desconta o header sticky para o hero ocupar a primeira
-   tela em qualquer largura, sem esconder o CTA no mobile. */
-.maniva-hero {
-  min-height: calc(100svh - var(--maniva-header-height, 4.125rem));
-  justify-content: center;
-  padding-block: clamp(3rem, 7vw, 7.5rem);
+/* O hero vence o padding padrão da Section e ocupa exatamente 1 tela. */
+.maniva-hero.maniva-layer {
+  min-height: 100svh;
+  display: flex;
+  align-items: center;
+  padding-block: 120px 64px;
 }
-.maniva-hero__eyebrow {
-  margin: 0 0 1.5rem;
-  font-family: var(--font-ui);
-  font-size: 0.75rem;
-  font-weight: 600;
-  line-height: 1.5;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--color-text-secondary);
-  text-wrap: balance;
+.hero-grid {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  align-items: start;
 }
-.maniva-hero__title {
-  max-width: 62rem;
-  margin-bottom: 1.75rem;
-  /* Preserva o teto do token display-2 (3.375rem) e reduz só no mobile. */
-  font-size: clamp(2.375rem, 6.1vw + 0.55rem, var(--text-display-2));
-  line-height: 1.05;
-  letter-spacing: -0.03em;
-  text-wrap: balance;
+@media (width >= 1024px) {
+  .hero-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
 }
-.maniva-hero__lead {
+.hero-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   max-width: 36rem;
-  line-height: 1.7;
-  text-wrap: pretty;
 }
-.maniva-hero__cta {
+.hero-title {
+  margin-top: 1.5rem;
+}
+.hero-lead {
+  margin-top: 1.5rem;
+  max-width: 42ch;
+}
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
   margin-top: 2.25rem;
 }
-@media (width <= 639px) {
-  .maniva-hero__cta {
-    width: 100%;
+.hero-proof {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  margin-top: 1.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  text-decoration: none;
+}
+.hero-proof:hover {
+  color: var(--color-ink);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+.hero-proof:focus-visible {
+  outline: var(--focus-width) solid var(--focus-color);
+  outline-offset: var(--focus-offset);
+}
+.hero-diagram {
+  min-height: 0;
+}
+@media (width >= 1024px) {
+  .hero-diagram {
+    align-self: center;
   }
-  .maniva-hero__cta :deep(.maniva-bud) {
-    width: 100%;
+}
+
+@media (max-width: 1023px) {
+  .maniva-hero.maniva-layer {
+    min-height: auto;
+    padding-block: 96px 48px;
+  }
+}
+
+/* Entrada única do hero: opacidade + 8px. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-enter {
+    animation: hero-enter 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+@keyframes hero-enter {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-enter {
+    animation: none;
   }
 }
 </style>
