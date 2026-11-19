@@ -90,7 +90,6 @@
       </div>
 
       <div class="maniva-footer__base">
-        <p>Sistemas com raízes sólidas para crescer com propósito.</p>
         <p>{{ baseline }}</p>
         <p>{{ remoteLine }}</p>
       </div>
@@ -130,7 +129,7 @@ const baseline = footerBaseline();
     align-items: center;
   }
   .maniva-footer > :deep(.maniva-container) {
-    width: 100%;
+    margin-block: auto;
   }
 }
 
