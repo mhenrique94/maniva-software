@@ -105,25 +105,30 @@ onUnmounted(() => {
 }
 
 /* Com JS, o texto começa em muted (5,48:1, AA) e ganha tinta ao entrar. */
-:global(html.mo-js) .mo-wh__word {
+:global(html.mo-js .mo-wh__word) {
   color: var(--color-muted);
   transition: color 200ms linear;
 }
-:global(html.mo-js) .mo-wh__word.is-on {
+:global(html.mo-js .mo-wh__word.is-on) {
   color: var(--color-ink);
 }
-:global(html.mo-js) .mo-wh__accent.is-on,
+:global(html.mo-js .mo-wh__accent.is-on) {
+  color: var(--color-leaf);
+}
+:global(html.mo-js .mo-wh__accent:not(.is-on)) {
+  color: var(--color-muted);
+}
 .mo-wh__accent {
   font-weight: 400;
   color: var(--color-leaf);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  :global(html.mo-js) .mo-wh__word {
+  :global(html.mo-js .mo-wh__word) {
     color: var(--color-ink);
     transition: none;
   }
-  :global(html.mo-js) .mo-wh__accent {
+  :global(html.mo-js .mo-wh__accent) {
     color: var(--color-leaf);
   }
 }

@@ -1,3 +1,12 @@
+/**
+ * Structured data (JSON-LD) da Maniva Software.
+ *
+ * `Organization` descreve a empresa (marca, razão social, CNPJ, atuação
+ * remota no Brasil); `SoftwareApplication` descreve o HelpMed como produto
+ * próprio; `WebSite` descreve a landing. Não há `FAQPage`: não existe FAQ
+ * visível na página.
+ */
+
 export const getOrganizationSchema = () => ({
   "@context": "https://schema.org",
   "@type": "Organization",
@@ -6,6 +15,9 @@ export const getOrganizationSchema = () => ({
   taxId: "66.739.634/0001-79",
   url: "https://manivasoftware.com.br",
   sameAs: ["https://www.linkedin.com/company/maniva-software"],
+  areaServed: "BR",
+  description:
+    "Sites, sistemas e produtos de IA sob medida. Engenharia de quem colocou o HelpMed em produção. Atendimento remoto em todo o Brasil.",
 });
 
 export const getHelpMedSchema = () => ({
@@ -14,73 +26,23 @@ export const getHelpMedSchema = () => ({
   name: "HelpMed",
   applicationCategory: "ResearchApplication",
   operatingSystem: "Web",
+  description:
+    "Plataforma de IA para pesquisa e síntese de literatura médica, com busca em PubMed e SciELO.",
   author: {
+    "@type": "Organization",
+    name: "Maniva Software",
+  },
+  publisher: {
     "@type": "Organization",
     name: "Maniva Software",
   },
   url: "https://helpmed.app",
 });
 
-export const getFAQSchema = (
-  faqs: Array<{ question: string; answer: string }>,
-) => ({
+export const getWebSiteSchema = () => ({
   "@context": "https://schema.org",
-  "@type": "FAQPage",
-  mainEntity: faqs.map((faq) => ({
-    "@type": "Question",
-    name: faq.question,
-    acceptedAnswer: {
-      "@type": "Answer",
-      text: faq.answer,
-    },
-  })),
+  "@type": "WebSite",
+  name: "Maniva Software",
+  url: "https://manivasoftware.com.br",
+  inLanguage: "pt-BR",
 });
-
-export const FAQ_QUESTIONS = [
-  {
-    question:
-      "Qual a diferença entre uma consultoria de software e uma fábrica de software tradicional?",
-    answer:
-      "Uma consultoria foca em entender o problema de negócio e desenhar a solução ideal, enquanto uma fábrica foca em volume de produção de código seguindo especificações pré-definidas.",
-  },
-  {
-    question:
-      "Quando devo desenvolver um software sob medida em vez de assinar um sistema pronto (SaaS)?",
-    answer:
-      "Quando seus processos de negócio são diferenciais competitivos e um sistema genérico limita seu crescimento ou introduz ineficiências operacionais.",
-  },
-  {
-    question: "Quanto custa o desenvolvimento de um software personalizado?",
-    answer:
-      "O custo varia conforme a complexidade, mas focamos em transparência e previsibilidade, alinhando o investimento ao valor de negócio gerado.",
-  },
-  {
-    question: "Qual é o tempo médio para a entrega de um sistema?",
-    answer:
-      "Trabalhamos com entregas incrementais e ágeis, permitindo que você veja valor e utilize partes do sistema muito antes da conclusão total do projeto.",
-  },
-  {
-    question:
-      "Como a Maniva Software integra Inteligência Artificial (LLMs) em sistemas corporativos?",
-    answer:
-      "Utilizamos IA para automação de processos complexos, síntese de dados e suporte à decisão, integrando modelos de linguagem diretamente no fluxo de trabalho existente.",
-  },
-  {
-    question:
-      "É possível modernizar e integrar novas tecnologias em um sistema legado antigo?",
-    answer:
-      "Sim, nossa especialidade é a modernização de sistemas, permitindo que tecnologias modernas coexistam e se integrem com sua infraestrutura atual sem interrupções críticas.",
-  },
-  {
-    question:
-      "De quem é a propriedade do código-fonte após a conclusão do projeto?",
-    answer:
-      "O código-fonte é de propriedade total do cliente, garantindo independência tecnológica e controle sobre seu ativo digital.",
-  },
-  {
-    question:
-      "O que acontece após o lançamento do software? Vocês oferecem suporte?",
-    answer:
-      "Sim, oferecemos suporte contínuo e contratos de manutenção para garantir que seu software evolua e permaneça seguro e performático.",
-  },
-];

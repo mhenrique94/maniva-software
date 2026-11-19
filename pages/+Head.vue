@@ -24,7 +24,6 @@
   <meta name="page-type" content="service" />
   <meta name="site-kind" content="other" />
   <link v-if="isHome" rel="canonical" :href="siteUrl + '/'" />
-  <component :is="'script'" v-text="moJsInit"></component>
 
   <template v-if="stylesheetsInline">
     <style v-for="[href, css] in stylesheetsInline" :key="href" v-html="css"></style>
@@ -48,8 +47,6 @@ const pageUrl = `${siteUrl}${pageContext?.urlPathname ?? "/"}`;
 const isHome = pageContext?.urlPathname === "/";
 
 const gaMeasurementId = import.meta.env.VITE_GA_ID || "G-9HV03VP5FL";
-// Marca o documento antes do paint: o CSS do statement usa `html.mo-js`.
-const moJsInit = 'document.documentElement.classList.add("mo-js");';
 const gaInitSnippet = `window.dataLayer = window.dataLayer || [];
 function gtag(...args) {
   dataLayer.push(args);

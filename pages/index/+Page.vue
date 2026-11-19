@@ -8,9 +8,6 @@
   <!-- Bottom sentinel (scroll spy): força última seção ao fim da página. -->
   <div aria-hidden="true" data-bottom-sentinel style="height: 1px; margin-top: -1px;"></div>
 
-  <!-- Page Structured Data -->
-  <component :is="'script'" type="application/ld+json" v-text="JSON.stringify(helpMedSchema)" />
-
   <Head />
 </template>
 
@@ -19,7 +16,6 @@ import HeroSection from "../../components/sections/HeroSection.vue";
 import SegmentsSection from "../../components/sections/SegmentsSection.vue";
 import StatementSection from "../../components/sections/StatementSection.vue";
 import { defineAsyncComponent } from "vue";
-import { getHelpMedSchema } from "@util/structuredData";
 import { Head } from "vike-vue/Head";
 
 const HelpMedSection = defineAsyncComponent(
@@ -28,6 +24,4 @@ const HelpMedSection = defineAsyncComponent(
 const MethodologySection = defineAsyncComponent(
   () => import("../../components/sections/MethodologySection.vue"),
 );
-
-const helpMedSchema = getHelpMedSchema();
 </script>

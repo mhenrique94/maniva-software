@@ -18,19 +18,13 @@
   </main>
   <Footer />
   <MobileActionBar />
-
-  <!-- Global Structured Data -->
-  <component :is="'script'" type="application/ld+json" v-text="JSON.stringify(organizationSchema)" />
 </template>
 
 <script setup lang="ts">
 import { Header, Footer, MobileActionBar } from "@layout";
-import { getOrganizationSchema } from "@util/structuredData";
 import "@fontsource-variable/fraunces/standard.css";
 import "@fontsource/figtree/latin-400.css";
 import "@fontsource/figtree/latin-500.css";
-
-const organizationSchema = getOrganizationSchema();
 </script>
 
 <style>

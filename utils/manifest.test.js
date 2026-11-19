@@ -34,14 +34,14 @@ test("comportamento de app", () => {
 
 test("ícones PWA quadrados 1:1 com dimensões reais", () => {
   const expected = new Map([
-    ["images/icons/icon-72x72.png", "79x79"],
-    ["images/icons/icon-96x96.png", "106x106"],
-    ["images/icons/icon-128x128.png", "141x141"],
-    ["images/icons/icon-144x144.png", "158x158"],
-    ["images/icons/icon-152x152.png", "167x167"],
-    ["images/icons/icon-192x192.png", "211x211"],
-    ["images/icons/icon-384x384.png", "422x422"],
-    ["images/icons/icon-512x512.png", "563x563"],
+    ["images/icons/icon-72x72.png", "72x72"],
+    ["images/icons/icon-96x96.png", "96x96"],
+    ["images/icons/icon-128x128.png", "128x128"],
+    ["images/icons/icon-144x144.png", "144x144"],
+    ["images/icons/icon-152x152.png", "152x152"],
+    ["images/icons/icon-192x192.png", "192x192"],
+    ["images/icons/icon-384x384.png", "384x384"],
+    ["images/icons/icon-512x512.png", "512x512"],
   ]);
   assert.equal(manifest.icons.length, expected.size);
   for (const icon of manifest.icons) {
