@@ -1,155 +1,191 @@
-<template>
-  <Section id="projetos" variant="vitality" organic :aria-label="'Projetos ambiciosos'">
-    <div class="container mx-auto px-6 py-20">
-      <div class="text-center max-w-4xl mx-auto mb-12">
-        <Typography type="heading" level="2" class="text-balance mb-6">
-          Nosso terreno favorito: projetos que outros chamariam de impossíveis.
-        </Typography>
-        <Typography type="body" level="lg" class="text-root-800 text-balance">
-          IA complexa não é promessa: é produto nosso em produção.
-        </Typography>
-      </div>
+<!--
+  HelpMedSection.vue — a prova própria em produção.
 
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center max-w-6xl mx-auto">
-        <!-- Prova: a interface real do HelpMed, no maior tamanho que a coluna permite. -->
-        <div class="lg:col-span-7">
-          <div class="maniva-helpmed__shot bg-root-50 rounded-card border border-root-100 shadow-elevation-2 overflow-hidden p-3 lg:p-4">
+  Faixa `ink` (única faixa escura de conteúdo), split 6/6: texto à esquerda,
+  screenshot real à direita (nunca espelhar). O screenshot é a única prova
+  visual da página; o link cross-domain beneficia o SEO da HelpMed.
+-->
+<template>
+  <Section id="helpmed" variant="ink" aria-label="Prova HelpMed">
+    <Container>
+      <div class="helpmed-grid">
+        <div class="helpmed-copy">
+          <p class="t-label">{{ helpMed.label }}</p>
+          <Typography type="heading" level="2" tone="on-dark" class="helpmed-title">
+            {{ helpMed.title }}
+          </Typography>
+          <Typography
+            type="body"
+            level="lg"
+            tone="on-dark"
+            class="helpmed-lead"
+          >
+            {{ helpMed.lead }}
+          </Typography>
+
+          <ul class="helpmed-facts">
+            <li v-for="fact in helpMed.facts" :key="fact">{{ fact }}</li>
+          </ul>
+
+          <a
+            class="helpmed-link"
+            :href="helpMed.href"
+            target="_blank"
+            rel="noopener"
+          >
+            {{ helpMed.link }} ↗
+          </a>
+
+          <div class="helpmed-action">
+            <Button
+              as="a"
+              :href="ctaLink('helpmed')"
+              variant="inverse"
+              leading-icon="whatsapp"
+              target="_blank"
+              rel="noopener"
+              @click="trackCta('helpmed_showcase_cta', 'ambitious_projects')"
+            >
+              {{ helpMed.cta }}
+            </Button>
+          </div>
+        </div>
+
+        <figure class="helpmed-shot">
+          <p class="t-label helpmed-shot__label">helpmed.app · em produção</p>
+          <a
+            class="helpmed-shot__link"
+            :href="helpMed.href"
+            target="_blank"
+            rel="noopener"
+          >
             <picture>
               <source
                 srcset="/images/screenshot_pubmed-scielo-400.avif 400w, /images/screenshot_pubmed-scielo-800.avif 800w"
-                sizes="(max-width: 1024px) 100vw, 640px"
+                sizes="(max-width: 1024px) 100vw, 628px"
                 type="image/avif"
               />
               <img
                 src="/images/screenshot_pubmed-scielo-800.webp"
                 srcset="/images/screenshot_pubmed-scielo-400.webp 400w, /images/screenshot_pubmed-scielo-800.webp 800w"
-                sizes="(max-width: 1024px) 100vw, 640px"
-                alt="Interface do HelpMed.app com busca em PubMed e SciELO e síntese de artigos médicos"
+                sizes="(max-width: 1024px) 100vw, 628px"
+                :alt="helpMed.imageAlt"
                 width="800"
                 height="507"
-                loading="lazy"
+                loading="eager"
+                fetchpriority="low"
                 decoding="async"
-                class="w-full h-auto rounded-[6px] border border-root-100"
               />
             </picture>
-          </div>
-        </div>
-
-        <div class="lg:col-span-5 space-y-6 max-w-2xl">
-          <a
-            href="https://helpmed.app"
-            target="_blank"
-            rel="noopener"
-            class="maniva-helpmed__brand"
-          >
-            <span class="maniva-helpmed__mark">
-              <Icon name="brain" size="28" duotone />
-            </span>
-            <span class="maniva-helpmed__name">HelpMed.app</span>
-            <Icon name="arrow-right" size="18" duotone aria-hidden="true" />
           </a>
-
-          <Typography type="body" level="2xl" weight="bold" tone="primary" class="leading-snug text-balance">
-            IA, processamento de dados e sistemas especializados.
-          </Typography>
-
-          <Typography type="body" level="base" class="text-root-800">
-            O HelpMed é produto nosso: uma plataforma de IA que processa milhares de artigos médicos e devolve síntese útil a pesquisadores. Em produção, não em protótipo.
-          </Typography>
-
-          <ul class="maniva-helpmed__list">
-            <li v-for="item in helpMedCapabilities" :key="item">
-              <span class="maniva-helpmed__check">
-                <Icon name="check" size="14" duotone />
-              </span>
-              <Typography type="body" level="base" tone="primary">{{ item }}</Typography>
-            </li>
-          </ul>
-
-          <div class="pt-2">
-            <Button
-              as="a"
-              :href="ctaLink('helpmed')"
-              variant="primary"
-              size="lg"
-              target="_blank"
-              rel="noopener"
-              @click="trackCta('helpmed_showcase_cta', 'ambitious_projects')"
-            >
-              Tenho um projeto desafiador
-            </Button>
-          </div>
-        </div>
+        </figure>
       </div>
-    </div>
+    </Container>
   </Section>
 </template>
 
-<script setup>
-import { Button, Section, Typography, Icon } from "@ui";
+<script lang="ts" setup>
+import { Button, Section, Typography } from "@ui";
+import Container from "@layout/Container.vue";
+import { helpMed } from "./content.js";
 import { ctaLink, trackCta } from "@util/ctaActions";
-
-const helpMedCapabilities = [
-  "Processamento de documentos complexos",
-  "Busca contextual em bases de artigos",
-  "Processamento em escala",
-];
 </script>
 
 <style scoped>
-.maniva-helpmed__shot img {
-  display: block;
+.helpmed-grid {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4rem);
+  align-items: start;
 }
-.maniva-helpmed__brand {
+@media (width >= 1024px) {
+  .helpmed-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.helpmed-copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 34rem;
+}
+.helpmed-title {
+  margin-top: 1.25rem;
+}
+.helpmed-lead {
+  margin-top: 1.5rem;
+  color: var(--color-muted-dark);
+}
+.helpmed-facts {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  width: 100%;
+}
+.helpmed-facts li {
+  padding-block: 0.75rem;
+  border-top: 1px solid var(--color-line-dark);
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: var(--color-bone);
+}
+.helpmed-facts li:last-child {
+  border-bottom: 1px solid var(--color-line-dark);
+}
+.helpmed-link {
   display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  color: var(--color-root-800);
+  min-height: 2.75rem;
+  margin-top: 1.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-bone);
   text-decoration: none;
 }
-.maniva-helpmed__mark {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 3rem;
-  height: 3rem;
-  border-radius: 0.75rem;
-  background-color: var(--color-root-100);
-  color: var(--color-root-800);
-  flex: none;
-}
-.maniva-helpmed__name {
-  font-family: var(--font-ui);
-  font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1.2;
-}
-.maniva-helpmed__brand:hover .maniva-helpmed__name {
+.helpmed-link:hover {
+  color: var(--color-leaf-light);
   text-decoration: underline;
   text-underline-offset: 0.25rem;
 }
-.maniva-helpmed__list {
-  list-style: none;
+.helpmed-link:focus-visible,
+.helpmed-shot__link:focus-visible {
+  outline: var(--focus-width) solid var(--focus-inverse-color);
+  outline-offset: var(--focus-offset);
+}
+.helpmed-action {
+  margin-top: 1.5rem;
+}
+
+.helpmed-shot {
   margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 0.75rem;
 }
-.maniva-helpmed__list li {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.helpmed-shot__label {
+  margin-bottom: 0.75rem;
+  color: var(--color-muted-dark);
 }
-.maniva-helpmed__check {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 1.5rem;
-  height: 1.5rem;
-  border-radius: 999px;
-  background-color: color-mix(in srgb, var(--color-leaf-500) 12%, transparent);
-  color: var(--color-leaf-500);
-  flex: none;
+.helpmed-shot__link {
+  display: block;
+  overflow: hidden;
+  border: 1px solid var(--color-line-dark);
+  border-radius: var(--radius-frame);
+  background: var(--color-paper-2);
+}
+.helpmed-shot__link img {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition: transform 200ms ease;
+}
+.helpmed-shot__link:hover img {
+  transform: scale(1.02);
+}
+@media (prefers-reduced-motion: reduce) {
+  .helpmed-shot__link img {
+    transition: none;
+  }
+  .helpmed-shot__link:hover img {
+    transform: none;
+  }
 }
 </style>

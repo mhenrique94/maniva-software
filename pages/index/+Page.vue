@@ -2,6 +2,7 @@
   <HeroSection />
   <SegmentsSection />
   <HelpMedSection />
+  <StatementSection />
   <MethodologySection />
 
   <!-- Bottom sentinel (scroll spy): força última seção ao fim da página. -->
@@ -17,6 +18,7 @@
 <script setup lang="ts">
 import HeroSection from "../../components/sections/HeroSection.vue";
 import SegmentsSection from "../../components/sections/SegmentsSection.vue";
+import StatementSection from "../../components/sections/StatementSection.vue";
 import { defineAsyncComponent } from "vue";
 import {
   getFAQSchema,
