@@ -3,9 +3,12 @@
 
   O desenho é decorativo (`aria-hidden`): tronco, três ramos e raízes. A lista
   é a interface real — três links de âncora que levam aos cards de segmento.
-  No desktop o desenho aparece a 240px e cada linha da lista senta na altura do
-  seu nó (`nth-child` → `top` em % da altura do desenho, casando com o `cy` do
-  SVG); abaixo disso, só a lista com um fio vertical e nós.
+
+  Mesmo componente pai para os dois, e o tópico fica sempre ao lado do
+  desenho: cada linha senta na altura do seu nó (`nth-child` → `top` em % da
+  altura do desenho, casando com o `cy` do SVG). O desenho e os tópicos só
+  somem juntos: no phone (<600) a lista com fio vertical e nós é o desenho
+  em forma de lista.
 -->
 <template>
   <div class="root-diagram">
@@ -61,6 +64,7 @@ import { rootMap } from "./content.js";
 .root-diagram {
   position: relative;
   display: grid;
+  gap: 1.75rem;
   align-self: stretch;
   align-items: center;
   color: var(--color-ink);
@@ -151,18 +155,21 @@ import { rootMap } from "./content.js";
   transform: translateX(3px);
 }
 
-@media (width >= 1200px) {
+/*
+  Lado a lado em toda largura em que os dois cabem (>=600): o tópico nunca
+  sai de beside do desenho. Cada linha senta na altura do seu nó
+  (150/280/400 de 640 = 23,4375% / 43,75% / 62,5%).
+*/
+@media (width >= 600px) {
   .root-diagram {
     grid-template-columns: 15rem minmax(0, 1fr);
     gap: 2rem;
-    /* O desenho define a altura; os nós ficam em 150/280/400 de 640
-       (23,4375% / 43,75% / 62,5%) e as linhas sentam exatamente neles. */
-    height: clamp(30rem, calc(100svh - 11.5rem), 34rem);
   }
   .root-diagram__drawing {
     display: block;
     width: 100%;
     height: 100%;
+    justify-self: stretch;
     color: var(--color-ink);
   }
   .root-diagram__list {
@@ -191,6 +198,30 @@ import { rootMap } from "./content.js";
   }
   .root-diagram__link::before {
     display: none;
+  }
+}
+
+/* Tablet em pé: o bloco ocupa a largura toda e cabe em uma tela do hero. */
+@media (600px <= width < 1024px) {
+  .root-diagram {
+    height: clamp(24rem, 58svh, 29rem);
+  }
+}
+
+/* 1024–1199: o hero divide 6/6 e a coluna fica estreita. O par continua
+   lado a lado, com o desenho menor; 10,5rem casa com 28rem de altura
+   (168/448 = 0,375, a proporção do viewBox) e sobra texto de uma linha. */
+@media (1024px <= width < 1200px) {
+  .root-diagram {
+    grid-template-columns: 10.5rem minmax(0, 1fr);
+    gap: 1rem;
+    height: 28rem;
+  }
+}
+
+@media (width >= 1200px) {
+  .root-diagram {
+    height: clamp(30rem, calc(100svh - 11.5rem), 34rem);
   }
 }
 
