@@ -46,7 +46,27 @@ export function footerBaseline(year = new Date().getFullYear()) {
 }
 
 /** Sinal de atualidade (GEO, §6.4) — "Atualizado em …" no rodapé. */
-export const lastUpdated = "Atualizado em setembro de 2026";
+const MONTHS_PT_BR = [
+  "janeiro",
+  "fevereiro",
+  "março",
+  "abril",
+  "maio",
+  "junho",
+  "julho",
+  "agosto",
+  "setembro",
+  "outubro",
+  "novembro",
+  "dezembro",
+];
+
+/** Rótulo de atualidade derivado da data corrente (não envelhece no deploy). */
+export function footerUpdated(date = new Date()) {
+  return `Atualizado em ${MONTHS_PT_BR[date.getMonth()]} de ${date.getFullYear()}`;
+}
+
+export const lastUpdated = footerUpdated();
 
 /** Classes utilitárias para links do footer: transição suave de cor + reduced motion (§4). */
 export const footerLinkClasses = [

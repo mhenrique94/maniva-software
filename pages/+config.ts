@@ -6,6 +6,7 @@ import vikeVue from "vike-vue/config";
 
 const config: Config = {
   // https://vike.dev/head-tags
+  lang: "pt-BR",
   title: "Maniva Software | Engenharia de Software e Soluções Digitais",
   description:
     "Maniva Software: transformamos necessidade digital em solução técnica. Desenvolvimento web, modernização de sistemas e projetos complexos como o HelpMed. Engenharia de software com código limpo e entregas claras.",

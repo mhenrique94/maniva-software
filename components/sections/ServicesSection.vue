@@ -2,30 +2,41 @@
   <!-- Segmento 1: Pessoas e Pequenos Negócios -->
   <Section id="pmes" variant="pulp" class="py-20">
     <div class="container mx-auto px-6">
-      <div class="max-w-3xl mx-auto text-center mb-16">
-        <Typography type="heading" level="2" class="mb-6">
-          Seu negócio ainda não tem site ou o atual não funciona? <br class="hidden lg:block" />
-          Está na hora do digital de verdade.
+      <div class="max-w-3xl mx-auto text-center mb-12">
+        <Typography type="heading" level="2" class="text-balance mb-6">
+          Seu negócio ainda não tem site ou o atual não funciona?
+        </Typography>
+        <Typography type="body" level="lg" tone="secondary" class="text-balance">
+          Um site profissional resolve os dois casos: presença no Google, portfólio e contato direto com quem procura você.
         </Typography>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <Card v-for="(benefit, idx) in segment1Benefits" :key="idx" 
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 max-w-6xl mx-auto">
+        <Card
+          v-for="(benefit, idx) in segment1Benefits"
+          :key="idx"
           elevation="soft"
-          class="p-8 border border-root-100">
-          <div class="text-root-500 mb-4">
+          density="compact"
+          class="h-full"
+          :class="[
+            'lg:col-span-2',
+            idx === 3 ? 'lg:col-start-2' : '',
+            idx === 4 ? 'md:col-span-2 md:mx-auto md:w-full md:max-w-[calc(50%-1.5rem)] lg:col-span-2 lg:mx-0 lg:max-w-none' : '',
+          ]"
+        >
+          <div class="mb-4">
             <Icon :name="benefit.icon" size="32" duotone />
           </div>
           <Typography type="body" level="base" weight="semibold" class="mb-2">
             {{ benefit.title }}
           </Typography>
-          <Typography type="body" level="sm" tone="secondary">
+          <Typography type="body" level="base" tone="secondary">
             {{ benefit.desc }}
           </Typography>
         </Card>
       </div>
 
-      <div class="mt-16 text-center">
+      <div class="mt-12 text-center">
         <Button variant="primary" @click="openServicesSegment1CTA">
           Quero meu site profissional sem dor técnica
         </Button>
@@ -36,17 +47,17 @@
   <!-- Segmento 2: Empresas em Crescimento -->
   <Section id="empresas" variant="root" organic :connect-to="'services-segment-2'" class="py-20">
     <div class="container mx-auto px-6">
-        <div class="max-w-4xl mx-auto mb-20 text-center">
-           <Typography type="heading" level="2" tone="pulp" class="mb-6">
+        <div class="max-w-4xl mx-auto mb-12 text-center">
+           <Typography type="heading" level="2" tone="pulp" class="text-balance mb-6">
              Seu sistema trava seu crescimento? <br class="hidden lg:block" />
-             Vamos desemperrar sua operação digital.
+             Vamos desemperrar a operação.
           </Typography>
-          
+
           <div class="mt-12 max-w-2xl mx-auto">
             <div class="space-y-3 text-left">
               <div v-for="pain in segment2Pains" :key="pain" class="flex items-center gap-3 p-3 bg-root-50 rounded-lg border border-root-100">
-                <Icon name="warning" class="text-root-500 flex-shrink-0" size="20" duotone />
-                <Typography type="body" level="sm" weight="semibold" tone="primary">
+                <Icon name="warning" class="flex-shrink-0" size="20" duotone />
+                <Typography type="body" level="base" weight="semibold" tone="primary">
                   {{ pain }}
                 </Typography>
               </div>
@@ -55,10 +66,11 @@
         </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-        <Card v-for="(solution, idx) in segment2Solutions" :key="idx" 
-          elevation="soft" 
+        <Card v-for="(solution, idx) in segment2Solutions" :key="idx"
+          elevation="soft"
+          density="compact"
           texture
-          class="p-8 border border-root-100">
+          class="h-full">
           <div class="h-1 w-12 bg-root-500 mb-6" />
           <Typography type="body" level="lg" weight="bold" class="mb-4">
             {{ solution.title }}
@@ -69,7 +81,7 @@
         </Card>
       </div>
 
-      <div class="mt-20 text-center">
+      <div class="mt-12 text-center">
         <Button variant="primary" @click="openServicesSegment2CTA">
           Diagnóstico técnico do seu sistema atual
         </Button>
@@ -104,7 +116,7 @@ const segment1Benefits = [
   {
     title: "Receba contatos sem dar seu número pessoal",
     desc: "Formulários inteligentes e gestão de leads sem expor sua privacidade.",
-    icon: "chat-circle",
+    icon: "chat",
   },
   {
     title: "Site rápido e otimizado para Google",

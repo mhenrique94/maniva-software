@@ -1,11 +1,11 @@
 <template>
   <Section id="metodo" variant="earth" organic :aria-label="'Methodology Section'">
     <div class="container mx-auto px-6 py-20">
-      <div class="text-center max-w-3xl mx-auto mb-20">
-        <Typography type="heading" level="2" tone="pulp" class="mb-6">
-          Sem surpresas. Processo claro do primeiro contato à entrega
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <Typography type="heading" level="2" tone="pulp" class="text-balance mb-6">
+          Sem surpresas: processo claro do primeiro contato à entrega.
         </Typography>
-         <Typography type="body" level="lg" tone="pulp">
+         <Typography type="body" level="lg" tone="pulp" class="text-balance">
            Trabalhamos com transparência e previsibilidade, para que você tenha controle total sobre o que está sendo construído.
         </Typography>
       </div>
@@ -13,10 +13,10 @@
       <!-- Timeline -->
       <div class="relative max-w-5xl mx-auto">
         <!-- Vertical line with gradient (Mobile) -->
-        <div class="absolute left-8 top-0 bottom-0 w-0.5 lg:left-1/2 lg:-translate-x-1/2" style="background: linear-gradient(to bottom, var(--color-root-100), var(--color-root-300));" />
+        <div class="absolute left-[18px] top-0 bottom-0 w-0.5 lg:left-1/2 lg:-translate-x-1/2" style="background: linear-gradient(to bottom, var(--color-root-100), var(--color-root-300));" />
 
         <div class="space-y-12 lg:space-y-0">
-          <div v-for="(step, idx) in steps" :key="idx" 
+          <div v-for="(step, idx) in steps" :key="idx"
             :class="[
               'relative flex flex-col lg:flex-row items-center gap-8 lg:gap-0',
               idx % 2 === 0 ? 'lg:flex-row' : 'lg:flex-row-reverse'
@@ -26,17 +26,17 @@
             <div class="hidden lg:block w-1/2" />
 
             <!-- Step Indicator -->
-            <div class="absolute left-8 lg:left-1/2 lg:-translate-x-1/2 w-12 h-12 rounded-full bg-root-500 flex items-center justify-center text-root-50 z-10 shadow-elevation-2">
+            <div class="absolute left-0 lg:left-1/2 lg:-translate-x-1/2 w-[36px] h-[36px] lg:w-12 lg:h-12 rounded-full bg-root-500 flex items-center justify-center text-root-50 z-10 shadow-elevation-2">
               <Typography type="body" level="sm" weight="bold">{{ idx + 1 }}</Typography>
             </div>
 
             <!-- Step Content Card -->
-            <div class="w-full lg:w-1/2 pl-20 lg:pl-0" :class="idx % 2 === 0 ? 'lg:text-right' : 'lg:text-left'">
-              <div class="bg-root-50 p-8 rounded-card shadow-elevation-1 border border-root-100 relative">
+            <div class="w-full lg:w-1/2 pl-[56px] lg:pl-0" :class="idx % 2 === 0 ? 'lg:text-right' : 'lg:text-left'">
+              <div class="bg-root-50 p-6 lg:p-8 rounded-card shadow-elevation-1 border border-root-100 relative">
                 <Typography type="body" level="lg" weight="bold" class="mb-3">
                   {{ step.title }}
                 </Typography>
-                <Typography type="body" level="sm" tone="secondary" class="leading-relaxed">
+                <Typography type="body" level="base" tone="secondary" class="leading-relaxed">
                   {{ step.desc }}
                 </Typography>
               </div>
@@ -46,15 +46,15 @@
       </div>
 
       <!-- Differentiators -->
-      <div class="mt-32 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <div v-for="diff in differentiators" :key="diff.title" class="text-center">
-          <div class="w-16 h-16 mx-auto mb-6 bg-root-100 rounded-full flex items-center justify-center text-root-800">
-            <Icon :name="diff.icon" size="32" duotone />
+          <div class="w-12 h-12 mx-auto mb-4 bg-root-100 rounded-full flex items-center justify-center text-root-800">
+            <Icon :name="diff.icon" size="28" duotone />
           </div>
            <Typography type="body" level="base" tone="pulp" weight="bold" class="mb-2">
              {{ diff.title }}
            </Typography>
-           <Typography type="body" level="sm" tone="pulp">
+           <Typography type="body" level="base" tone="pulp">
              {{ diff.desc }}
           </Typography>
         </div>
@@ -87,17 +87,17 @@ const steps = [
 
 const differentiators = [
   {
-    title: "Código Limpo",
+    title: "Código limpo",
     desc: "Documentamos o que construímos. Você herda um sistema, não um problema.",
     icon: "file-text",
   },
   {
-    title: "Performance Obrigatória",
+    title: "Performance como padrão",
     desc: "Sites rápidos não são opção, são obrigação para SEO e conversão.",
-    icon: "zap",
+    icon: "lightning",
   },
   {
-    title: "Arquitetura Pensada",
+    title: "Arquitetura pensada",
     desc: "Construímos para hoje, garantindo que o sistema funcione e escale amanhã.",
     icon: "layers",
   },

@@ -34,6 +34,12 @@ import PhArrowRight from "phosphor-vue/dist/esm/components/PhArrowRight.vue.js";
 import PhEnvelope from "phosphor-vue/dist/esm/components/PhEnvelope.vue.js";
 import PhLinkedinLogo from "phosphor-vue/dist/esm/components/PhLinkedinLogo.vue.js";
 import PhTrendUp from "phosphor-vue/dist/esm/components/PhTrendUp.vue.js";
+import PhBriefcase from "phosphor-vue/dist/esm/components/PhBriefcase.vue.js";
+import PhImage from "phosphor-vue/dist/esm/components/PhImage.vue.js";
+import PhLightning from "phosphor-vue/dist/esm/components/PhLightning.vue.js";
+import PhWarning from "phosphor-vue/dist/esm/components/PhWarning.vue.js";
+import PhFileText from "phosphor-vue/dist/esm/components/PhFileText.vue.js";
+import PhStack from "phosphor-vue/dist/esm/components/PhStack.vue.js";
 
 /** Ícono por defecto cuando `name` no está registrado. */
 export const defaultIconName = "leaf";
@@ -136,6 +142,48 @@ export const icons = [
     weight: "regular",
     label: "Métricas em alta",
     category: "empresas",
+  },
+  {
+    name: "briefcase",
+    component: PhBriefcase,
+    weight: "regular",
+    label: "Negócio",
+    category: "pmes",
+  },
+  {
+    name: "image",
+    component: PhImage,
+    weight: "regular",
+    label: "Portfólio",
+    category: "pmes",
+  },
+  {
+    name: "lightning",
+    component: PhLightning,
+    weight: "regular",
+    label: "Performance",
+    category: "pmes",
+  },
+  {
+    name: "warning",
+    component: PhWarning,
+    weight: "regular",
+    label: "Ponto de atenção",
+    category: "empresas",
+  },
+  {
+    name: "file-text",
+    component: PhFileText,
+    weight: "regular",
+    label: "Documentação",
+    category: "metodo",
+  },
+  {
+    name: "layers",
+    component: PhStack,
+    weight: "regular",
+    label: "Arquitetura",
+    category: "metodo",
   },
   {
     name: "brain",

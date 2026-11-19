@@ -48,6 +48,18 @@
         </ul>
       </nav>
 
+      <Button
+        as="a"
+        :href="ctaHref"
+        variant="action"
+        leading-icon="whatsapp"
+        target="_blank"
+        rel="noopener"
+        class="maniva-header__cta"
+      >
+        {{ headerCta.label }}
+      </Button>
+
       <button
         type="button"
         class="maniva-burger"
@@ -286,6 +298,7 @@ onUnmounted(() => {
   align-items: center;
   gap: 0.5rem;
   flex: none;
+  min-height: 2.75rem; /* alvo de toque 44px */
   text-decoration: none;
 }
 .maniva-brand__symbol {
@@ -298,7 +311,7 @@ onUnmounted(() => {
   font-weight: 700;
   font-size: 1.0625rem;
   line-height: 1;
-  color: var(--color-root-500);
+  color: var(--color-root-800);
 }
 .maniva-brand__name {
   font-family: var(--font-display);
@@ -308,6 +321,8 @@ onUnmounted(() => {
 
 /* Navegação desktop: somente >= 1024px. */
 .maniva-nav { display: none; }
+/* CTA desktop (DESIGN.md, Navigation): aparece quando há espaço real. */
+.maniva-header__cta { display: none; }
 .maniva-nav ul {
   display: flex;
   gap: 0.5rem;
@@ -388,6 +403,11 @@ onUnmounted(() => {
     grid-column: 2;
     justify-self: center;
   }
+  .maniva-header__cta {
+    display: inline-flex;
+    grid-column: 3;
+    justify-self: end;
+  }
 }
 
 /* Menú mobile: slide-down suave (a11y + reduced motion). */
@@ -431,7 +451,9 @@ onUnmounted(() => {
   gap: 0.75rem;
 }
 .maniva-menu-panel__link {
-  display: block;
+  display: flex;
+  align-items: center;
+  min-height: 2.75rem; /* alvo de toque 44px */
   padding: 0.5rem 0.75rem; /* base 6px: 8 + 12 */
   border-radius: 8px;
   font-family: var(--font-ui);

@@ -27,13 +27,13 @@
         <ul class="maniva-footer__contact">
           <li>
             <a :href="waLink()" target="_blank" rel="noopener" :class="footerLinkClasses">
-              <Icon name="whatsapp" :size="18" duotone aria-hidden="true" />
+              <Icon name="whatsapp" :size="18" duotone color="currentColor" aria-hidden="true" />
               {{ company.whatsapp }}
             </a>
           </li>
           <li>
             <a :href="`mailto:${company.email}`" :class="footerLinkClasses">
-              <Icon name="envelope" :size="18" duotone aria-hidden="true" />
+              <Icon name="envelope" :size="18" duotone color="currentColor" aria-hidden="true" />
               {{ company.email }}
             </a>
           </li>
@@ -41,7 +41,7 @@
       </div>
 
       <div class="maniva-footer__col">
-        <Typography type="heading" level="2" tone="pulp" class="maniva-footer__title">
+        <Typography type="body" level="sm" weight="semibold" tone="pulp" class="maniva-footer__title">
           Links rápidos
         </Typography>
         <ul class="maniva-footer__links">
@@ -52,7 +52,7 @@
       </div>
 
       <div class="maniva-footer__col">
-        <Typography type="heading" level="2" tone="pulp" class="maniva-footer__title">
+        <Typography type="body" level="sm" weight="semibold" tone="pulp" class="maniva-footer__title">
           Conexões
         </Typography>
         <ul class="maniva-footer__links">
@@ -65,7 +65,7 @@
               :class="footerLinkClasses"
             >
               {{ conn.label }}
-              <Icon name="arrow-right" :size="16" duotone aria-hidden="true" />
+              <Icon name="arrow-right" :size="16" duotone color="currentColor" aria-hidden="true" />
             </a>
           </li>
         </ul>
@@ -104,7 +104,7 @@ const baseline = footerBaseline();
   margin-top: auto;
 }
 .maniva-footer__grid {
-   padding: 2.25rem 1.5rem; /* base 6px: 24px vertical + lateral */
+   padding-block: 3rem;
    display: flex;
    flex-wrap: wrap;
    justify-content: center;
@@ -142,6 +142,14 @@ const baseline = footerBaseline();
    font-size: 0.9375rem;
    color: var(--color-root-50);
  }
+.maniva-footer__title {
+   margin: 0 0 1rem;
+   font-size: 0.75rem;
+   font-weight: 600;
+   letter-spacing: 0.12em;
+   text-transform: uppercase;
+   color: var(--color-root-100);
+ }
 .maniva-footer__legal {
   font-family: var(--font-ui);
   font-size: 0.875rem;
@@ -162,6 +170,7 @@ const baseline = footerBaseline();
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
+  min-height: 1.75rem;
   color: var(--color-root-50);
   font-family: var(--font-ui);
   font-size: 0.875rem;
@@ -170,6 +179,15 @@ const baseline = footerBaseline();
 .maniva-footer__links a:hover,
 .maniva-footer__contact a:hover {
   color: var(--color-root-300);
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+/* No mobile, todo link do rodapé é alvo de toque de 44px. */
+@media (width <= 1023px) {
+  .maniva-footer__contact a,
+  .maniva-footer__links a {
+    min-height: 2.75rem;
+  }
 }
 .maniva-footer__base p {
   font-family: var(--font-ui);

@@ -24,6 +24,7 @@
       name="leaf"
       :duotone="true"
       :size="sizeSpinner"
+      color="currentColor"
       class="maniva-bud-spinner"
       aria-hidden="true"
     />
@@ -32,6 +33,7 @@
       :name="leadingIcon"
       :duotone="true"
       :size="sizeSpinner"
+      color="currentColor"
       aria-hidden="true"
     />
     <slot />
@@ -40,6 +42,7 @@
       :name="trailingIcon"
       :duotone="true"
       :size="sizeSpinner"
+      color="currentColor"
       class="maniva-bud-trailing"
       aria-hidden="true"
     />

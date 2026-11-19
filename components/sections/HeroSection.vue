@@ -1,6 +1,6 @@
 <template>
-  <Section id="inicio" variant="pulp" organic :aria-label="'Hero Section'">
-    <div class="container mx-auto px-6 py-20 lg:py-32 flex flex-col items-center text-center relative overflow-hidden">
+  <Section id="inicio" variant="pulp" organic :aria-label="'Início'">
+    <div class="maniva-hero container mx-auto px-6 flex flex-col items-center text-center relative overflow-hidden">
       <!-- Background Organic Roots Decoration -->
       <div class="absolute inset-0 -z-10 pointer-events-none opacity-10">
         <svg class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%]" viewBox="0 0 800 600" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -12,17 +12,21 @@
         </svg>
       </div>
 
+      <p class="maniva-hero__eyebrow">
+        Produto próprio de IA em produção&nbsp;· Atendimento remoto no Brasil
+      </p>
+
       <Typography type="display" weight="semibold" class="maniva-hero__title">
-        Do site simples ao sistema complexo. <span class="text-root-500">Engenharia de software</span> que entende seu negócio
+        <span class="text-root-500">Software sob medida</span> para o seu negócio, do site simples ao sistema complexo.
       </Typography>
 
       <Typography type="body" level="lg" tone="secondary" class="maniva-hero__lead">
-        Desenvolvimento web, modernização de sistemas e projetos de IA complexos. Com qualidade técnica de quem já construiu plataformas em escala.
+        Desenvolvimento web, modernização de sistemas e projetos de IA complexos, com a engenharia de quem já colocou uma plataforma de IA em produção.
       </Typography>
 
       <div class="maniva-hero__cta flex flex-col sm:flex-row gap-4">
         <Button variant="primary" size="lg" @click="openHeroCTA">
-          Veja qual solução faz sentido para você
+          Conversar sobre meu projeto
         </Button>
       </div>
     </div>
@@ -35,11 +39,30 @@ import { openHeroCTA } from "@util/ctaActions";
 </script>
 
 <style scoped>
-/* Hero "Escala editorial": o display do Cormorant domina e o CTA recua. */
+/* Hero "Escala editorial": o display do Cormorant domina e o CTA recua.
+   A altura mínima desconta o header sticky para o hero ocupar a primeira
+   tela em qualquer largura, sem esconder o CTA no mobile. */
+.maniva-hero {
+  min-height: calc(100svh - var(--maniva-header-height, 4.125rem));
+  justify-content: center;
+  padding-block: clamp(3rem, 7vw, 7.5rem);
+}
+.maniva-hero__eyebrow {
+  margin: 0 0 1.5rem;
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-text-secondary);
+  text-wrap: balance;
+}
 .maniva-hero__title {
   max-width: 62rem;
   margin-bottom: 1.75rem;
-  font-size: var(--text-display-2);
+  /* Preserva o teto do token display-2 (3.375rem) e reduz só no mobile. */
+  font-size: clamp(2.375rem, 6.1vw + 0.55rem, var(--text-display-2));
   line-height: 1.05;
   letter-spacing: -0.03em;
   text-wrap: balance;
@@ -47,8 +70,17 @@ import { openHeroCTA } from "@util/ctaActions";
 .maniva-hero__lead {
   max-width: 36rem;
   line-height: 1.7;
+  text-wrap: pretty;
 }
 .maniva-hero__cta {
   margin-top: 2.25rem;
+}
+@media (width <= 639px) {
+  .maniva-hero__cta {
+    width: 100%;
+  }
+  .maniva-hero__cta :deep(.maniva-bud) {
+    width: 100%;
+  }
 }
 </style>

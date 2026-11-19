@@ -13,8 +13,9 @@
 -->
 
 <template>
+  <a class="maniva-skip" href="#conteudo">Pular para o conteúdo</a>
   <Header />
-  <main id="conteudo" class="maniva-main">
+  <main id="conteudo" class="maniva-main" tabindex="-1">
     <slot />
   </main>
   <Footer />
@@ -37,6 +38,37 @@ const organizationSchema = getOrganizationSchema();
 </script>
 
 <style>
+/* Skip link: primeiro Tab revela o atalho sobre o header. */
+.maniva-skip {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  transform: translateY(-200%);
+  padding: 0.75rem 1.125rem;
+  border-radius: var(--radius-bud);
+  background-color: var(--color-root-800);
+  color: var(--color-root-50);
+  font-family: var(--font-ui);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: transform 160ms ease;
+}
+.maniva-skip:focus-visible {
+  transform: translateY(0);
+  outline: 2px solid var(--color-root-300);
+  outline-offset: 2px;
+}
+main:focus {
+  outline: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .maniva-skip {
+    transition: none;
+  }
+}
+
 body {
   margin: 0;
   font-family: var(--font-ui);
