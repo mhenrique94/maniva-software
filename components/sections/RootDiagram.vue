@@ -3,8 +3,9 @@
 
   O desenho é decorativo (`aria-hidden`): tronco, três ramos e raízes. A lista
   é a interface real — três links de âncora que levam aos cards de segmento.
-  No desktop o desenho aparece a 240px; abaixo disso, só a lista com um fio
-  vertical e nós.
+  No desktop o desenho aparece a 240px e cada linha da lista senta na altura do
+  seu nó (`nth-child` → `top` em % da altura do desenho, casando com o `cy` do
+  SVG); abaixo disso, só a lista com um fio vertical e nós.
 -->
 <template>
   <div class="root-diagram">
@@ -150,17 +151,37 @@ import { rootMap } from "./content.js";
   transform: translateX(3px);
 }
 
-@media (width >= 1024px) {
+@media (width >= 1200px) {
   .root-diagram {
-    grid-template-columns: 240px minmax(0, 1fr);
+    grid-template-columns: 15rem minmax(0, 1fr);
     gap: 2rem;
+    /* O desenho define a altura; os nós ficam em 150/280/400 de 640
+       (23,4375% / 43,75% / 62,5%) e as linhas sentam exatamente neles. */
+    height: clamp(30rem, calc(100svh - 11.5rem), 34rem);
   }
   .root-diagram__drawing {
     display: block;
     width: 100%;
     height: 100%;
-    max-height: 34rem;
     color: var(--color-ink);
+  }
+  .root-diagram__list {
+    position: relative;
+    height: 100%;
+  }
+  .root-diagram__list > li {
+    position: absolute;
+    inset-inline: 0;
+    transform: translateY(-50%);
+  }
+  .root-diagram__list > li:nth-child(1) {
+    top: 23.4375%;
+  }
+  .root-diagram__list > li:nth-child(2) {
+    top: 43.75%;
+  }
+  .root-diagram__list > li:nth-child(3) {
+    top: 62.5%;
   }
   .root-diagram__list::before {
     display: none;
